@@ -66,13 +66,19 @@ public class HomeActivity extends Activity implements OnClickListener {
 				switch (msg.what) {
 				case 1:
 					Bundle bundle = msg.getData();
+					tv_home_bottom_left.setCompoundDrawables(null, null, null, null);
+					tv_home_bottom_left.setTextColor(HomeActivity.this.getResources().getColor(R.color.textcolor_default));
 					tv_home_bottom_left.setText(bundle.getString("nickname"));
 					tv_home_bottom_right.setText(bundle.getString("userLevel"));
+					tv_home_bottom_right.setTextColor(HomeActivity.this.getResources().getColor(R.color.appcolor));
 					findViewById(R.id.ll_home_bottom).setClickable(false);
 					break;
 				case 2:
 					tv_home_bottom_left.setText("登录/注册");
-					tv_home_bottom_right.setText("\t\t 自渔自乐，不一样的钓鱼体验");
+					tv_home_bottom_left.setTextColor(HomeActivity.this.getResources().getColor(R.color.appcolor));
+					
+					tv_home_bottom_right.setText("创新 · 坐享生活");
+					tv_home_bottom_right.setTextColor(HomeActivity.this.getResources().getColor(R.color.textcolor_default));
 					findViewById(R.id.ll_home_bottom).setClickable(true);
 					break;
 				case 5:

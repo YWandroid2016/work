@@ -289,8 +289,8 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 			break;
 		case R.id.btn_login_login:
 			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("phoneNumber", tv_login_phone.getText().toString());
-			params.put("password", tv_login_password.getText().toString());
+			params.put("phoneNumber", edt_login_phone.getText().toString());
+			params.put("password", edt_login_password.getText().toString());
 			HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_APPUSER + HttpAddress.METHOD_LOGIN, params, new HttpCallbackListener() {
 
 				@Override

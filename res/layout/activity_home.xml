@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
+    android:background="@color/gray_bg"
     android:orientation="vertical"
     tools:context=".HomeActivity" >
 
@@ -16,9 +16,6 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/x5"
-        android:layout_marginLeft="@dimen/x5"
-        android:layout_marginRight="@dimen/x5"
         android:layout_weight="4"
         layout="@layout/adbanner" />
 
@@ -26,15 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
+        android:layout_margin="@dimen/x10"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/tv_homeactivity_jump2heikeng"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x5"
-            android:layout_marginRight="@dimen/x5"
-            android:layout_marginTop="@dimen/x5"
+            android:layout_marginRight="@dimen/x10"
             android:layout_weight="3"
             android:background="@drawable/ic_home_heikeng"
             android:gravity="center" />
@@ -42,10 +38,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/x5"
             android:layout_weight="3"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/x5" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tv_homeactivity_jump2fishshop"
@@ -56,7 +50,7 @@
                 android:gravity="center" />
 
             <TextView
-                android:layout_marginTop="@dimen/x5"
+                android:layout_marginTop="@dimen/x10"
                 android:id="@+id/tv_homeactivity_jump2mywallet"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -72,27 +66,35 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:background="#fff"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/img_home_bootom_usericon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_user_defult" />
+<!--         <ImageView -->
+<!--             android:id="@+id/img_home_bootom_usericon" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:src="@drawable/zhucedenglu2x" /> -->
 
         <TextView
             android:id="@+id/tv_home_bottom_left"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:drawableLeft="@drawable/zhucedenglu2x"
+            android:textSize="@dimen/tab_size"
+            android:drawablePadding="@dimen/x5"
+            android:textColor="@color/textcolor_default"
             android:text="登录/注册" />
 
         <TextView
             android:id="@+id/tv_home_bottom_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
             android:gravity="center_vertical"
-            android:text="\t自渔自乐，不一样的钓鱼体验" />
+            android:textSize="@dimen/tab_size"
+            android:textColor="@color/textcolor_default"
+            android:text="创新 · 坐享生活" />
     </LinearLayout>
 
 </LinearLayout>

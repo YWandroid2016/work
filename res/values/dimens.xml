@@ -1,0 +1,89 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+	 <dimen name="margin_12">12.0dp</dimen>
+    <dimen name="vi_margin">15.0dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="padding_btn_leftandright">70dp</dimen>
+        <dimen name="margin_ic_home">5dp</dimen>
+	
+	<!-- 黑坑界面用到的dimen -->
+	<dimen name="fishpit_title">20sp</dimen>
+	<dimen name="fishpit_spinner_item">25sp</dimen>
+	<dimen name="tv_fishpit_itmeshow_title">20sp</dimen>
+	<dimen name="img_fishpit_itmeshow">65dp</dimen>
+	<dimen name="img_fishpit_itmeshow_rightpadding">30dp</dimen>
+	<dimen name="tv_register_edit_size">12sp</dimen>
+	<dimen name="edt_register_edit_size">12sp</dimen>
+	<dimen name="tv_login_edit_size">15sp</dimen>
+	
+	
+	
+	<!-- 黑坑细节显示用到的属性 -->
+	<dimen name="padding_fishpitdetail_location">10dp</dimen>
+	
+	<!-- 我的钱包界面用到的属性 -->
+	<dimen name="img_mywallet_top">150dp</dimen>
+	<dimen name="tv_mywallet_top_nickname">20sp</dimen>
+	<dimen name="tv_mywallet_usablejifen">25sp</dimen>
+	<dimen name="tv_mywallet_top_userlevel">10sp</dimen>
+	<dimen name="padding_mywallet_top_arrow">20dp</dimen>
+	<dimen name="padding_muwallet_top_image">50dp</dimen>
+	<dimen name="button_width_height">100dp</dimen>
+	<dimen name="tv_mywallet_updateVIP">30sp</dimen>
+	<dimen name="margin_mywallet_usablejifen">20dp</dimen>
+	
+	
+	<!-- userinfo界面用到的属性 -->
+	<dimen name="padding_userinfo_textview">15dp</dimen>
+	<dimen name="padding_userinfo_imageview">10dp</dimen>
+	<dimen name="imageview_userinfo">60dp</dimen>
+	<dimen name="padding_userinfo_item">10dp</dimen>
+	
+	<!-- mybill界面用到的属性 -->
+	<dimen name="tv_myuseablejifen">25sp</dimen>
+	<dimen name="padding_billitem">10dp</dimen>
+	
+	<!-- orderinformation界面用到的属性 -->
+	<dimen name="tv_orderinformation_orderkind">23sp</dimen>
+	<dimen name="margin_orderinformation_top">25dp</dimen>
+	<dimen name="margin_ordercontent_left">10dp</dimen>
+	<dimen name="margin_ordercontent_right">15dp</dimen>
+	<dimen name="margin_orderinfomation_radioright">30dp</dimen>
+	
+	<!-- orderinfoalter界面用到的属性 -->
+	<dimen name="tv_orderinfoalter_item_width">50dp</dimen>
+	
+	<!-- passwordalter -->
+	<dimen name="tv_passwordalter_item_width">80dp</dimen>
+	
+	<!-- commodityDeatil 界面用到的属性 -->
+	<dimen name="margin_commodity_post_freight">20dp</dimen>
+	<dimen name="padding_fishposition_item_show">8dp</dimen>
+	
+	<!-- config界面用到的属性 -->
+	<dimen name="btn_textsize">25sp</dimen>
+	
+	<!-- 开通会员界面用到的属性 -->
+	<dimen name="margin_updateVIP_top">20dp</dimen>
+	<dimen name="margin_updateVIP_middle">10dp</dimen>
+	<dimen name="font_money">30sp</dimen>
+	<dimen name="height_become">80dp</dimen>
+	<dimen name="margin_become_right">15dp</dimen>
+	<dimen name="font_becomeVIP">30sp</dimen>
+	<dimen name="font_becomeVIP_detail">20sp</dimen>
+	<dimen name="font_btn_becomeVIP">15sp</dimen>
+	<!-- 商品展示想请界面用到的属性 -->
+	<dimen name="font_commoditydetail_jingbaojia">20sp</dimen>
+	<dimen name="font_commoditydetail_price">30sp</dimen>
+	
+	<dimen name="topbar_size">51px</dimen>
+	<dimen name="tab_size">45px</dimen>
+	<dimen name="gong_size">42px</dimen>
+	<dimen name="default_size">39px</dimen>
+	<dimen name="tip_size">36px</dimen>
+	
+	
+</resources>

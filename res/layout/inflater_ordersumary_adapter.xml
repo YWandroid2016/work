@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/x16"
+    android:layout_marginRight="@dimen/x16"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <com.example.happyfishing.image.ImageRequestView
+        android:id="@+id/img_ordersumary_adapter"
+        android:layout_width="@dimen/x65"
+        android:layout_height="@dimen/x65" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x5"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_ordersumary_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_ordersumary_merchantname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="鱼坑名" />
+
+            <TextView
+                android:id="@+id/tv_ordersumary_merchantposition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
+                android:text="钓位" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ordersumary_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="111" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,180 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MyWalletActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionbar_mywallet"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.5"
+        android:background="@drawable/bgd_mywallet"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_mywallet_usablejifen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x20"
+            android:text="8888"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_mywallet_usablejifen" />
+
+        <TextView
+            android:id="@+id/tv_mywallet_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_mywallet_usablejifen"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:text="可用积分"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_mywallet_bill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/ic_arrows_right"
+            android:text="明细"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_bocomeVIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x20"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="升级VIP，享特权"
+            android:textColor="#bb1133"
+            android:textSize="@dimen/tv_mywallet_updateVIP" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_weight="6.7"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x20" />
+
+        <TextView
+            android:id="@+id/tv_mywallet_userinfo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:drawableLeft="@drawable/ic_userinfo"
+            android:drawablePadding="@dimen/x15"
+            android:drawableRight="@drawable/ic_arrows_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:layout_marginTop="@dimen/x10"
+            android:text="个人信息" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2" />
+
+        <TextView
+            android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+            android:id="@+id/tv_mywallet_myorder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:drawableLeft="@drawable/ic_mycollection"
+            android:drawablePadding="@dimen/x15"
+            android:drawableRight="@drawable/ic_arrows_right"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x10"
+            android:text="我的订单" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+
+        <TextView
+            android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+            android:id="@+id/tv_mywallet_mycollection"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:drawableLeft="@drawable/ic_myorder"
+            android:drawablePadding="@dimen/x15"
+            android:drawableRight="@drawable/ic_arrows_right"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x10"
+            android:text="我的收藏" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2" />
+
+        <TextView
+            android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+            android:id="@+id/tv_mywallet_setting"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:drawableLeft="@drawable/ic_setting"
+            android:drawablePadding="@dimen/x15"
+            android:drawableRight="@drawable/ic_arrows_right"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x10"
+            android:text="设置" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2" />
+
+        <TextView
+            android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+            android:id="@+id/tv_mywallet_help"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:drawableLeft="@drawable/ic_help"
+            android:drawablePadding="@dimen/x15"
+            android:drawableRight="@drawable/ic_arrows_right"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x10"
+            android:text="帮助" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4" />
+    </LinearLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        layout="@layout/home_button" />
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CommodityDisplayActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionbar_commodity_display"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:id="@+id/fl_commodity_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/edt_commodity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="true"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tv_edt_commodity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="请输入渔坑名字"
+                android:textSize="@dimen/tv_register_edit_size" />
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/btn_search" />
+    </LinearLayout> -->
+
+    <GridView
+        android:id="@+id/grv_commodity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11" 
+        android:numColumns="2"
+        >
+    </GridView>
+
+</LinearLayout>

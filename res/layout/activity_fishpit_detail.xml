@@ -1,0 +1,139 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FishpitDetailActivity" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" 
+            >
+
+            <com.example.happyfishing.view.ActionBarView
+                android:id="@+id/actionbar_fishipitdetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/img_actionbar_collection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/x20"
+                android:src="@drawable/ic_collection_default" />
+
+        </RelativeLayout>
+    </FrameLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        layout="@layout/adbanner"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+         />
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+		android:gravity="center_vertical"
+         >
+
+        <!-- <TextView
+            android:id="@+id/tv_fishpitdetail_envirScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="环境：4.5" /> -->
+
+        <ImageView
+            android:id="@+id/img_fishpitdetail_haveWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi" />
+        <View android:layout_width="@dimen/x10"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/img_fishpitdetail_haveParking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_park" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        
+        android:id="@+id/ll_fishpitlocation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" 
+		android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_address" />
+
+        <TextView
+            android:id="@+id/tv_fishpitdetail_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="我是用于显示地址的textview" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/x10"
+            android:src="@drawable/ic_arrows_right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="简介：" />
+
+        <TextView
+            android:id="@+id/tv_fishipitdetail_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="11111111111111111111111111111111111111111111111111111111" />
+    </LinearLayout>
+
+    
+    <TextView
+        android:layout_margin="@dimen/x8"
+        android:id="@+id/tv_fishpitdetail_order"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/button_background"
+        android:text="预约钓位" />
+
+</LinearLayout>

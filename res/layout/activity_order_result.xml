@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".OrderResultActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionbar_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center" 
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_orderresult_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="支付成功 获得300积分"
+            android:drawableTop="@drawable/ic_result_success"
+            android:gravity="center"/>
+
+        <TextView 
+            android:id="@+id/tv_orderresult_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详情可在“我的积分”中查看"
+            />
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"/>
+
+</LinearLayout>

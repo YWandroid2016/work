@@ -1,0 +1,257 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".OrderInformationActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionBar_orderinfomation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11"
+        android:background="#eeeeee"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x25"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:text="预约钓位"
+            android:textSize="@dimen/tv_orderinformation_orderkind" />
+
+        <RelativeLayout
+            android:id="@+id/rl_orderdetail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x2"
+            android:layout_weight="2"
+            android:background="#fff"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x15" >
+
+            <TextView
+                android:id="@+id/tv_orderdetail_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间" />
+
+            <TextView
+                android:id="@+id/tv_orderdetail_content1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_orderdetail_title1"
+                android:text="\t2016-1-28" />
+
+            <TextView
+                android:id="@+id/tv_orderdetail_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_orderdetail_content1"
+                android:text="坑位" />
+
+            <TextView
+                android:id="@+id/tv_orderdetail_content2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_orderdetail_title2"
+                android:text="\t3号" />
+
+            <TextView
+                android:id="@+id/tv_orderdetail_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_orderdetail_title1"
+                android:text="￥30 元" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x2"
+            android:layout_weight="0.5"
+            android:background="#fff"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x15" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:hint="手机号码" />
+
+            <TextView
+                android:id="@+id/tv_orderinformation_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="13260356241" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x5"
+            android:layout_weight="0.5"
+            android:background="#fff"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x15" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:hint="实付金额" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="￥30" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x5"
+            android:layout_weight="0.5"
+            android:background="#fff"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x15"
+            android:text="选择支付方式" />
+
+        <LinearLayout
+            android:id="@+id/ll_payment_wechart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/x5"
+            android:paddingRight="@dimen/x30" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_payment_wechart" />
+
+            <TextView
+                android:paddingLeft="@dimen/x10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信支付" />
+            <TextView android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/rb_paymentmethod_wechart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_radio_orderinfo"
+                android:button="@null" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_payment_daokeng"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/x5"
+            android:paddingRight="@dimen/x30" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_payment_daokeng" />
+            <TextView
+                android:paddingLeft="@dimen/x10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="到坑支付" />
+			<TextView android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"/>
+            
+            <RadioButton
+                android:id="@+id/rb_paymentmethod_daokeng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_radio_orderinfo"
+                android:button="@null" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2" />
+
+        <LinearLayout
+            android:id="@+id/ll_payment_jifen"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/x5"
+            android:paddingRight="@dimen/x30" >
+
+            <ImageView
+                android:id="@+id/img_orderinfomation_pay_jifen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_payment_jifen_usable" />
+            <TextView
+                android:paddingLeft="@dimen/x10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="积分支付" />
+
+            <TextView
+                android:id="@+id/tv_orderinformation_jifenzhifu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/x5" />
+
+            <RadioButton
+                android:id="@+id/rb_paymentmethod_jifen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_radio_orderinfo"
+                android:button="@null" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.75" />
+
+        <Button
+            android:id="@+id/btn_orderinformation_pay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/x8"
+            android:layout_weight="1"
+            android:background="@color/button_background"
+            android:text="立即支付"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

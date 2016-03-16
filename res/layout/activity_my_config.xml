@@ -1,0 +1,145 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MyConfigActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionBar_config"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5" >
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:id="@+id/ll_myconfig_loginpassword"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" 
+            android:background="#fff">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="登录密码" 
+                />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+                android:drawableRight="@drawable/ic_arrows_right"
+                android:text="设置/修改"
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+             />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:id="@+id/ll_myconfig_paypassword"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="#fff" >
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+				android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="支付密码" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+                android:drawableRight="@drawable/ic_arrows_right"
+                android:text="设置/修改"
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+             />
+
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="#fff" >
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="版本更新" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableRight="@drawable/ic_arrows_right"
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
+
+      <!--   <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#fff" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="清除缓存" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_arrows_right"
+                android:textColor="@color/blue" />
+        </LinearLayout> -->
+        <View android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:text="退出登录"
+            android:textColor="@color/red"
+            android:textSize="@dimen/btn_textsize" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7" />
+
+    </LinearLayout>
+
+</LinearLayout>

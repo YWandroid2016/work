@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoacationShowActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionBar_loacationshow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" >
+
+       <com.amap.api.maps2d.MapView
+            android:id="@+id/mav_locationshow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+       <LinearLayout android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+           
+           <HorizontalScrollView
+            android:id="@+id/hsv_busroute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginRight="@dimen/x5"
+            android:scrollbars="none" 
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <GridView
+                    android:id="@+id/grv_busroute_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" 
+                    />
+                
+            </LinearLayout>
+        </HorizontalScrollView>
+        <ListView android:id="@+id/liv_busroute_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            />
+           
+       </LinearLayout>
+        
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_locationshow_drive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="button_drive"
+            android:text="自驾" />
+
+        <Button
+            android:id="@+id/btn_locationshow_bus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="button_bus"
+            android:text="公交" />
+
+        <Button
+            android:id="@+id/btn_locationshow_walk"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="button_walk"
+            android:text="步行" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 系统默认 -->
+    <string name="app_name">HappyFishing</string>
+    <string name="action_settings">1</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_fishpit">FishpitActivity</string>
+    <string name="title_activity_fishing_shop">FishingShopActivity</string>
+    <string name="title_activity_fishpit_detail">FishpitDetailActivity</string>
+    <string name="fishipit">黑坑</string>
+    <string name="fishipitdetail">11111</string>
+    <string name="title_activity_my_wallet">MyWalletActivity</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
+    <string name="text_message">信息</string>
+    <!-- 自定义string -->
+    <string name="back">返回</string>
+    <string name="cancl">取消</string>
+    <string name="title_actionbar_home">自渔自乐简版</string>
+    <string name="title_actionbar_fishshop">渔具店</string>
+    <string name="title_actionbar_message">消息</string>
+    <string name="title_actionbar_register">注册</string>
+    <string name="title_actionbar_register_success">注册成功</string>
+    <string name="title_actionbar_login">登录</string>
+    <string name="title_actionbar_zhaohui">找回密码</string>
+    <string name="title_actionbar_zhaohui_success">找回成功</string>
+    <string name="title_actionbar_fishpit_detail">钓位详情</string>
+    <string name="title_actionbar_order_detail">订单详情</string>
+    <string name="title_actionbar_pay_success">支付成功</string>
+    <string name="title_actionbar_order_success">预订成功</string>
+    <string name="title_actionbar_commodity">商品详情</string>
+    <string name="title_actionbar_address">地址详情</string>
+    <string name="close">关闭</string>
+    <string name="title_actionbar_userinfo">个人信息</string>
+    <string name="title_actionbar_alternick">修改昵称</string>
+    <string name="title_actionbar_alterpassword">修改成功</string>
+    <string name="title_actionbar_alterphone">修改手机</string>
+    <string name="title_actionbar_mybill">我的账单</string>
+    <string name="title_actionbar_mywallet">我的钱包</string>
+    <string name="title_actionbar_myorder">我的订单</string>
+    <string name="title_actionbar_mycollection">我的收藏</string>
+    <string name="title_actionbar_memberdetail">会员介绍</string>
+    <string name="title_actionbar_becomeVIP">成为会员</string>
+    <string name="title_actionbar_myconfig">设置</string>
+    <!-- 图片浏览 -->
+    <string name="only_choose_num">超出可选图片张数</string>
+    <string name="finish">完成</string>
+    <string name="invalidSD">sdcard无效或没有插入！</string>
+    <string name="photo">选择相册</string>
+    <string name="album">相册</string>
+    <string name="preview">预览</string>
+    <string name="unfinished">完成</string>
+    <string name="camera_cancel">取消</string>
+    <string name="no_photo">相册没有图片</string>
+    <!-- listview中用到的 -->
+    <string name="hello">Hello World, XListViewActivity!</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    
+    <string name="title_activity_album">AlbumActivity</string>
+    <string name="title_activity_my_bill">MyBillActivity</string>
+    <string name="title_activity_fishshop_detail">FishshopDetailActivity</string>
+    <string name="title_activity_message">MessageActivity</string>
+    <string name="title_activity_fishpit_confirm_order">FishpitConfirmOrderActivity</string>
+    <string name="title_activity_fishpit_order_show">FishpitOrderShowActivity</string>
+    <string name="title_activity_loacation_show">LoacationShowActivity</string>
+    <string name="title_activity_order_information">OrderInformationActivity</string>
+    <string name="title_activity_order_result">OrderResultActivity</string>
+    <string name="title_activity_upgrade_vip">UpgradeVIPActivity</string>
+    <string name="title_activity_user_info_alter">UserInfoAlterActivity</string>
+    <string name="title_activity_user_address_alter">UserAddressAlterActivity</string>
+    <string name="title_activity_address_add">AddressAddActivity</string>
+    <string name="title_activity_my_collection">MyCollectionActivity</string>
+    <string name="title_activity_my_config">MyConfigActivity</string>
+    <string name="title_activity_password_alter">PasswordAlterActivity</string>
+    <string name="title_activity_password_creat">PasswordCreatActivityActivity</string>
+    <string name="title_activity_my_order">MyOrderActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_commodity_display">CommodityDisplayActivity</string>
+    <string name="title_activity_commodity_detail_show">CommodityDetailShowActivity</string>
+    <string name="title_activity_become_vip_order">BecomeVipOrderActivity</string>
+    <string name="title_activity_alter_phone_confirm">AlterPhoneConfirmActivity</string>
+    <string name="title_activity_finish_order_show">FinishOrderShowActivity</string>
+
+</resources>

@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_fishpit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_bg"
+    tools:context=".FishpitActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionbar_fishpit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="@dimen/x5">
+
+        <AutoCompleteTextView
+            android:id="@+id/atv_fishpit_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bgd_actv_default"
+            android:hint="搜索"
+            android:imeOptions="actionSearch"
+            android:singleLine="true" />
+
+        <!--
+        <FrameLayout
+            android:id="@+id/fl_fishpit_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/edt_fishpit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="true"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tv_edt_fishpit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="请输入渔坑名字"
+                android:textSize="@dimen/tv_fishpit_edit_size" />
+        </FrameLayout>-->
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/btn_search" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="#ccc" />
+
+    <!--
+    <LinearLayout
+        android:id="@+id/ll_fishpit_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_edit_text"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/sp_fishpit_distance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/sp_fishpit_renqi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>-->
+
+    <ListView
+        android:id="@+id/liv_heikeng"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8.5" />
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        layout="@layout/home_button" />
+
+</LinearLayout>

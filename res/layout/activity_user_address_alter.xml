@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserAddressAlterActivity" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionBarView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="11" >
+		<ListView android:id="@+id/liv_useraddress"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:visibility="invisible"
+		    />
+        <Button
+            android:id="@+id/btn_useraddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="添加新地址" />
+    </FrameLayout>
+
+</LinearLayout>

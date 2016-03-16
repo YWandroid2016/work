@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.example.happyfishing.image.ImageRequestView
+        android:id="@+id/img_fishshop_itemshow"
+        android:layout_width="@dimen/x65"
+        android:layout_height="@dimen/x65"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_fishshop_itemshow_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/img_fishshop_itemshow"
+        android:text="我是渔具店名"
+        android:textSize="@dimen/tv_fishpit_itmeshow_title" />
+
+    <TextView
+        android:maxEms="20"
+        android:id="@+id/tv_fishshop_itemshow_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_fishshop_itemshow_title"
+        android:layout_toRightOf="@+id/img_fishshop_itemshow"
+        android:singleLine="true"
+        android:ems="10"
+        android:text="我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介" >
+    </TextView>
+
+</RelativeLayout>

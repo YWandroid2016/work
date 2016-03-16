@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/x5"
+    android:layout_height="wrap_content"
     android:background="#fff"
+    android:gravity="center_vertical"
     android:orientation="horizontal" >
       <TextView 
 	        android:id="@+id/tv_homeactivity_jump2home"
 	        android:gravity="center"
-	        android:layout_height="match_parent"
+	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:text="首页"/>
 	    <TextView 
 	        android:id="@+id/tv_homeactivity_heikeng"
 	        android:gravity="center"
-	        android:layout_height="match_parent"
+	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:text="黑坑"/>
 	    <TextView 
 	        android:id="@+id/tv_homeactivity_fishingshop"
 	        android:gravity="center"
-	        android:layout_height="match_parent"
+	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:text="渔具店"/>
 	    <TextView 
 	        android:gravity="center"
 	        android:id="@+id/tv_homeactivity_mywallet"
-	        android:layout_height="match_parent"
+	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:text="我的钱包"/>

@@ -57,6 +57,8 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 	private Handler mHandler;
 	private SharedPreferences sharedPreferences;
 
+	//111
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

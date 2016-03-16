@@ -53,6 +53,8 @@ public class HttpAddress {
 	public static String METHOD_COLLECTFISHSHOPS = "collectFishshops?";
 
 	public static String METHOD_CHANGEPASSWORDBYOLD = "changePasswordByOld?";
+	
+	public static String METHOD_CHANGEPASSWORDBYPHONE = "changePasswordByPhone?";
 
 	public static String METHOD_FISHSHOPLIST = "fishshopList?";
 

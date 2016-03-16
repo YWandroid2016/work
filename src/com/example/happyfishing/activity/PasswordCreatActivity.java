@@ -1,214 +1,155 @@
 package com.example.happyfishing.activity;
 
+import java.util.HashMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.happyfishing.R;
-import com.example.happyfishing.R.color;
-import com.example.happyfishing.R.layout;
-import com.example.happyfishing.R.menu;
-import com.example.happyfishing.view.ActionBarView;
+import com.example.happyfishing.tool.HttpAddress;
+import com.example.happyfishing.tool.HttpCallbackListener;
+import com.example.happyfishing.tool.HttpUtil;
+import com.example.happyfishing.view.TimeButton;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MotionEvent;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
+import android.app.Activity;
 
-public class PasswordCreatActivity extends Activity implements OnClickListener,OnTouchListener{
+public class PasswordCreatActivity extends Activity{
 	
-	private ActionBarView actionBar_PasswordCreat;
-	private Button btn_password_creat_verfication;
-	private Button btn_password_creat;
-	private TextView tv_passwordcreat_phone1;
-	private TextView tv_passwordcreat_verification1;
-	private EditText edt_passwordcreat_phone1;
-	private EditText edt_passwordcreat_verification1;
-	private InputMethodManager inputManager;
+	private EditText edt_phone;
+	private EditText edt_verification;
+	private EditText edt_password;
+	private TimeButton btn_register_verification;
+	private Button forget_login;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_password_creat);
 		
-		findViewById(R.id.btn_passwordcreate).setOnClickListener(this);
-		
-		
-		
-		initView();
-		
-		loadData();
-		
 	}
-
-	private void initActionbar() {
-		actionBar_PasswordCreat = (ActionBarView) findViewById(R.id.actionBar_passwordCreate);
-		Intent intent = getIntent();
-		int key = intent.getIntExtra("type", 0);
-		switch (key) {
-		case 2:
-			actionBar_PasswordCreat.setActionBar(-1, -1, R.string.title_actionbar_zhaohui, this);
-			findViewById(R.id.tv_passwordcreat_phone).setVisibility(View.GONE);
-			findViewById(R.id.tv_passwordcreat_verification).setVisibility(View.GONE);
+	
+	private void initView(){
+		
+		edt_phone = (EditText) findViewById(R.id.edt_forget_phone);
+		edt_verification = (EditText) findViewById(R.id.edt_forget_verification);
+		edt_password = (EditText) findViewById(R.id.edt_forget_password);
+		btn_register_verification = (TimeButton) findViewById(R.id.btn_register_verification);
+		forget_login = (TimeButton) findViewById(R.id.btn_forget_login);
+		
+		btn_register_verification.setOnClickListener(new OnClickListener() {
 			
-			btn_password_creat_verfication = (Button) findViewById(R.id.btn_passwordcreate_verfication);
-			btn_password_creat_verfication.setText("发送验证码");
-			btn_password_creat = (Button) findViewById(R.id.btn_passwordcreate);
-			btn_password_creat.setText("下一步");
-			btn_password_creat.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					Intent intent1 = new Intent(PasswordCreatActivity.this, PasswordAlterActivity.class);
-					intent1.putExtra("password_create", true);
-					startActivity(intent1);
+			@Override
+			public void onClick(View arg0) {
+				String phoneNumber = edt_phone.getText().toString();
+				if(null == phoneNumber || "".equals(phoneNumber)){
+					Toast.makeText(PasswordCreatActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+					return;
 				}
-			});
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	private void initView() {
-		findViewById(R.id.ll_passwordcreatparent).setOnTouchListener(this);
-		initActionbar();
-		
-		tv_passwordcreat_phone1 = (TextView) findViewById(R.id.tv_passwordcreat_phone1);
-		tv_passwordcreat_phone1.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				tv_passwordcreat_phone1.setVisibility(View.INVISIBLE);
-				edt_passwordcreat_phone1.setVisibility(View.VISIBLE);
-				edt_passwordcreat_phone1.requestFocus();
-				inputManager = (InputMethodManager) edt_passwordcreat_phone1.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-				inputManager.showSoftInput(edt_passwordcreat_phone1, 0);	
-				tv_passwordcreat_verification1.setVisibility(View.VISIBLE);
-				edt_passwordcreat_verification1.setVisibility(View.INVISIBLE);
-				edt_passwordcreat_phone1.setOnEditorActionListener(new OnEditorActionListener() {
-					
+				HashMap<String , String> params = new HashMap<String, String>();
+				params.put("phoneNumber", phoneNumber);
+				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
+						HttpAddress.CLASS_APPUSER+HttpAddress.METHOD_SENDVALIDATECONDE, 
+						params, new HttpCallbackListener() {
 					@Override
-					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							点击按钮隐藏键盘
-							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-							edt_passwordcreat_phone1.setVisibility(View.INVISIBLE);
-							tv_passwordcreat_phone1.setVisibility(View.VISIBLE);
-							return true;
+					public void onFinish(Object response) {
+						Log.d("response", response.toString());
+						Message message = new Message();
+						message.what = 1;
+						JSONObject jsonObject1 = (JSONObject) response;
+						int code = 0 ;
+						String statisString = null; 
+						try {
+							code = jsonObject1.getInt("status");
+							statisString = jsonObject1.getString("text");
+						} catch (JSONException e1) {
+							e1.printStackTrace();
 						}
-						return false;
+						if (code == 2000) {
+							Toast.makeText(PasswordCreatActivity.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
+						}else {
+							Toast.makeText(PasswordCreatActivity.this, "验证码发送失败", Toast.LENGTH_SHORT).show();
+						}
+					}
+					@Override
+					public void onError(Exception e) {
+						Toast.makeText(PasswordCreatActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
 		});
-		edt_passwordcreat_phone1=(EditText) findViewById(R.id.edt_passwordcreat_phone1);
-		edt_passwordcreat_phone1.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				tv_passwordcreat_phone1.setText(edt_passwordcreat_phone1.getText().toString());
-			}
-		});
 		
 		
-		tv_passwordcreat_verification1=(TextView) findViewById(R.id.tv_passwordcreat_verification1);
-		tv_passwordcreat_verification1.setOnClickListener(new OnClickListener() {
+		/**
+		 * 
+		 * 测试网络请求
+		 * 
+		 * 
+		 */
+		
+		forget_login.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				tv_passwordcreat_verification1.setVisibility(View.INVISIBLE);
-				edt_passwordcreat_verification1.setVisibility(View.VISIBLE);
-				edt_passwordcreat_verification1.requestFocus();
-				inputManager = (InputMethodManager) edt_passwordcreat_verification1.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-				inputManager.showSoftInput(edt_passwordcreat_verification1, 0);	
-				tv_passwordcreat_phone1.setVisibility(View.VISIBLE);
-				edt_passwordcreat_phone1.setVisibility(View.INVISIBLE);
-				edt_passwordcreat_verification1.setOnEditorActionListener(new OnEditorActionListener() {
-					
+			public void onClick(View arg0) {
+				String phone = edt_phone.getText().toString();
+				String ver = edt_verification.getText().toString();
+				String pass = edt_password.getText().toString();
+				
+				if(null == phone || "".equals(phone)){
+					Toast.makeText(PasswordCreatActivity.this, "请输入手机号", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if(null == ver || "".equals(ver)){
+					Toast.makeText(PasswordCreatActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if(null == pass || "".equals(pass)){
+					Toast.makeText(PasswordCreatActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				HashMap<String , String> params = new HashMap<String, String>();
+				params.put("phoneNumber", phone);
+				params.put("validateCode", ver);
+				params.put("newPassword", pass);
+				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
+						HttpAddress.CLASS_APPUSER+HttpAddress.METHOD_CHANGEPASSWORDBYPHONE, 
+						params, new HttpCallbackListener() {
 					@Override
-					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							点击按钮隐藏键盘
-							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-							edt_passwordcreat_verification1.setVisibility(View.INVISIBLE);
-							tv_passwordcreat_verification1.setVisibility(View.VISIBLE);
-							return true;
+					public void onFinish(Object response) {
+						Log.d("response", response.toString());
+						Message message = new Message();
+						message.what = 1;
+						JSONObject jsonObject1 = (JSONObject) response;
+						int code = 0 ;
+						String statisString = null; 
+						try {
+							code = jsonObject1.getInt("status");
+							statisString = jsonObject1.getString("text");
+						} catch (JSONException e1) {
+							e1.printStackTrace();
 						}
-						return false;
+						if (code == 2000) {
+							
+						}else {
+							
+						}
+					}
+
+					@Override
+					public void onError(Exception e) {
+						
 					}
 				});
 			}
 		});
-		edt_passwordcreat_verification1=(EditText) findViewById(R.id.edt_passwordcreat_verification1);
-		edt_passwordcreat_verification1.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				tv_passwordcreat_verification1.setText
-				(edt_passwordcreat_verification1.getText().toString());
-			}
-		});
-	}
-
-	private void loadData() {
-		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.password_creat_activity, menu);
-		return true;
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-//		case R.id.btn_passwordcreate:
-//			Intent intent1 = new Intent(PasswordCreatActivity.this, PasswordAlterActivity.class);
-//			intent1.putExtra("password_create", true);
-//			startActivity(intent1);
-//			break;
-		default:
-			break;
-		}
-	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		v.setFocusable(true);
-		v.setFocusableInTouchMode(true);
-		v.requestFocus();
-		edt_passwordcreat_phone1.setVisibility(View.INVISIBLE);
-		tv_passwordcreat_phone1.setVisibility(View.VISIBLE);
-		edt_passwordcreat_verification1.setVisibility(View.INVISIBLE);
-		tv_passwordcreat_verification1.setVisibility(View.VISIBLE);
-		return false;
 	}
 
 }

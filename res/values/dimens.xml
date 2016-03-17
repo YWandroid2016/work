@@ -27,12 +27,12 @@
 	<!-- 我的钱包界面用到的属性 -->
 	<dimen name="img_mywallet_top">150dp</dimen>
 	<dimen name="tv_mywallet_top_nickname">20sp</dimen>
-	<dimen name="tv_mywallet_usablejifen">25sp</dimen>
+	<dimen name="tv_mywallet_usablejifen">30sp</dimen>
 	<dimen name="tv_mywallet_top_userlevel">10sp</dimen>
 	<dimen name="padding_mywallet_top_arrow">20dp</dimen>
 	<dimen name="padding_muwallet_top_image">50dp</dimen>
 	<dimen name="button_width_height">100dp</dimen>
-	<dimen name="tv_mywallet_updateVIP">30sp</dimen>
+	<dimen name="tv_mywallet_updateVIP">20sp</dimen>
 	<dimen name="margin_mywallet_usablejifen">20dp</dimen>
 	
 	

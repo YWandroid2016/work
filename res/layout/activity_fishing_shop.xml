@@ -6,61 +6,28 @@
     android:background="@color/gray_bg"
     tools:context=".FishingShopActivity" >
 
-    <com.example.happyfishing.view.ActionBarView
-        android:id="@+id/actionBar_fishshop"
+    
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:padding="@dimen/x5" >
-
-        <AutoCompleteTextView
-            android:id="@+id/atv_fishshop_search"
-            android:layout_width="0dp"
+        <com.example.happyfishing.view.ActionBarView
+            android:id="@+id/actionBar_fishshop"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bgd_actv_default"
-            android:layout_weight="1"
-            android:hint="搜索"
-            android:imeOptions="actionSearch"
-            android:singleLine="true" />
-
+            android:gravity="center" />
+        
         <ImageView
+            android:id="@+id/img_fishshop_seach"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_search" />
-    </LinearLayout>
-     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="#ccc" />
-    <!--
-    <LinearLayout
-        android:id="@+id/ll_fishpit_sort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fl_edit_text"
-        android:orientation="horizontal" >
-
-        <Spinner
-            android:id="@+id/sp_fishpit_distance"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/sp_fishpit_renqi"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-    </LinearLayout>
-    -->
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_search"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20" />
+        
+	</RelativeLayout>
 
     <ListView
         android:id="@+id/liv_fishingshop"

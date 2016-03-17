@@ -60,7 +60,6 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
-    
     <string name="title_activity_album">AlbumActivity</string>
     <string name="title_activity_my_bill">MyBillActivity</string>
     <string name="title_activity_fishshop_detail">FishshopDetailActivity</string>
@@ -86,5 +85,6 @@
     <string name="title_activity_become_vip_order">BecomeVipOrderActivity</string>
     <string name="title_activity_alter_phone_confirm">AlterPhoneConfirmActivity</string>
     <string name="title_activity_finish_order_show">FinishOrderShowActivity</string>
+    <string name="title_activity_seach">SeachActivity</string>
 
 </resources>

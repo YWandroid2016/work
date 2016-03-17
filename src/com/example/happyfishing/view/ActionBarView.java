@@ -60,6 +60,7 @@ public class ActionBarView extends FrameLayout {
 			txt_title.setOnClickListener(clickListener);
 		}
 	}
+	
 	public void setActionBar(int leftResId, int rightResId, int titleResId, int rz, OnClickListener clickListener) {
 		
 		if (leftResId == -1) {

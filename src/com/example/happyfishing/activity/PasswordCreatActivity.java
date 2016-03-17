@@ -9,31 +9,39 @@ import com.example.happyfishing.R;
 import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
+import com.example.happyfishing.view.ActionBarView;
 import com.example.happyfishing.view.TimeButton;
 
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 import android.app.Activity;
+import android.content.Intent;
 
-public class PasswordCreatActivity extends Activity{
+public class PasswordCreatActivity extends Activity implements OnClickListener{
 	
 	private EditText edt_phone;
 	private EditText edt_verification;
 	private EditText edt_password;
 	private TimeButton btn_register_verification;
 	private Button forget_login;
+	private ActionBarView actionBar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_password_creat);
-		
+		initView();
 	}
 	
 	private void initView(){
@@ -42,7 +50,10 @@ public class PasswordCreatActivity extends Activity{
 		edt_verification = (EditText) findViewById(R.id.edt_forget_verification);
 		edt_password = (EditText) findViewById(R.id.edt_forget_password);
 		btn_register_verification = (TimeButton) findViewById(R.id.btn_register_verification);
-		forget_login = (TimeButton) findViewById(R.id.btn_forget_login);
+		forget_login = (Button) findViewById(R.id.btn_forget_login);
+		actionBar = (ActionBarView) findViewById(R.id.actionBar_passwordCreate);
+		
+		actionBar.setActionBar(R.string.back, -1, R.string.title_actionbar_zhaohui, this);
 		
 		btn_register_verification.setOnClickListener(new OnClickListener() {
 			
@@ -137,9 +148,9 @@ public class PasswordCreatActivity extends Activity{
 							e1.printStackTrace();
 						}
 						if (code == 2000) {
-							
-						}else {
-							
+							popupwindow();
+						} else {
+							Toast.makeText(PasswordCreatActivity.this, statisString, Toast.LENGTH_SHORT).show();
 						}
 					}
 
@@ -150,6 +161,39 @@ public class PasswordCreatActivity extends Activity{
 				});
 			}
 		});
+	}
+	
+	private TextView tv_pop;
+	private TextView btn_pop;
+	private PopupWindow popupWindow;
+	
+	public void popupwindow(){
+		View v = LayoutInflater.from(this).inflate(R.layout.popup, null);
+		popupWindow = new PopupWindow(v, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, true);
+		popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+		tv_pop = (TextView) v.findViewById(R.id.tv_pop);
+		tv_pop.setText("密码重置成功！");
+		btn_pop = (TextView) v.findViewById(R.id.btn_pop);
+		btn_pop.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				popupWindow.dismiss();
+				Intent intent3 = new Intent(PasswordCreatActivity.this, LoginActivity.class);
+				startActivity(intent3);
+			}
+		});
+		
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		switch (arg0.getId()) {
+		case R.id.tv_actionbar_left:
+			PasswordCreatActivity.this.finish();
+			break;
+		default:
+			break;
+		}
 	}
 
 }

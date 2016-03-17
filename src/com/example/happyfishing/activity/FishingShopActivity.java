@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.example.happyfishing.R;
 import com.example.happyfishing.R.color;
+import com.example.happyfishing.SeachActivity;
 import com.example.happyfishing.adapter.ACTVAdapter;
 import com.example.happyfishing.adapter.FishshopAdapter;
 import com.example.happyfishing.entity.FishpitSumaryEntity;
@@ -70,6 +71,8 @@ public class FishingShopActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fishing_shop);
+		
+		findViewById(R.id.img_fishshop_seach).setOnClickListener(this);
 
 		mainHandler = new Handler(){
 			@Override
@@ -91,7 +94,7 @@ public class FishingShopActivity extends Activity implements OnClickListener {
 					adapter_ACTV = new  ACTVAdapter<String>(FishingShopActivity.this,
 							android.R.layout.simple_list_item_1, nameStrings);
 					adapter_ACTV.add2Adapter(nameStrings);
-					atv_fishshop_search.setAdapter(adapter_ACTV);
+//					atv_fishshop_search.setAdapter(adapter_ACTV);
 					Log.d("aaa", "1113");
 					break;
 
@@ -163,72 +166,72 @@ public class FishingShopActivity extends Activity implements OnClickListener {
 		
 		
 		actionBar_fishshop = (ActionBarView) findViewById(R.id.actionBar_fishshop);
-		actionBar_fishshop.setActionBar(-1, R.string.action_settings, R.string.title_actionbar_fishshop, null);
+		actionBar_fishshop.setActionBar(-1, -1, R.string.title_actionbar_fishshop, null);
 		
 		findViewById(R.id.tv_homeactivity_jump2home).setOnClickListener(this);
 		findViewById(R.id.tv_homeactivity_fishingshop).setOnClickListener(this);
 		findViewById(R.id.tv_homeactivity_heikeng).setOnClickListener(this);
 		findViewById(R.id.tv_actionbar_right).setOnClickListener(this);
 		findViewById(R.id.tv_homeactivity_mywallet).setOnClickListener(this);
-		atv_fishshop_search = (AutoCompleteTextView) findViewById(R.id.atv_fishshop_search);
-		atv_fishshop_search.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				liv_fishingshop.setBackgroundColor(Color.parseColor("#dddddd"));
-			}
-		});
-		atv_fishshop_search.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				HashMap<String, String> params = new HashMap<String, String>();
-				params.put("fishpit", adapter_ACTV.getItem(position));
-				Log.d("paras", adapter_ACTV.getItem(position));
-				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-						HttpAddress.CLASS_MERCHANT+HttpAddress.METHOD_FISHSHOPLIST, 
-						params, new HttpCallbackListener() {
-							
-							@Override
-							public void onFinish(Object response) {
-								Log.d("select_result", response.toString());
-								JSONObject jsonObject = (JSONObject) response;
-								ArrayList<FishshopEntity> arrayList = new ArrayList<FishshopEntity>();
-								try {
-									int total ;
-									String totalString= jsonObject.getString("total");
-									total = Integer.parseInt(totalString);
-									JSONArray jsonArray = jsonObject.getJSONArray("data");
-									for (int i = 0; i < jsonArray.length(); i++) {
-										JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-										String name = (String) jsonObject2.get("name");
-										String headImageURL = (String) jsonObject2.get("headImage");
-										String detail = (String) jsonObject2.get("introduction");
-										int id = jsonObject2.getInt("id");
-										arrayList.add(new FishshopEntity(name,  headImageURL, detail,id+""));
-									}
-									Message message = new Message();
-									message.what=2;
-									message.obj = arrayList;
-									mainHandler.sendMessage(message);
-//									fishpitAdapter.addToAdapter(arrayList, true);
-									Log.d("total", total+" "+jsonArray);
-									
-								} catch (JSONException e) {
-									mainHandler.sendEmptyMessage(5);
-									e.printStackTrace();
-								}
-								
-							}
-							
-							@Override
-							public void onError(Exception e) {
-								mainHandler.sendEmptyMessage(5);
-							}
-						});
-			}
-		});
-		// sp_distence=(Spinner) findViewById(R.id.sp_fishpit_distance);
+//		atv_fishshop_search = (AutoCompleteTextView) findViewById(R.id.atv_fishshop_search);
+//		atv_fishshop_search.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				liv_fishingshop.setBackgroundColor(Color.parseColor("#dddddd"));
+//			}
+//		});
+//		atv_fishshop_search.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				HashMap<String, String> params = new HashMap<String, String>();
+//				params.put("fishpit", adapter_ACTV.getItem(position));
+//				Log.d("paras", adapter_ACTV.getItem(position));
+//				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
+//						HttpAddress.CLASS_MERCHANT+HttpAddress.METHOD_FISHSHOPLIST, 
+//						params, new HttpCallbackListener() {
+//							
+//							@Override
+//							public void onFinish(Object response) {
+//								Log.d("select_result", response.toString());
+//								JSONObject jsonObject = (JSONObject) response;
+//								ArrayList<FishshopEntity> arrayList = new ArrayList<FishshopEntity>();
+//								try {
+//									int total ;
+//									String totalString= jsonObject.getString("total");
+//									total = Integer.parseInt(totalString);
+//									JSONArray jsonArray = jsonObject.getJSONArray("data");
+//									for (int i = 0; i < jsonArray.length(); i++) {
+//										JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+//										String name = (String) jsonObject2.get("name");
+//										String headImageURL = (String) jsonObject2.get("headImage");
+//										String detail = (String) jsonObject2.get("introduction");
+//										int id = jsonObject2.getInt("id");
+//										arrayList.add(new FishshopEntity(name,  headImageURL, detail,id+""));
+//									}
+//									Message message = new Message();
+//									message.what=2;
+//									message.obj = arrayList;
+//									mainHandler.sendMessage(message);
+////									fishpitAdapter.addToAdapter(arrayList, true);
+//									Log.d("total", total+" "+jsonArray);
+//									
+//								} catch (JSONException e) {
+//									mainHandler.sendEmptyMessage(5);
+//									e.printStackTrace();
+//								}
+//								
+//							}
+//							
+//							@Override
+//							public void onError(Exception e) {
+//								mainHandler.sendEmptyMessage(5);
+//							}
+//						});
+//			}
+//		});
+//		// sp_distence=(Spinner) findViewById(R.id.sp_fishpit_distance);
 		// sp_distence.setPrompt("距离");
 		// sp_renqi=(Spinner) findViewById(R.id.sp_fishpit_renqi);
 		liv_fishingshop = (ListView) findViewById(R.id.liv_fishingshop);
@@ -325,6 +328,10 @@ public class FishingShopActivity extends Activity implements OnClickListener {
 		case R.id.tv_homeactivity_jump2home:
 			Intent intent3 = new Intent(FishingShopActivity.this, HomeActivity.class);
 			startActivity(intent3);
+			break;
+		case R.id.img_fishshop_seach:
+			Intent intent5 = new Intent(FishingShopActivity.this, SeachActivity.class);
+			startActivity(intent5);
 			break;
 		case R.id.tv_actionbar_right:
 			SharedPreferences sp = getSharedPreferences("token", Context.MODE_PRIVATE);

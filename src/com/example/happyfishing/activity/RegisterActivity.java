@@ -422,7 +422,7 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 						}
 						if (code == 2000) {
 							
-							dialog();
+							popupwindow();
 							
 						}else {
 							try {

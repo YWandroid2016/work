@@ -1,5 +1,7 @@
 package com.example.happyfishing.activity;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -209,6 +211,13 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.fishpit_detail, menu);
 		return true;
 	}
+	
+	private boolean isInstalled(String packageName){
+		Intent manager = getPackageManager().getLaunchIntentForPackage(packageName);
+		Log.d("intent", manager+"");
+		Log.d("exists", new File("/data/data/" + packageName).exists()+"");
+		return new File("/data/data/" + packageName).exists();
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -229,15 +238,24 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.ll_fishpitlocation:
-			Intent intent2 = new Intent(FishpitDetailActivity.this, LocationShowActivity.class);
-			Bundle bundle2 = new Bundle();
-			bundle2.putDouble("target_lat", latitude2);
-			bundle2.putDouble("target_lon", longitude2);
-			bundle2.putDouble("my_lat", locating.latitude);
-			bundle2.putDouble("my_lon", locating.longitude);
-			bundle2.putString("city", locating.cityName);
-			intent2.putExtras(bundle2);
-			startActivity(intent2);
+//			Intent intent2 = new Intent(FishpitDetailActivity.this, LocationShowActivity.class);
+//			Bundle bundle2 = new Bundle();
+//			bundle2.putDouble("target_lat", latitude2);
+//			bundle2.putDouble("target_lon", longitude2);
+//			bundle2.putDouble("my_lat", locating.latitude);
+//			bundle2.putDouble("my_lon", locating.longitude);
+//			bundle2.putString("city", locating.cityName);
+//			intent2.putExtras(bundle2);
+//			startActivity(intent2);
+
+			if (isInstalled("com.baidu.BaiduMap")) {
+				try {
+					Intent intent = Intent.getIntent("intent://map/marker?location="+latitude2+""+","+longitude2+""+"&title="+nameString+"&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+					startActivity(intent);
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
 			break;
 		case R.id.tv_actionbar_left:
 			FishpitDetailActivity.this.finish();

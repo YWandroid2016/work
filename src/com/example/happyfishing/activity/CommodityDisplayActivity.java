@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -47,6 +48,7 @@ public class CommodityDisplayActivity extends Activity implements OnClickListene
 	private double my_lat;
 	private double my_lon;
 	private String cityString;
+	private String nameString;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class CommodityDisplayActivity extends Activity implements OnClickListene
 		my_lat = bundle.getDouble("my_lat");
 		my_lon = bundle.getDouble("my_lon");
 		cityString = bundle.getString("city");
+		nameString = bundle.getString("nameString");
 		initView();
 		
 		loadData();
@@ -88,7 +91,8 @@ public class CommodityDisplayActivity extends Activity implements OnClickListene
 	private void initView() {
 		actionBar_commodity = (ActionBarView) findViewById(R.id.actionbar_commodity_display);
 		actionBar_commodity.setActionBar(R.string.back, -1, R.string.title_actionbar_commodity, this);
-		
+		TextView tv_name = (TextView) findViewById(R.id.tv_actionbar_title);
+		tv_name.setText(nameString);
 		grv_commodity=(GridView) findViewById(R.id.grv_commodity);
 		arrayList= new ArrayList<CommodityEntity>();
 		adapter = new CommodityAdapter(CommodityDisplayActivity.this);
@@ -164,6 +168,7 @@ public class CommodityDisplayActivity extends Activity implements OnClickListene
 				bundle1.putDouble("my_lat", my_lat);
 				bundle1.putDouble("my_lon", my_lon);
 				bundle1.putString("city", cityString);
+				bundle1.putString("nameString", nameString);
 				intent.putExtras(bundle1);
 				startActivity(intent);
 			}

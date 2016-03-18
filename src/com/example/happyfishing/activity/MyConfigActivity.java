@@ -39,48 +39,43 @@ public class MyConfigActivity extends Activity implements OnClickListener {
 	private void initView() {
 		actionBar_config = (ActionBarView) findViewById(R.id.actionBar_config);
 		actionBar_config.setActionBar(R.string.back, -1, R.string.title_actionbar_myconfig, this);
+		
+		findViewById(R.id.ll_myconfig_loginpassword).setOnClickListener(this); //登陆密码
+		findViewById(R.id.ll_myconfig_paypassword).setOnClickListener(this);	//支付密码
+		findViewById(R.id.ll_myconfig_update).setOnClickListener(this);		//版本更新
+		findViewById(R.id.ll_myconfig_cancle).setOnClickListener(this);		//清除缓存
+		
+		
 	}
 
 	private void loadData() {
-		// TODO Auto-generated method stub
+		// TODO 加载数据
 		
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my_config, menu);
-		return true;
-	}
-
-	@Override
 	public void onClick(View v) {
+		Intent intent = new  Intent();
 		switch (v.getId()) {
-//		case R.id.ll_myconfig_loginpassword:
-//			Intent intent1 = new  Intent(MyConfigActivity.this, PasswordAlterActivity.class);
-//			
-////			int TYPE_LOGIN = 0;
-////			if (TYPE_LOGIN == 1) {
-//				
-////			} else {
-////				intent1 = new Intent(MyConfigActivity.this, PasswordCreatActivity.class);
-////			}
-//			startActivity(intent1);
-//			break;
-//			
-//		case R.id.tv_actionbar_left:
-//			MyConfigActivity.this.finish();
-//			break;
-//		case R.id.ll_myconfig_paypassword:
-//			Intent intent2;
-//			int TYPE_PAY = 1;
-//			if (TYPE_PAY == 1) {
-//				intent2 = new Intent(MyConfigActivity.this, PasswordAlterActivity.class);
-//			} else {
-//				intent2 = new Intent(MyConfigActivity.this, PasswordCreatActivity.class);
-//			}
-//			startActivity(intent2);
-//			break;
+		case R.id.ll_myconfig_loginpassword:
+			intent.setClass(MyConfigActivity.this, PasswordAlterActivity.class);
+			startActivity(intent);
+			break;
+			
+		case R.id.ll_myconfig_paypassword:
+			
+			//TODO 版本修改创建待定
+			
+			break;
+			
+		case R.id.ll_myconfig_update:
+			
+			break;
+		
+		case R.id.ll_myconfig_cancle:
+			
+			break;
+			
 		case R.id.btn_logout:
 			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 			if (sp.getString("token", null) == null) {

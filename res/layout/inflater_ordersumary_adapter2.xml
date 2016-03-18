@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/img_ordersumary_adapter2"
+        android:layout_width="@dimen/img_fishpit_itmeshow"
+        android:layout_height="@dimen/img_fishpit_itmeshow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_ordersumary_name2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name" />
+
+        <TextView
+            android:id="@+id/tv_ordersumary_merchantname2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="鱼坑名" />
+
+        <TextView
+            android:id="@+id/tv_ordersumary_price2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="111" />
+    </LinearLayout>
+
+</LinearLayout>

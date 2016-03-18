@@ -47,6 +47,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -72,6 +73,9 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 	private int fishPositionTotal;
 	private String cityName;
 	private Handler mainHandler;
+	private ImageView img_collected;
+	private boolean isCollected;
+	private String collectedId;
 
 	// private ArrayList<String> titleList = new ArrayList<String>();
 
@@ -86,6 +90,13 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 				switch (msg.what) {
 				case 1:
 					String statusString = (String) msg.obj;
+					Bundle bundle = msg.getData();
+					boolean collecting = bundle.getBoolean("isCollected");
+					if (collecting) {
+						img_collected.setImageResource(R.drawable.ic_collection_collected);
+					}else {
+						img_collected.setImageResource(R.drawable.ic_collection_default);
+					}
 					Toast.makeText(FishpitDetailActivity.this, statusString, Toast.LENGTH_SHORT).show();
 					break;
 				case 2:
@@ -137,8 +148,8 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 	}
 
 	private void initView() {
-
-		findViewById(R.id.img_actionbar_collection).setOnClickListener(this);
+		img_collected = (ImageView) findViewById(R.id.img_actionbar_collection);
+		img_collected.setOnClickListener(this);
 
 		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
@@ -189,18 +200,25 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 					final String fishpitDetail = jsonObject2.getString("introduction");// 鱼坑介绍
 					String ADBannerURLS = jsonObject2.getString("imageUrls");// 鱼坑的banner图片
 					String longitude = jsonObject2.getString("longitude");// 鱼坑所在的经度
+					final String collected = jsonObject2.getString("collected");
 					longitude2 = Double.parseDouble(longitude);
 					String latitude = jsonObject2.getString("latitude");// 鱼坑所在的纬度
 					latitude2 = Double.parseDouble(latitude);
 					boolean hasWifi = jsonObject2.getBoolean("hasWifi");// 鱼坑是否有wifi
 					boolean hasPark = jsonObject2.getBoolean("hasPark");// 鱼坑是否有停车场
 					String idString = jsonObject2.getString("id");
-					
+					collectedId = jsonObject2.getString("collectId");
 					runOnUiThread(new Runnable() {
 						public void run() {
 							// tv_envirScore.setText("环境："+envirScore);
 							tv_address.setText(location);
-							tv_fishpitDetail.setText("\t"+fishpitDetail);
+							tv_fishpitDetail.setText(fishpitDetail);
+							if (collected.equals("1")) {
+								img_collected.setImageResource(R.drawable.ic_collection_collected);
+								FishpitDetailActivity.this.isCollected = true;
+							}else {
+								FishpitDetailActivity.this.isCollected = false;
+							}
 						}
 					});
 				} catch (JSONException e) {
@@ -410,40 +428,85 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 		case R.id.tv_actionbar_left:
 			FishpitDetailActivity.this.finish();
 		case R.id.img_actionbar_collection:
-			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-			String token = sp.getString("token", "");
-			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("token", token);
-			params.put("merchantId", idString);
-
-			if (token.equals("")) {
-				Toast.makeText(FishpitDetailActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
-
-			} else {
-				HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERINFO + HttpAddress.METHOD_ADDCOLLET, params, new HttpCallbackListener() {
-
-					@Override
-					public void onFinish(Object response) {
-						JSONObject jsonObject = (JSONObject) response;
-						Log.d("response", response.toString());
-						String statusString = "收藏失败";
-						try {
-							statusString = jsonObject.getString("text");
-						} catch (JSONException e) {
-							mainHandler.sendEmptyMessage(5);
-							e.printStackTrace();
+			if (isCollected) {
+				SharedPreferences sp3 = getSharedPreferences("user", Context.MODE_PRIVATE);
+				String token = sp3.getString("token", "");
+				HashMap<String, String> params2 = new HashMap<String, String>();
+				params2.put("token", token);
+				params2.put("collectId", collectedId);
+				
+				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
+						HttpAddress.CLASS_USERCOLLECT+HttpAddress.METHOD_DELCOLLET, 
+						params2, 
+						new HttpCallbackListener() {
+							
+							@Override
+							public void onFinish(Object response) {
+								Log.d("delCollect", response.toString());
+								JSONObject jsonObject = (JSONObject) response;
+								String text = "网络错误，请重试";
+								try {
+									text = jsonObject.getString("text");
+								} catch (JSONException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								Message msg = new Message();
+								isCollected = false;
+								Bundle bundle = new Bundle();
+								bundle.putBoolean("isCollected", isCollected);
+								msg.setData(bundle);
+								msg.obj = text;
+								msg.what=1;
+								mainHandler.sendMessage(msg);
+							}
+							
+							@Override
+							public void onError(Exception e) {
+								
+							}
+						});
+			}else {
+				SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+				String token = sp.getString("token", "");
+				HashMap<String, String> params = new HashMap<String, String>();
+				params.put("token", token);
+				params.put("merchantId", idString);
+				
+				if (token.equals("")) {
+					Toast.makeText(FishpitDetailActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+					
+				} else {
+					HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERCOLLECT + HttpAddress.METHOD_ADDCOLLET, params, new HttpCallbackListener() {
+						
+						@Override
+						public void onFinish(Object response) {
+							JSONObject jsonObject = (JSONObject) response;
+							Log.d("addCollect", response.toString());
+							String statusString = "收藏失败";
+							try {
+								statusString = jsonObject.getString("text");
+								collectedId = jsonObject.getString("collectId");
+							} catch (JSONException e) {
+								mainHandler.sendEmptyMessage(5);
+								e.printStackTrace();
+							}
+							isCollected = true;
+							Message message = new Message();
+							message.what = 1;
+							message.obj = statusString;
+							Bundle bundle = new Bundle();
+							bundle.putBoolean("isCollected", isCollected);
+							message.setData(bundle);
+							mainHandler.sendMessage(message);
 						}
-						Message message = new Message();
-						message.what = 1;
-						message.obj = statusString;
-						mainHandler.sendMessage(message);
-					}
-
-					@Override
-					public void onError(Exception e) {
-						mainHandler.sendEmptyMessage(5);
-					}
-				});
+						
+						@Override
+						public void onError(Exception e) {
+							mainHandler.sendEmptyMessage(5);
+						}
+					});
+				}
 			}
 			break;
 		default:
@@ -455,9 +518,11 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		
 		if(keyCode == event.KEYCODE_BACK){
-			if(popupWindow.isShowing()){
-				popupWindow.dismiss();
-				return true;
+			if (popupWindow != null) {
+				if(popupWindow.isShowing()){
+					popupWindow.dismiss();
+					return false;
+				}
 			}
 		}
 		

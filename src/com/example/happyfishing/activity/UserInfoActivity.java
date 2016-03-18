@@ -49,7 +49,6 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 	private InputMethodManager inputManager;
 	
 	private TextView tv_userinfo_nickname;
-	private EditText edt_userinfo_nickname;
 	private TextView tv_userinfo_phonenumber;
 	private ActionBarView actionBar_userinfo;
 
@@ -70,12 +69,8 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		actionBar_userinfo = (ActionBarView) findViewById(R.id.actionBar_userinfo);
 		actionBar_userinfo.setActionBar(R.string.back, -1, R.string.title_actionbar_userinfo, this);
 		
-//		findViewById(R.id.userinfo_useraddress).setOnClickListener(this);
-//		findViewById(R.id.userinfo_usericon).setOnClickListener(this);
 		findViewById(R.id.userinfo_usernickname).setOnClickListener(this);
 		findViewById(R.id.userinfo_userphone).setOnClickListener(this);
-//		img_usericon = (ImageView) findViewById(R.id.img_userinfo_usericon);
-		// 昵称的监听设置
 		SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 		
 		String nickName = sp.getString("nickname", "获取失败，请重试");
@@ -85,8 +80,8 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		tv_userinfo_nickname.setText(nickName);
 		
 		tv_userinfo_phonenumber = (TextView) findViewById(R.id.tv_userinfo_phone);
+		
 		tv_userinfo_phonenumber.setText(phoneNumber);
-		edt_userinfo_nickname = (EditText) findViewById(R.id.edt_userinfo_nickname);
 	}
 
 	private void loadData() {
@@ -103,14 +98,8 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-//		case R.id.userinfo_usericon:
-//			initChangeUserIcon();
-//			ll_popup.startAnimation(AnimationUtils.loadAnimation(UserInfoActivity.this, R.anim.activity_translate_in));
-//			pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
-//			break;
 		case R.id.userinfo_usernickname:
-			Intent intent2 = new Intent(UserInfoActivity.this, UserInfoAlterActivity.class);
-			intent2.putExtra("phone", false);
+			Intent intent2 = new Intent(UserInfoActivity.this, UserInfoAlter_NickName_Activity.class);
 			startActivity(intent2);
 			break;
 		case R.id.userinfo_userphone:
@@ -118,11 +107,6 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 			intent1.putExtra("phone", true);
 			startActivity(intent1);
 			break;
-//		case R.id.userinfo_useraddress:
-//			Intent intent3 = new Intent(UserInfoActivity.this, UserAddressAlterActivity.class);
-//			intent3.putExtra("have", false);
-//			startActivity(intent3);
-//			break;
 		case R.id.tv_actionbar_left:
 			UserInfoActivity.this.finish();
 			break;

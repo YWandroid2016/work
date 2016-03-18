@@ -3,175 +3,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/gray_bg"
     tools:context=".UserInfoActivity" >
 
     <com.example.happyfishing.view.ActionBarView
         android:id="@+id/actionBar_userinfo"
         android:layout_width="match_parent"
        android:layout_height="@dimen/x45" />
-
-   <!--  <LinearLayout
-        android:id="@+id/userinfo_usericon"
+    
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical" >
-
-        <TextView
+        android:background="#fff"
+        android:layout_marginTop="@dimen/x10"
+        android:orientation="vertical" >
+        
+        <LinearLayout
+            android:id="@+id/userinfo_userimg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:gravity="center_vertical" >
+            
+            <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_userinfo_textview"
+            android:paddingLeft="@dimen/x15"
             android:text="头像" />
+            
+            <ImageView
+                android:id="@+id/img_userinfo_userimg"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x50"
+                android:src="@drawable/ic_launcher" />
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrows_right"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                 />
 
-        <ImageView
-            android:id="@+id/img_userinfo_usericon"
-            android:layout_width="@dimen/imageview_userinfo"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/padding_userinfo_imageview"
-            android:src="@drawable/ic_arrows_right" />
-    </LinearLayout> -->
-
-    <LinearLayout
-        android:id="@+id/userinfo_usernickname"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x30"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
+		</LinearLayout>
+		
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@color/gray_bg" />
+        
+        <LinearLayout
+            android:id="@+id/userinfo_usernickname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:gravity="center_vertical" >
+            
+            <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x15"
             android:text="昵称" />
-        
-        <EditText
-                android:id="@+id/edt_userinfo_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:editable="true"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
-                android:visibility="gone" />
-
+            
             <TextView
                 android:id="@+id/tv_userinfo_nickname"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:hint="当前昵称"
-                android:textSize="@dimen/tv_register_edit_size" />
+                android:layout_height="wrap_content"
+                android:text="十三。。。" />
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrows_right"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                 />
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/x10"
-            android:src="@drawable/ic_arrows_right" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/userinfo_userphone"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x30"
-        android:gravity="center_vertical"
-        android:paddingTop="@dimen/x10" >
-
-        <TextView
+		</LinearLayout>
+        
+		<View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@color/gray_bg" />
+        
+        <LinearLayout
+            android:id="@+id/userinfo_userphone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:gravity="center_vertical" >
+            
+            <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x15"
             android:text="手机号" />
-
-
-            <EditText
-                android:id="@+id/edt_userinfo_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:imeOptions="actionDone"
-                android:inputType="phone"
-                android:singleLine="true"
-                android:visibility="invisible" />
-
+            
             <TextView
                 android:id="@+id/tv_userinfo_phone"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:hint="13260356241"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/tv_register_edit_size" />
-      
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/x10"
-            android:src="@drawable/ic_arrows_right" />
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:text="13240912869" />
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrows_right"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                 />
 
-   <!--  <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingTop="@dimen/padding_userinfo_item" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_userinfo_textview"
-            android:text="我的等级" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/padding_userinfo_imageview"
-            android:src="@drawable/ic_arrows_right" />
-    </LinearLayout> -->
-
-   <!--  <LinearLayout
-        android:id="@+id/userinfo_useraddress"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:paddingTop="@dimen/padding_userinfo_item" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_userinfo_textview"
-            android:text="我的地址" />
-
-        <TextView
-            android:id="@+id/tv_userinfo_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加/修改" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/padding_userinfo_imageview"
-            android:src="@drawable/ic_arrows_right" />
-    </LinearLayout>  -->
-    <View android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"/>
+		</LinearLayout>
+        
+	</LinearLayout>
+    
 
 </LinearLayout>

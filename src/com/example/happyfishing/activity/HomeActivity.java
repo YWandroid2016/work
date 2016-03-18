@@ -164,8 +164,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 						SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 						Editor editor = sp.edit();
 						// 比较两次userpoint值 如果变化则修改message图标为带红点
-						String userPoint_previous = sp.getString("userPoint", "");
-						String userPoint_now = jsonObject1.getString("userPoint");
+//						String userPoint_previous = sp.getString("userPoint", "");
+//						String userPoint_now = jsonObject1.getString("userPoint");
 						long current = System.currentTimeMillis();
 						String outOfDate = jsonObject1.getString("outOfDate");
 						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-hh");
@@ -182,10 +182,10 @@ public class HomeActivity extends Activity implements OnClickListener {
 							e.printStackTrace();
 						}
 						
-						if (userPoint_now.equals(userPoint_previous)) {
-						} else {
-							UiUtil.setNewMessage(true);
-						}
+//						if (userPoint_now.equals(userPoint_previous)) {
+//						} else {
+//							UiUtil.setNewMessage(true);
+//						}
 						
 						editor.putString("outOfDate", jsonObject1.getString("outOfDate"));
 						editor.putString("startOfDate", jsonObject1.getString("startOfDate"));
@@ -264,7 +264,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 		mViewFlow.setTimeSpan(4500);
 		mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
 		mViewFlow.startAutoFlowTimer(); // 启动自动播放
-	}
+	} 
 
 	@Override
 	public void onClick(View v) {

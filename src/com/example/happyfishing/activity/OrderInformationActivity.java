@@ -1,5 +1,8 @@
 package com.example.happyfishing.activity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -12,7 +15,7 @@ import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
 import com.example.happyfishing.tool.UiUtil;
 import com.example.happyfishing.view.ActionBarView;
-import com.umeng.message.UmengRegistrar;
+import com.example.happyfishing.view.RushBuyCountDownTimerView;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,12 +53,13 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	private String token;
 	private String orderId;
 	private long userPoint;
-	private Handler mainHandler;
+	private Handler mainHandler;   
 	
 	private TextView tv_orderdetail_content1;
 	private TextView tv_orderdetail_content2;
 	private TextView tv_orderdetail_phone;
-
+	private RushBuyCountDownTimerView tv_timeUp;
+	private String dateCreate;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,6 +86,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	}
 
 	private void initView() {
+		tv_timeUp = (RushBuyCountDownTimerView) findViewById(R.id.timeup_ordershow);
 		Intent intent = getIntent();
 		boolean hide = intent.getBooleanExtra("hide", false);
 		Bundle bundle = intent.getExtras();
@@ -90,11 +95,31 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		orderId = bundle.getString("orderId");
 		merchantId = bundle.getString("merchantId");
 		userPoint = bundle.getLong("userPoint");
-		
 		Log.d("point", userPoint+" 积分");
-		
+		dateCreate = bundle.getString("dateCreate");
 		nameString = bundle.getString("name");
 		dateString = bundle.getString("date");
+		Log.d("date", dateString);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			Log.d("dateCreate", dateCreate+"   ");
+			Date daojishi = dateFormat.parse(dateCreate);
+			String creatString = dateFormat.format(daojishi);
+			String currentString = dateFormat.format(new Date(System.currentTimeMillis()));
+			SimpleDateFormat dateFormat_minute= new SimpleDateFormat("mm");
+			SimpleDateFormat dateFormat_second = new SimpleDateFormat("ss");
+			Date daojishiCurrent = dateFormat.parse(currentString);
+			long daojishiTime = 15*60*1000 - (daojishiCurrent.getTime() - daojishi.getTime());
+			String minute = dateFormat_minute.format(new Date(daojishiTime));
+			String second = dateFormat_second.format(new Date(daojishiTime));
+			tv_timeUp.setTime(0, Integer.parseInt(minute), Integer.parseInt(second));
+			tv_timeUp.start();
+			Log.d("daojishi", minute+"  "+second);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		location = bundle.getInt("location");
 		phoneNumber = bundle.getString("phone");
 		if (hide) {
@@ -180,7 +205,6 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 					HttpAddress.CLASS_ORDERPAY+HttpAddress.METHOD_CASHPAY, 
 					params, 
 					new HttpCallbackListener() {
-						
 						@Override
 						public void onFinish(Object response) {
 							int code = 0 ;
@@ -245,25 +269,12 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		}
 		else if (rdb_jifen.isChecked()) {
 			
-			String device_token = getSharedPreferences("phone_info", MODE_PRIVATE).getString("device_token", "");
-			
-			if("".equals(device_token)){
-				device_token = UmengRegistrar.getRegistrationId(this);
-				if(null == device_token){
-					device_token = "";
-				}
-			} 
-			
 			Log.d("jifenzhifu", "11111");
 			HashMap<String, String> params = new HashMap<String, String>();
 			params.put("pointValue", "30");
 			params.put("token", token);
 			params.put("merchantId", merchantId);
 			params.put("orderId", orderId);
-			params.put("appkey", AppInfo.APPKEY);	//umeng appkey
-			params.put("app_master_secret", AppInfo.APP_MASTER_SECRET);	//umeng app_master_secret
-			params.put("after_open", AppInfo.AFTER_OPEN);	//推送跳转activity
-			params.put("device_token", device_token);	//设备device_tokens码
 			HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
 					HttpAddress.CLASS_ORDERPAY+HttpAddress.METHOD_POINTPAY, 
 					params, 

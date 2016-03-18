@@ -17,6 +17,12 @@
         android:background="#eeeeee"
         android:orientation="vertical" >
 
+        <com.example.happyfishing.view.RushBuyCountDownTimerView
+            android:id="@+id/timeup_ordershow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </com.example.happyfishing.view.RushBuyCountDownTimerView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"

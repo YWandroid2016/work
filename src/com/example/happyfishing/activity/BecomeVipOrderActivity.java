@@ -1,21 +1,20 @@
 package com.example.happyfishing.activity;
 
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.example.happyfishing.R;
-import com.example.happyfishing.R.color;
-import com.example.happyfishing.R.id;
-import com.example.happyfishing.R.layout;
-import com.example.happyfishing.R.menu;
-import com.example.happyfishing.R.string;
 import com.example.happyfishing.view.ActionBarView;
+import com.example.happyfishing.view.RushBuyCountDownTimerView;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +27,8 @@ public class BecomeVipOrderActivity extends Activity implements OnClickListener{
 	private TextView tv_becomevip_order_time;
 	private TextView tv_becomevip_phone;
 	private TextView tv_becomevip_order_paymoney;
+	private RushBuyCountDownTimerView tv_timeUp;
+	private String dateCreate;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,9 +40,33 @@ public class BecomeVipOrderActivity extends Activity implements OnClickListener{
 	}
 
 	private void initView() {
+		tv_timeUp = (RushBuyCountDownTimerView) findViewById(R.id.timeup_vipordershow);
 		actionbar_becomevip = (ActionBarView) findViewById(R.id.actionbar_becomevip);
 		actionbar_becomevip.setActionBar(R.string.cancl, -1, R.string.title_actionbar_order_detail, this);
 		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		dateCreate = bundle.getString("dateCreate");
+		
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			Log.d("dateCreate", dateCreate+"   ");
+			Date daojishi = dateFormat.parse(dateCreate);
+			String creatString = dateFormat.format(daojishi);
+			String currentString = dateFormat.format(new Date(System.currentTimeMillis()));
+			SimpleDateFormat dateFormat_minute= new SimpleDateFormat("mm");
+			SimpleDateFormat dateFormat_second = new SimpleDateFormat("ss");
+			Date daojishiCurrent = dateFormat.parse(currentString);
+			long daojishiTime = 15*60*1000 - (daojishiCurrent.getTime() - daojishi.getTime());
+			String minute = dateFormat_minute.format(new Date(daojishiTime));
+			String second = dateFormat_second.format(new Date(daojishiTime));
+			tv_timeUp.setTime(0, Integer.parseInt(minute), Integer.parseInt(second));
+			tv_timeUp.start();
+			Log.d("daojishi", minute+"  "+second);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//设置所花金额和有效期的文本
 		int money = intent.getIntExtra("money", -1);
 		int type = intent.getIntExtra("type", -1);

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+	android:layout_gravity="center"
+	android:background="@color/daojishi_background"
+    android:padding="3dp" >
+
+    
+	<TextView 
+	    android:textColor="#fff"
+	    android:drawableLeft="@drawable/ic_daojishi"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="请在"/>
+    <TextView
+        android:textColor="#fff"
+        android:id="@+id/tv_min_decade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        />
+
+    <TextView
+        android:textColor="#fff"
+        android:id="@+id/tv_min_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_marginLeft="1dp" />
+	<TextView android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textColor="#fff"
+	    android:text="分"/>
+
+    <TextView
+        android:id="@+id/tv_sec_decade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="1"
+        />
+
+    <TextView
+        android:id="@+id/tv_sec_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="1"
+        android:layout_marginLeft="1dp" />
+    
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="秒内完成支付	，超时将取消订单"/>
+
+</LinearLayout>

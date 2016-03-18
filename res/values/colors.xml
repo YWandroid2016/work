@@ -160,6 +160,7 @@
     <!-- 自定义颜色 -->
     <color name="actionbar_background">#3086f2</color>
     <color name="button_background">#3086f2</color>
+    <color name="daojishi_background">#f0b035</color>
     
     <color name="appcolor">#3086f2</color>
     <color name="anhong">#f26665</color>

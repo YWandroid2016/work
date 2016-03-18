@@ -26,7 +26,7 @@ public class MyConfigActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_config);
 
-		findViewById(R.id.ll_myconfig_loginpassword).setOnClickListener(this);
+//		findViewById(R.id.ll_myconfig_loginpassword).setOnClickListener(this);
 		findViewById(R.id.btn_logout).setOnClickListener(this);
 		
 		
@@ -56,31 +56,31 @@ public class MyConfigActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.ll_myconfig_loginpassword:
-			Intent intent1 = new  Intent(MyConfigActivity.this, PasswordAlterActivity.class);
-			
-//			int TYPE_LOGIN = 0;
-//			if (TYPE_LOGIN == 1) {
-				
+//		case R.id.ll_myconfig_loginpassword:
+//			Intent intent1 = new  Intent(MyConfigActivity.this, PasswordAlterActivity.class);
+//			
+////			int TYPE_LOGIN = 0;
+////			if (TYPE_LOGIN == 1) {
+//				
+////			} else {
+////				intent1 = new Intent(MyConfigActivity.this, PasswordCreatActivity.class);
+////			}
+//			startActivity(intent1);
+//			break;
+//			
+//		case R.id.tv_actionbar_left:
+//			MyConfigActivity.this.finish();
+//			break;
+//		case R.id.ll_myconfig_paypassword:
+//			Intent intent2;
+//			int TYPE_PAY = 1;
+//			if (TYPE_PAY == 1) {
+//				intent2 = new Intent(MyConfigActivity.this, PasswordAlterActivity.class);
 //			} else {
-//				intent1 = new Intent(MyConfigActivity.this, PasswordCreatActivity.class);
+//				intent2 = new Intent(MyConfigActivity.this, PasswordCreatActivity.class);
 //			}
-			startActivity(intent1);
-			break;
-			
-		case R.id.tv_actionbar_left:
-			MyConfigActivity.this.finish();
-			break;
-		case R.id.ll_myconfig_paypassword:
-			Intent intent2;
-			int TYPE_PAY = 1;
-			if (TYPE_PAY == 1) {
-				intent2 = new Intent(MyConfigActivity.this, PasswordAlterActivity.class);
-			} else {
-				intent2 = new Intent(MyConfigActivity.this, PasswordCreatActivity.class);
-			}
-			startActivity(intent2);
-			break;
+//			startActivity(intent2);
+//			break;
 		case R.id.btn_logout:
 			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 			if (sp.getString("token", null) == null) {

@@ -353,9 +353,14 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 						} catch (JSONException e) {
 							mainHandler.sendEmptyMessage(5);
 							e.printStackTrace();
-						}
+						} 
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+						long currentTime = System.currentTimeMillis();
+						Date date = new Date(currentTime);
+						String dateCreate = dateFormat.format(date);
 						Intent intent1 = new Intent(FishpitConfirmOrderActivity.this, OrderInformationActivity.class);
 						Bundle bundle = new Bundle();
+						bundle.putString("dateCreate", dateCreate);
 						bundle.putString("token", tokenString);
 						bundle.putString("orderId", orderIdString);
 						bundle.putString("merchantId", merchantIdString);

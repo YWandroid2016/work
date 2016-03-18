@@ -2,6 +2,8 @@ package com.example.happyfishing.entity;
 
 public class OrderEntity {
 	public String id;
+	public String orderType;
+	public String category;
 	public String merchantId;
 	public String reserveTime;
 	public String location;
@@ -11,9 +13,27 @@ public class OrderEntity {
 	public String totalFee;
 	public String picUrl;
 	public String merchantName;
-	public OrderEntity(String id, String merchantId, String reserveTime, String location, String orderId, String name, String dateCreated, String totalFee, String picUrl,String merchantName) {
+//	public OrderEntity(String id, String merchantId, String reserveTime, String location, String orderId, String name, String dateCreated, String totalFee, String picUrl,String merchantName) {
+//		super();
+//		this.id = id;
+//		this.merchantId = merchantId;
+//		this.reserveTime = reserveTime;
+//		this.location = location;
+//		this.orderId = orderId;
+//		this.name = name;
+//		this.dateCreated = dateCreated;
+//		this.totalFee = totalFee;
+//		this.picUrl = picUrl;
+//		this.merchantName =merchantName;
+//	}
+	public OrderEntity(String id, String orderType, String category,
+			String merchantId, String reserveTime, String location,
+			String orderId, String name, String dateCreated, String totalFee,
+			String picUrl, String merchantName) {
 		super();
 		this.id = id;
+		this.orderType = orderType;
+		this.category = category;
 		this.merchantId = merchantId;
 		this.reserveTime = reserveTime;
 		this.location = location;
@@ -22,6 +42,6 @@ public class OrderEntity {
 		this.dateCreated = dateCreated;
 		this.totalFee = totalFee;
 		this.picUrl = picUrl;
-		this.merchantName =merchantName;
+		this.merchantName = merchantName;
 	}
 }

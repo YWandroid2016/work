@@ -61,12 +61,23 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 					String saleCount = bundle.getString("saleCount");
 					String totalCount = bundle.getString("totalCount");
 					String imageUrl = bundle.getString("imageUrl");
+					
 					String name = bundle.getString("name");
 					tv_actionbar_title.setText(name);
 					tv_commodity_detail_detail.setText(detail);
 					tv_commoditydetail_totalCount.setText(totalCount);
 					tv_commoditydetail_sallCount.setText(saleCount);
-					imageUrlList.add(imageUrl);
+					String[] imageUrls = imageUrl.split(",");
+					for (int i = 0; i < imageUrls.length; i++) {
+						imageUrlList.add(imageUrls[i]);
+						linkUrlArray.add(imageUrls[i]);
+					}
+					mViewFlow.setAdapter(new ImagePagerAdapter(CommodityDetailShowActivity.this, imageUrlList, linkUrlArray).setInfiniteLoop(true));
+					mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
+					mViewFlow.setFlowIndicator(mFlowIndicator);
+					mViewFlow.setTimeSpan(4500);
+					mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
+					mViewFlow.startAutoFlowTimer(); // 启动自动播放
 					break;
 				case 5:
 					Toast.makeText(CommodityDetailShowActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
@@ -97,22 +108,8 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 	private void initBanner() {
 		imageUrlList = new ArrayList<String>();
 		linkUrlArray = new ArrayList<String>();
-		imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-		imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
-		imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
-
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/43486527");
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44648121");
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44619589");
 		
-		Log.d("null", mViewFlow + "   "+ mFlowIndicator +"  " + imageUrlList+"  "+linkUrlArray);
-		mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray).setInfiniteLoop(true));
-		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
-
-		mViewFlow.setFlowIndicator(mFlowIndicator);
-		mViewFlow.setTimeSpan(4500);
-		mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
-		mViewFlow.startAutoFlowTimer(); // 启动自动播放
+		
 	}
 
 	private void initView() {
@@ -140,6 +137,7 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 					
 					@Override
 					public void onFinish(Object response) {
+						Log.d("commodityDetailShow", response.toString());
 						JSONObject jsonObject = (JSONObject) response;
 						try {
 							JSONObject jsonObject2 = jsonObject.getJSONObject("product");
@@ -147,7 +145,9 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 							String saleCount = jsonObject2.getString("saleCount");
 							String totalCount = jsonObject2.getString("totalCount");
 							String name = jsonObject2.getString("name");
-							String imageUrl = jsonObject2.getString("listBannerUrl");
+							String imageUrl = jsonObject.getString("images");
+							String[] imageUrls = imageUrl.split(",");
+							Log.d("imageUrls", imageUrl+" "+imageUrls.length );
 							Bundle bundle = new Bundle();
 							bundle.putString("detail", detail);
 							bundle.putString("saleCount", saleCount);

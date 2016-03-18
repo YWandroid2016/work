@@ -20,7 +20,11 @@ public class HttpAddress {
 	
 	public static String CLASS_USERSHOW = "userShow/";
 	
+	public static String CLASS_USERCOLLECT = "userCollect/";
+	
 	public static String CLASS_FISHPRODUCT = "fishProduct/";
+	
+	public static String CLASS_USERMEMBER = "userMember/";
 
 	public static String METHOD_FISHPITLIST = "fishpitList?";
 	
@@ -31,6 +35,8 @@ public class HttpAddress {
 	public static String METHOD_SENDVALIDATECONDE= "sendValidateCode?";
 
 	public static String METHOD_LOGIN= "login?";
+	
+	public static String METHOD_MAKEMEMBERORDER = "makeMemberOrder?";
 	
 	public static String METHOD_DETAIL = "detail?";
 	
@@ -47,6 +53,8 @@ public class HttpAddress {
 	public static String METHOD_EDITNICKNAME = "editNickname?";
 	
 	public static String METHOD_ADDCOLLET = "addCollect?";
+	
+	public static String METHOD_DELCOLLET = "delCollect?";
 	
 	public static String METHOD_COLLECTFISHPONDS = "collectFishponds?";
 	

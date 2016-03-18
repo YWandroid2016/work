@@ -39,6 +39,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -199,7 +200,7 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 						public void run() {
 							// tv_envirScore.setText("环境："+envirScore);
 							tv_address.setText(location);
-							tv_fishpitDetail.setText(fishpitDetail);
+							tv_fishpitDetail.setText("\t"+fishpitDetail);
 						}
 					});
 				} catch (JSONException e) {
@@ -234,6 +235,11 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 		return new File("/data/data/" + packageName).exists();
 	}
 
+	private PopupWindow popupWindow;
+	private TextView tv_gao;
+	private TextView tv_bai;
+	private TextView tv_cancle;
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -262,24 +268,21 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 //			bundle2.putString("city", locating.cityName);
 //			intent2.putExtras(bundle2);
 //			startActivity(intent2);
-			View contentView = LayoutInflater.from(FishpitDetailActivity.this).inflate( R.layout.inflater_popwindow_map, null);
-			ListView liv_map = (ListView) contentView.findViewById(R.id.liv_map_selector);
-			ArrayList<String> arrayList_item = new ArrayList<String>();
-			arrayList_item.add("使用高德地图导航");
-			arrayList_item.add("使用百度地图导航");
-			MapSelectorStringItemAdapter adapter = new MapSelectorStringItemAdapter(FishpitDetailActivity.this);
-			adapter.add2Adapter(arrayList_item);
-			liv_map.setAdapter(adapter);
+			View view = LayoutInflater.from(FishpitDetailActivity.this).inflate( R.layout.inflater_popwindow_map, null);
+			tv_gao = (TextView) view.findViewById(R.id.tv_gao);
+			tv_bai = (TextView) view.findViewById(R.id.tv_bai);
+			tv_cancle = (TextView) view.findViewById(R.id.tv_cencal);
+			
 			final PackageManager pm = FishpitDetailActivity.this.getPackageManager();
-			PopupWindow popupWindow = new PopupWindow(contentView,LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,true);
-			popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
+			popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,true);
 			popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-			liv_map.setOnItemClickListener(new OnItemClickListener() {
-
+			
+			OnClickListener onclick = new OnClickListener() {
+				
 				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					if (arg2 == 0) {
+				public void onClick(View arg0) {
+					switch (arg0.getId()) {
+					case R.id.tv_gao:
 						if (isInstalled("com.autonavi.minimap")) {
 							try {
 								PackageInfo packageInfo =  pm.getPackageInfo("com.autonavi.minimap", 0);
@@ -303,7 +306,8 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
 							startActivity(intent_down1);
 						}
-					}else if (arg2 == 1) {
+						break;
+					case R.id.tv_bai:
 						if (isInstalled("com.baidu.BaiduMap")) {
 							try {
 								PackageInfo packageInfo =  pm.getPackageInfo("com.baidu.BaiduMap", 0);
@@ -324,12 +328,83 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
 							startActivity(intent_down1);
 						}
+						break;
+					case R.id.tv_cencal:
+						if(null != popupWindow && popupWindow.isShowing()){
+							popupWindow.dismiss();
+						}
+						break;
+
+					default:
+						break;
 					}
-					
 				}
-			});
-		
+			};
 			
+			tv_gao.setOnClickListener(onclick);
+			tv_bai.setOnClickListener(onclick);
+			tv_cancle.setOnClickListener(onclick);
+			
+			
+			
+			
+			
+//			liv_map.setOnItemClickListener(new OnItemClickListener() {
+//
+//				@Override
+//				public void onItemClick(AdapterView<?> arg0, View arg1,
+//						int arg2, long arg3) {
+//					if (arg2 == 0) {
+//						if (isInstalled("com.autonavi.minimap")) {
+//							try {
+//								PackageInfo packageInfo =  pm.getPackageInfo("com.autonavi.minimap", 0);
+//								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
+//							} catch (NameNotFoundException e1) {
+//								// TODO Auto-generated catch block
+//								e1.printStackTrace();
+//							}
+//							try  
+//					        {  
+//					            Intent intent = Intent.getIntent("androidamap://viewMap?sourceApplication=自渔自乐&poiname="+nameString+"&lat="+latitude2+""+"&lon="+longitude2+""+"&dev=0");  
+//					            startActivity(intent);   
+//					        } catch (URISyntaxException e)  
+//					        {  
+//					            e.printStackTrace();  
+//					        }  
+//						}else 
+//						{
+//							String url = "http://shouji.baidu.com/soft/item?docid=8992640&from=web_alad_6";
+//							Uri uri = Uri.parse(url);
+//							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
+//							startActivity(intent_down1);
+//						}
+//					}else if (arg2 == 1) {
+//						if (isInstalled("com.baidu.BaiduMap")) {
+//							try {
+//								PackageInfo packageInfo =  pm.getPackageInfo("com.baidu.BaiduMap", 0);
+//								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
+//							} catch (NameNotFoundException e1) {
+//								// TODO Auto-generated catch block
+//								e1.printStackTrace();
+//							}
+//							try {
+//								Intent intent = Intent.getIntent("intent://map/marker?location="+latitude2+""+","+longitude2+""+"&title="+nameString+"&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+//								startActivity(intent);
+//							} catch (URISyntaxException e1) {
+//								e1.printStackTrace();
+//							}
+//						}else {
+//							String url = "http://wap.amap.com/?type=bdpz01";
+//							Uri uri = Uri.parse(url);
+//							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
+//							startActivity(intent_down1);
+//						}
+//					}
+//					
+//				}
+//			});
+//		
+//			
 			
 			break;
 		case R.id.tv_actionbar_left:
@@ -374,6 +449,19 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		if(keyCode == event.KEYCODE_BACK){
+			if(popupWindow.isShowing()){
+				popupWindow.dismiss();
+				return true;
+			}
+		}
+		
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

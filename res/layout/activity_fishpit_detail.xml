@@ -3,16 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/gray_bg"
     tools:context=".FishpitDetailActivity" >
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" 
+            android:layout_height="@dimen/x45"
             >
 
             <com.example.happyfishing.view.ActionBarView
@@ -30,63 +26,68 @@
                 android:src="@drawable/ic_collection_default" />
 
         </RelativeLayout>
-    </FrameLayout>
 
     <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
         layout="@layout/adbanner"
-        android:layout_marginLeft="@dimen/x5"
-        android:layout_marginRight="@dimen/x5"
          />
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/x5"
-        android:layout_marginRight="@dimen/x5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
 		android:gravity="center_vertical"
+		android:padding="@dimen/x10"
+		android:background="#fff"
          >
-
-        <!-- <TextView
-            android:id="@+id/tv_fishpitdetail_envirScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="环境：4.5" /> -->
 
         <ImageView
             android:id="@+id/img_fishpitdetail_haveWIFI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x10"
             android:src="@drawable/ic_wifi" />
-        <View android:layout_width="@dimen/x10"
-            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/img_fishpitdetail_haveParking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_park" />
+        
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" >
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@color/gray_bg" />
+
+	</LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/x5"
-        android:layout_marginRight="@dimen/x5"
-        
         android:id="@+id/ll_fishpitlocation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal" 
 		android:gravity="center_vertical"
+		android:padding="@dimen/x10"
+		android:background="#fff"
         >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x10"
             android:src="@drawable/ic_address" />
 
         <TextView
@@ -101,39 +102,58 @@
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/x10"
             android:src="@drawable/ic_arrows_right" />
+        
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/x5"
-        android:layout_marginRight="@dimen/x5"
-        
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        android:padding="@dimen/x10"
+        android:background="#fff"
         android:orientation="vertical" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5"
+            android:layout_marginBottom="@dimen/x15"
             android:text="简介：" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/gray_bg" />
 
         <TextView
             android:id="@+id/tv_fishipitdetail_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="11111111111111111111111111111111111111111111111111111111" />
+            android:layout_marginTop="@dimen/x15"
+            android:layout_marginBottom="@dimen/x5"
+            android:text="\t11111111111111111111111111111111111111111111111111111111" />
     </LinearLayout>
 
-    
-    <TextView
-        android:layout_margin="@dimen/x8"
-        android:id="@+id/tv_fishpitdetail_order"
-        android:layout_width="fill_parent"
+    <View
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+       	android:layout_weight="2" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x60"
+        android:background="#fff" >
+
+        <TextView
+        android:id="@+id/tv_fishpitdetail_order"
+        android:layout_margin="@dimen/x10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:textColor="@color/white"
-        android:background="@color/button_background"
+        android:background="@drawable/circle_app"
         android:text="预约钓位" />
-
+        
+	</LinearLayout>
+    
 </LinearLayout>

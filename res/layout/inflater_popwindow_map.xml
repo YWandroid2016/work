@@ -2,11 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <ListView 
-        android:id="@+id/liv_map_selector"
+    android:background="#51000000"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="@dimen/x10" >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_white"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_gao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/x12"
+            android:text="使用高德地图导航"
+            android:textColor="@color/appcolor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/gray_bg" />
+
+        <TextView
+            android:id="@+id/tv_bai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/x12"
+            android:text="使用百度地图导航"
+            android:textColor="@color/appcolor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_cencal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        android:background="@drawable/circle_white"
+        android:gravity="center"
+        android:padding="@dimen/x12"
+        android:text="取消"
+        android:textSize="18sp" />
 
 </LinearLayout>

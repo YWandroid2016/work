@@ -1,5 +1,7 @@
 package com.example.happyfishing.activity;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,17 +21,25 @@ import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
 import com.example.happyfishing.view.ActionBarView;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
+import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +61,8 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 	private TextView tv_address_fishshop;
 	private TextView tv_detail_fishshop;
 	private Locating locating;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +212,11 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 		return true;
 	}
 
+	private PopupWindow popupWindow;
+	private TextView tv_gao;
+	private TextView tv_bai;
+	private TextView tv_cancle;
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -219,15 +236,93 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 			startActivity(intent1);
 			break;
 		case R.id.ll_fishshop_address:
-			Intent intent2 = new Intent(FishshopDetailActivity.this, LocationShowActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putDouble("target_lat", latitude2);
-			bundle.putDouble("target_lon", longitude2);
-			bundle.putDouble("my_lat", locating.latitude);
-			bundle.putDouble("my_lon", locating.longitude);
-			bundle.putString("city", locating.cityName);
-			intent2.putExtras(bundle);
-			startActivity(intent2);
+//			Intent intent2 = new Intent(FishshopDetailActivity.this, LocationShowActivity.class);
+//			Bundle bundle = new Bundle();
+//			bundle.putDouble("target_lat", latitude2);
+//			bundle.putDouble("target_lon", longitude2);
+//			bundle.putDouble("my_lat", locating.latitude);
+//			bundle.putDouble("my_lon", locating.longitude);
+//			bundle.putString("city", locating.cityName);
+//			intent2.putExtras(bundle);
+//			startActivity(intent2);
+			
+			View view = LayoutInflater.from(FishshopDetailActivity.this).inflate( R.layout.inflater_popwindow_map, null);
+			tv_gao = (TextView) view.findViewById(R.id.tv_gao);
+			tv_bai = (TextView) view.findViewById(R.id.tv_bai);
+			tv_cancle = (TextView) view.findViewById(R.id.tv_cencal);
+			
+			final PackageManager pm = FishshopDetailActivity.this.getPackageManager();
+			popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,true);
+			popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+			
+			OnClickListener onclick = new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					switch (arg0.getId()) {
+					case R.id.tv_gao:
+						if (isInstalled("com.autonavi.minimap")) {
+							try {
+								PackageInfo packageInfo =  pm.getPackageInfo("com.autonavi.minimap", 0);
+								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
+							} catch (NameNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try  
+					        {  
+					            Intent intent = Intent.getIntent("androidamap://viewMap?sourceApplication=自渔自乐&poiname="+nameString+"&lat="+latitude2+""+"&lon="+longitude2+""+"&dev=0");  
+					            startActivity(intent);   
+					        } catch (URISyntaxException e)  
+					        {  
+					            e.printStackTrace();  
+					        }  
+						}else 
+						{
+							String url = "http://shouji.baidu.com/soft/item?docid=8992640&from=web_alad_6";
+							Uri uri = Uri.parse(url);
+							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
+							startActivity(intent_down1);
+						}
+						break;
+					case R.id.tv_bai:
+						if (isInstalled("com.baidu.BaiduMap")) {
+							try {
+								PackageInfo packageInfo =  pm.getPackageInfo("com.baidu.BaiduMap", 0);
+								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
+							} catch (NameNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								Intent intent = Intent.getIntent("intent://map/marker?location="+latitude2+""+","+longitude2+""+"&title="+nameString+"&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+								startActivity(intent);
+							} catch (URISyntaxException e1) {
+								e1.printStackTrace();
+							}
+						}else {
+							String url = "http://wap.amap.com/?type=bdpz01";
+							Uri uri = Uri.parse(url);
+							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
+							startActivity(intent_down1);
+						}
+						break;
+					case R.id.tv_cencal:
+						if(null != popupWindow && popupWindow.isShowing()){
+							popupWindow.dismiss();
+						}
+						break;
+
+					default:
+						break;
+					}
+				}
+			};
+			
+			tv_gao.setOnClickListener(onclick);
+			tv_bai.setOnClickListener(onclick);
+			tv_cancle.setOnClickListener(onclick);
+			
 			break;
 		case R.id.img_actionbar_collection:
 			SharedPreferences sp =getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -272,4 +367,11 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	private boolean isInstalled(String packageName){
+		Intent manager = getPackageManager().getLaunchIntentForPackage(packageName);
+		Log.d("intent", manager+"");
+		Log.d("exists", new File("/data/data/" + packageName).exists()+"");
+		return new File("/data/data/" + packageName).exists();
+	}
+	
 }

@@ -9,8 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_height="@dimen/x45" >
 
         <com.example.happyfishing.view.ActionBarView
             android:id="@+id/actionbar_fishpit"
@@ -40,8 +39,7 @@
 
     <include
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/x50"
         layout="@layout/home_button" />
 
 </LinearLayout>

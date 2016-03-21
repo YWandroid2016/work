@@ -12,15 +12,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="11"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/x20"
-            android:layout_weight="3"
+            android:layout_height="@dimen/x100"
+            android:layout_margin="@dimen/x10"
             android:background="@drawable/bgd_yueduhuiyuan" >
 
             <TextView
@@ -32,44 +30,47 @@
                 android:text="￥500"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_money" />
+            
+            <TextView android:id="@+id/tv_updateVIP_type_month_sumary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x130"
+                android:textSize="@dimen/font_becomeVIP_detail"
+                android:textColor="#c79359"
+                android:gravity="center"
+                android:padding="@dimen/x5"
+                android:text="月度会员，享特权"/>
+            
+            <TextView android:id="@+id/tv_updateVIP_type_month_become"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即\n购买"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_becomeVIP"
+                android:layout_marginRight="@dimen/x25"/>
 
             <TextView
                 android:id="@+id/tv_updateVIP_type_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_updateVIP_money_month"
-                android:layout_alignBaseline="@+id/tv_updateVIP_money_month"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_alignRight="@+id/tv_updateVIP_type_month_sumary"
+                android:text="VIP"
                 android:textColor="@color/white"
-                android:text="月度会员" />
-            
-            <TextView android:id="@+id/tv_updateVIP_type_month_sumary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:layout_alignLeft="@+id/tv_updateVIP_money_month"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x20"
-                android:textSize="@dimen/font_becomeVIP_detail"
-                android:textColor="#c79359"
-                android:text="月度会员，享特权"/>
-            
-            <TextView android:id="@+id/tv_updateVIP_type_month_become"
-                android:layout_width="@dimen/x80"
-                android:layout_height="@dimen/x80"
-                android:text="成为会员"
-                android:textColor="@color/white"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/font_becomeVIP"
-                android:layout_marginRight="@dimen/x15"/>
+                android:textSize="@dimen/font_money" />
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/x20"
-            android:layout_weight="3"
+            android:layout_height="@dimen/x100"
+            android:layout_margin="@dimen/x10"
             android:background="@drawable/bgd_jiduhuiyuan" >
             
             <TextView
@@ -86,39 +87,41 @@
                 android:id="@+id/tv_updateVIP_type_quater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_updateVIP_money_quater"
-                android:layout_alignBaseline="@+id/tv_updateVIP_money_quater"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_alignRight="@+id/tv_updateVIP_type_quater_sumary"
+                android:text="VIP"
                 android:textColor="@color/white"
-                android:text="季度会员" />
+                android:textSize="@dimen/font_money" />
             
             <TextView android:id="@+id/tv_updateVIP_type_quater_sumary"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_becomeVIP_detail"
                 android:background="#ffffff"
-                android:layout_alignLeft="@+id/tv_updateVIP_money_quater"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x130"
+                android:textSize="@dimen/font_becomeVIP_detail"
                 android:textColor="#c79359"
+                android:gravity="center"
+                android:padding="@dimen/x5"
                 android:text="季度会员，优惠100"/>
             
             <TextView android:id="@+id/tv_updateVIP_type_quater_become"
-                android:layout_width="@dimen/x80"
-                android:layout_height="@dimen/x80"
-                android:text="成为会员"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即\n购买"
                 android:textColor="@color/white"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/font_becomeVIP"
-                android:layout_marginRight="@dimen/x15"/>
+                android:layout_marginRight="@dimen/x25"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="20dp"
-            android:layout_weight="3"
+            android:layout_height="@dimen/x100"
+            android:layout_margin="@dimen/x10"
             android:background="@drawable/bgd_nianduhuiyuan" >
             
             <TextView
@@ -135,32 +138,35 @@
                 android:id="@+id/tv_updateVIP_type_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_updateVIP_money_year"
-                android:layout_alignBaseline="@+id/tv_updateVIP_money_year"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_alignRight="@+id/tv_updateVIP_type_year_sumary"
+                android:text="VIP"
                 android:textColor="@color/white"
-                android:text="年度会员" />
+                android:textSize="@dimen/font_money" />
             
             <TextView android:id="@+id/tv_updateVIP_type_year_sumary"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:layout_alignLeft="@+id/tv_updateVIP_money_year"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x130"
                 android:textSize="@dimen/font_becomeVIP_detail"
                 android:textColor="#c79359"
+                android:gravity="center"
+                android:padding="@dimen/x5"
                 android:text="年度会员，优惠200"/>
             
             <TextView android:id="@+id/tv_updateVIP_type_year_become"
-                android:layout_width="@dimen/x80"
-                android:layout_height="@dimen/x80"
-                android:text="成为会员"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即\n购买"
                 android:textColor="@color/white"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/font_becomeVIP"
-                android:layout_marginRight="@dimen/x15"/>
+                android:layout_marginRight="@dimen/x25"/>
         </RelativeLayout>
     </LinearLayout>
     <!--

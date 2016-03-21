@@ -69,11 +69,11 @@
 	<!-- 开通会员界面用到的属性 -->
 	<dimen name="margin_updateVIP_top">20dp</dimen>
 	<dimen name="margin_updateVIP_middle">10dp</dimen>
-	<dimen name="font_money">30sp</dimen>
+	<dimen name="font_money">20sp</dimen>
 	<dimen name="height_become">80dp</dimen>
 	<dimen name="margin_become_right">15dp</dimen>
-	<dimen name="font_becomeVIP">30sp</dimen>
-	<dimen name="font_becomeVIP_detail">20sp</dimen>
+	<dimen name="font_becomeVIP">20sp</dimen>
+	<dimen name="font_becomeVIP_detail">16sp</dimen>
 	<dimen name="font_btn_becomeVIP">15sp</dimen>
 	<!-- 商品展示想请界面用到的属性 -->
 	<dimen name="font_commoditydetail_jingbaojia">20sp</dimen>

@@ -2,28 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
+    android:padding="@dimen/x10"
+    android:orientation="vertical"
+    android:background="@drawable/circle_white" 
+    
     android:gravity="center">
 
     <com.example.happyfishing.image.ImageRequestView
         android:id="@+id/img_commodity"
-        android:layout_width="@dimen/x65"
-        android:layout_height="@dimen/x65" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
         android:src="@drawable/load_loading"/>
 
     <TextView android:id="@+id/tv_commodity_sumary"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="这个东西贼好这个东西贼好这个东西贼好这个东西贼好这个东西贼好这个东西贼好这个东西贼好"/>
+        android:layout_marginTop="@dimen/x5"
+        android:layout_marginBottom="@dimen/x5"
+        android:lines="2"
+        android:text="这个东西贼好这个东西贼好这个东西贼好这个东西贼好这个东西贼好这个东西贼好这个东西贼好东西贼好这个东西贼好这个东西贼好东西贼好这个东西贼好这个东西贼好东西贼好这个东西贼好这个东西贼好"/>
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
         <TextView 
-            android:id="@+id/tv_commodity_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥16.5"
+            android:text="￥"
+            />
+        <TextView 
+            android:id="@+id/tv_commodity_price"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/appcolor"
+            android:text="16.5"
             />
         <TextView 
             android:id="@+id/tv_commodity_sellNum"

@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/x30"
     android:orientation="horizontal"
-	android:layout_gravity="center"
+	android:gravity="center_vertical"
 	android:background="@color/daojishi_background"
-    android:padding="3dp" >
+    android:padding="@dimen/x5" >
 
+    <ImageView
+        android:layout_width="@dimen/x15"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginLeft="@dimen/x8"
+        android:src="@drawable/ic_daojishi" />
     
 	<TextView 
 	    android:textColor="#fff"
-	    android:drawableLeft="@drawable/ic_daojishi"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
+	    android:textSize="@dimen/tip_size"
 	    android:text="请在"/>
     <TextView
         android:textColor="#fff"
         android:id="@+id/tv_min_decade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/tip_size"
         android:text="1"
         />
 
@@ -27,17 +34,20 @@
         android:id="@+id/tv_min_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/tip_size"
         android:text="1"
         android:layout_marginLeft="1dp" />
 	<TextView android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:textColor="#fff"
+	    android:textSize="@dimen/tip_size"
 	    android:text="分"/>
 
     <TextView
         android:id="@+id/tv_sec_decade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/tip_size"
         android:textColor="#fff"
         android:text="1"
         />
@@ -46,6 +56,7 @@
         android:id="@+id/tv_sec_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/tip_size"
         android:textColor="#fff"
         android:text="1"
         android:layout_marginLeft="1dp" />
@@ -53,6 +64,7 @@
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#fff"
+        android:textSize="@dimen/tip_size"
         android:text="秒内完成支付	，超时将取消订单"/>
 
 </LinearLayout>

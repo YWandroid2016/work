@@ -19,6 +19,7 @@ import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
 import com.example.happyfishing.view.ActionBarView;
+import com.example.happyfishing.view.MBtn;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,8 +46,11 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 	private OrderSumaryFinishAdapter finishAdapter;
 	private ArrayList<OrderEntity> arrayList_finish;
 	private ArrayList<OrderEntity> arrayList_waitpay;
-	private Button btn_finish;
-	private Button btn_waitpay;
+	private MBtn btn_finish;
+	private MBtn btn_waitpay;
+	private MBtn btn_after;
+	private MBtn btn_all;
+	private MBtn btn_current;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +94,24 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 		arrayList_finish = new ArrayList<OrderEntity>();
 		arrayList_waitpay = new ArrayList<OrderEntity>();
 		finishAdapter = new OrderSumaryFinishAdapter(MyOrderActivity.this);
-		btn_finish = (Button) findViewById(R.id.btn_myorder_finish);
-		btn_finish.setOnClickListener(this);
-		btn_waitpay = (Button) findViewById(R.id.btn_myorder_waitpay);
+		btn_finish = (MBtn) findViewById(R.id.btn_myorder_finish);
+		btn_waitpay = (MBtn) findViewById(R.id.btn_myorder_waitpay);
+		btn_after = (MBtn) findViewById(R.id.btn_myorder_after);
+		btn_all = (MBtn) findViewById(R.id.btn_myorder_all);
+		btn_finish.setTv("已完成");
+		btn_waitpay.setTv("待支付");
+		btn_after.setTv("已过期");
+		btn_waitpay.setTv("全部");
+		btn_waitpay.dispalyLine(false);
+		btn_after.dispalyLine(false);
+		btn_all.dispalyLine(false);
 		btn_waitpay.setOnClickListener(this);
+		btn_finish.setOnClickListener(this);
+		btn_after.setOnClickListener(this);
+		btn_all.setOnClickListener(this);
+		
+		btn_current = btn_finish;
+		btn_current.dispalyLine(true);
 	}
 
 	private void loadData() {
@@ -206,13 +224,30 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 			MyOrderActivity.this.finish();
 			break;
 		case R.id.btn_myorder_finish:
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
 			orderType = 0;
 			finishAdapter.add2Adapter(arrayList_finish);
 			xliv_myorder.setAdapter(finishAdapter);
 			finishAdapter.notifyDataSetChanged();
 			xliv_myorder.setOnItemClickListener(null);
 			break;
+			
+		case R.id.btn_myorder_after:
+			//TODO 获取已过期订单并加载
+			break;
+			
+		case R.id.btn_myorder_all:
+			
+			//TODO 获取全部订单并加载
+			
+			break;
+			
 		case R.id.btn_myorder_waitpay:
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
 			orderType = 1;
 			finishAdapter.add2Adapter(arrayList_waitpay);
 			xliv_myorder.setAdapter(finishAdapter);

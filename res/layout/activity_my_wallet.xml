@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.5"
+        android:layout_weight="4"
         android:background="@drawable/bgd_mywallet"
         android:orientation="horizontal" >
 
@@ -50,7 +50,7 @@
 
         <Button
             android:id="@+id/btn_bocomeVIP"
-            android:layout_width="@dimen/x180"
+            android:layout_width="@dimen/x160"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -64,7 +64,7 @@
 
         <ImageView
             android:id="@+id/img_right"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -142,7 +142,7 @@
             android:drawableRight="@drawable/ic_arrows_right"
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/x1"
-            android:text="设置" />
+            android:text="系统设置" />
 
 
         <View

@@ -18,6 +18,7 @@ import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
 import com.example.happyfishing.view.ActionBarView;
+import com.example.happyfishing.view.MBtn;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,6 +46,9 @@ public class MyCollectionActivity extends Activity implements OnClickListener{
 	private FishpitFishpitAdapter fishpitAdapter;
 	private FishshopAdapter fishshopAdapter;
 	private Handler mainHandler;
+	private MBtn btn_hei;
+	private MBtn btn_yu;
+	private MBtn btn_current;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,8 +84,15 @@ public class MyCollectionActivity extends Activity implements OnClickListener{
 		fishshopEntities = new ArrayList<FishshopEntity>();
 		actionBar_mycollection = (ActionBarView) findViewById(R.id.actionBar_mycollection);
 		actionBar_mycollection.setActionBar(R.string.back, -1, R.string.title_actionbar_mycollection, this);
-		findViewById(R.id.btn_mycollection_fishpit).setOnClickListener(this);
-		findViewById(R.id.btn_mycollection_fishshop).setOnClickListener(this);
+		btn_hei = (MBtn) findViewById(R.id.btn_mycollection_fishpit);
+		btn_yu = (MBtn) findViewById(R.id.btn_mycollection_fishshop);
+		btn_hei.setTv("黑坑");
+		btn_yu.setTv("渔具店");
+		btn_hei.setOnClickListener(this);
+		btn_yu.setOnClickListener(this);
+		btn_current = btn_hei;
+		btn_current.dispalyLine(true);
+		btn_yu.dispalyLine(false);
 		liv_mycollection = (ListView) findViewById(R.id.liv_mycollection_show);
 		
 		fishpitAdapter = new FishpitFishpitAdapter(MyCollectionActivity.this);
@@ -195,6 +206,9 @@ public class MyCollectionActivity extends Activity implements OnClickListener{
 			MyCollectionActivity.this.finish();
 			break;
 		case R.id.btn_mycollection_fishpit:
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
 			liv_mycollection.setAdapter(fishpitAdapter);
 			liv_mycollection.setOnItemClickListener(new OnItemClickListener() {
 
@@ -211,6 +225,9 @@ public class MyCollectionActivity extends Activity implements OnClickListener{
 			fishpitAdapter.notifyDataSetChanged();
 			break;
 		case R.id.btn_mycollection_fishshop:
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
 			liv_mycollection.setAdapter(fishshopAdapter);
 			liv_mycollection.setOnItemClickListener(new OnItemClickListener() {
 

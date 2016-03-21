@@ -49,8 +49,11 @@
         android:id="@+id/grv_commodity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="11" 
+        android:layout_weight="1" 
         android:numColumns="2"
+        android:horizontalSpacing="@dimen/x5"
+        android:verticalSpacing="@dimen/x5"
+        android:padding="@dimen/x5"
         >
     </GridView>
 

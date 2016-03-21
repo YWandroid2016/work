@@ -241,6 +241,9 @@
             android:name="com.example.happyfishing.FinishOrderShowActivity"
             android:label="@string/title_activity_finish_order_show" >
         </activity>
+        <activity
+            android:name="com.example.happyfishing.activity.UserInfoAlter_NickName_Activity" >
+        </activity>
 
         <!-- 友盟推送 -->
         <receiver
@@ -308,7 +311,7 @@
         </service>
         <!-- 友盟推送 -->
         <activity
-            android:name="com.example.happyfishing.SeachActivity"
+            android:name="com.example.happyfishing.activity.SeachActivity"
             android:label="@string/title_activity_seach" >
         </activity>
     </application>

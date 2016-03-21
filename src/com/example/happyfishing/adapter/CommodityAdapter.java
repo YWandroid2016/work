@@ -62,7 +62,7 @@ public class CommodityAdapter extends BaseAdapter{
 		if (entity.imageURL != null) {
 			holder.imageRequestView.setImageUrl(entity.imageURL);
 		}else {
-			holder.imageRequestView.setImageResource(R.drawable.load_failure);
+			holder.imageRequestView.setImageResource(R.drawable.ic_launcher);
 		}
 		holder.tv_commodity_sumary.setText(entity.commoditySumary);
 		holder.tv_commodity_price.setText(entity.price);

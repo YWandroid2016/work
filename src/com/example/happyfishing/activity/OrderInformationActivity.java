@@ -26,13 +26,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +46,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	public static int TYPE_PAY_FISHPIT = 4;
 	private ActionBarView actionBar_orderinformation;
 	private RadioButton rdb_wechar;
-	private RadioButton rdb_daokeng;
+//	private RadioButton rdb_daokeng;
 	private RadioButton rdb_jifen;
 	
 	private String nameString;
@@ -122,21 +126,21 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		}
 		location = bundle.getInt("location");
 		phoneNumber = bundle.getString("phone");
-		if (hide) {
-			LinearLayout ll_payment_daokeng = (LinearLayout) findViewById(R.id.ll_payment_daokeng);
-			ll_payment_daokeng.setVisibility(View.GONE);
-		}
-		rdb_daokeng = (RadioButton) findViewById(R.id.rb_paymentmethod_daokeng);
-		rdb_daokeng.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					rdb_wechar.setChecked(false);
-					rdb_jifen.setChecked(false);
-				}
-			}
-		});
+//		if (hide) {
+//			LinearLayout ll_payment_daokeng = (LinearLayout) findViewById(R.id.ll_payment_daokeng);
+//			ll_payment_daokeng.setVisibility(View.GONE);
+//		}
+//		rdb_daokeng = (RadioButton) findViewById(R.id.rb_paymentmethod_daokeng);
+//		rdb_daokeng.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				if (isChecked) {
+//					rdb_wechar.setChecked(false);
+//					rdb_jifen.setChecked(false);
+//				}
+//			}
+//		});
 		rdb_wechar = (RadioButton) findViewById(R.id.rb_paymentmethod_wechart);
 		rdb_wechar.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -144,7 +148,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					
-					rdb_daokeng.setChecked(false);
+//					rdb_daokeng.setChecked(false);
 					rdb_jifen.setChecked(false);
 				}
 			}
@@ -155,7 +159,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
-					rdb_daokeng.setChecked(false);
+//					rdb_daokeng.setChecked(false);
 					rdb_wechar.setChecked(false);
 				}
 			}
@@ -196,53 +200,54 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	}
 	
 	public void payMethod() {
-		if (rdb_daokeng.isChecked()) {
-			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("token", token);
-			params.put("merchantId", merchantId);
-			params.put("orderId", orderId);
-			HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-					HttpAddress.CLASS_ORDERPAY+HttpAddress.METHOD_CASHPAY, 
-					params, 
-					new HttpCallbackListener() {
-						@Override
-						public void onFinish(Object response) {
-							int code = 0 ;
-							String money = null;
-							JSONObject jsonObject = (JSONObject) response;
-							JSONObject jsonObject2;
-							try {
-								jsonObject2 = jsonObject.getJSONObject("order");
-								money = jsonObject2.getString("totalFee");
-							} catch (JSONException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							try {
-								code = jsonObject.getInt("status");
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							if (code == 2000) {
-								Intent intent1 = new Intent(OrderInformationActivity.this, OrderResultActivity.class);
-								intent1.putExtra("type", TYPE_PAY_FISHPIT);
-								Bundle bundle = new Bundle();
-								bundle.putString("money", money);
-								bundle.putString("from", "order");
-								intent1.putExtras(bundle );
-								startActivity(intent1);
-							}
-							
-						}
-						
-						@Override
-						public void onError(Exception e) {
-							Log.d("error", e.toString());
-						}
-					});
-			
-		}else if (rdb_wechar.isChecked()) {
+//		if (rdb_daokeng.isChecked()) {
+//			HashMap<String, String> params = new HashMap<String, String>();
+//			params.put("token", token);
+//			params.put("merchantId", merchantId);
+//			params.put("orderId", orderId);
+//			HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
+//					HttpAddress.CLASS_ORDERPAY+HttpAddress.METHOD_CASHPAY, 
+//					params, 
+//					new HttpCallbackListener() {
+//						@Override
+//						public void onFinish(Object response) {
+//							int code = 0 ;
+//							String money = null;
+//							JSONObject jsonObject = (JSONObject) response;
+//							JSONObject jsonObject2;
+//							try {
+//								jsonObject2 = jsonObject.getJSONObject("order");
+//								money = jsonObject2.getString("totalFee");
+//							} catch (JSONException e1) {
+//								// TODO Auto-generated catch block
+//								e1.printStackTrace();
+//							}
+//							try {
+//								code = jsonObject.getInt("status");
+//							} catch (JSONException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//							if (code == 2000) {
+//								Intent intent1 = new Intent(OrderInformationActivity.this, OrderResultActivity.class);
+//								intent1.putExtra("type", TYPE_PAY_FISHPIT);
+//								Bundle bundle = new Bundle();
+//								bundle.putString("money", money);
+//								bundle.putString("from", "order");
+//								intent1.putExtras(bundle );
+//								startActivity(intent1);
+//							}
+//							
+//						}
+//						
+//						@Override
+//						public void onError(Exception e) {
+//							Log.d("error", e.toString());
+//						}
+//					});
+//			
+//		}else 
+		if (rdb_wechar.isChecked()) {
 			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 			String token = sp.getString("token", "");
 			HashMap<String, String> params = new HashMap<String, String>();
@@ -328,12 +333,45 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		}
 	}
 
+	private TextView tv_pop_one;
+	private TextView btn_pop_cancel;
+	private TextView btn_pop_ok;
+	private PopupWindow popupWindow;
+	
+	public void popupwindow(String str){
+		View v = LayoutInflater.from(this).inflate(R.layout.popup_pay, null);
+		popupWindow = new PopupWindow(v, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, true);
+		popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+		tv_pop_one = (TextView) v.findViewById(R.id.tv_pop_one);
+		tv_pop_one.setText(str);
+		btn_pop_cancel = (TextView) v.findViewById(R.id.tv_pop_cancel);
+		btn_pop_ok = (TextView) v.findViewById(R.id.tv_pop_ok);
+		btn_pop_ok.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				popupWindow.dismiss();
+				
+				UiUtil.setNewMessage(true);
+				payMethod();
+			}
+		});
+		btn_pop_cancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				popupWindow.dismiss();
+			}
+		});
+		
+	}
+	
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_orderinformation_pay:	
-			UiUtil.setNewMessage(true);
-			payMethod();
+			
+			popupwindow("预约钓位\n30积分");
+			
 			break;
 		case R.id.tv_actionbar_left:
 			OrderInformationActivity.this.finish();

@@ -3,37 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/gray_bg"
     tools:context=".MyCollectionActivity" >
 
     <com.example.happyfishing.view.ActionBarView
         android:id="@+id/actionBar_mycollection"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x45" />
-
+    
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/x45"
+        android:background="#fff"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <Button
+        <com.example.happyfishing.view.MBtn
             android:id="@+id/btn_mycollection_fishpit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" 
-            android:text="黑坑"/>
-        <Button
+            android:layout_weight="1"
+            android:text="已完成" />
+
+        <View
+            android:layout_width="@dimen/x1"
+            android:layout_height="@dimen/x30"
+            android:background="@color/gray_bg" />
+        
+        <com.example.happyfishing.view.MBtn
             android:id="@+id/btn_mycollection_fishshop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" 
-            android:text="渔具店"/>
+            android:layout_weight="1"
+            android:text="待支付" />
+        </LinearLayout>
 
-    </LinearLayout>
+   
     <ListView 
         android:id="@+id/liv_mycollection_show"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"/>
+        android:layout_marginTop="@dimen/x10"
+        android:layout_height="wrap_content"
+        android:background="#fff"/>
 
 </LinearLayout>

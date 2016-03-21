@@ -72,9 +72,9 @@ public class OrderSumaryFinishAdapter extends BaseAdapter{
 				holder = new ViewHolder_Order();
 				convertView = layoutInflater.inflate(R.layout.inflater_ordersumary_adapter, null);
 				holder.imageRequestView = (ImageRequestView) convertView.findViewById(R.id.img_ordersumary_adapter);
-				holder.tv_order_merchantname = (TextView) convertView.findViewById(R.id.tv_ordersumary_merchantname);
-				holder.tv_order_merchantposition = (TextView) convertView.findViewById(R.id.tv_ordersumary_merchantposition);
-				holder.tv_order_price = (TextView) convertView.findViewById(R.id.tv_ordersumary_price);
+				holder.tv_order_merchantname = (TextView) convertView.findViewById(R.id.tv_ordersumary_type);
+				holder.tv_order_merchantposition = (TextView) convertView.findViewById(R.id.tv_ordersumary_name);
+				holder.tv_order_price = (TextView) convertView.findViewById(R.id.tv_ordersumary_moeny);
 				holder.tv_order_name = (TextView) convertView.findViewById(R.id.tv_ordersumary_name);
 				convertView.setTag(holder);
 				break;
@@ -141,5 +141,4 @@ public class OrderSumaryFinishAdapter extends BaseAdapter{
 		TextView tv_member_validTime;
 		TextView tv_order_price;
 	}
-
 }

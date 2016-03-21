@@ -1,18 +1,15 @@
 package com.example.happyfishing.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.happyfishing.R;
-import com.example.happyfishing.R.color;
-import com.example.happyfishing.SeachActivity;
+import com.example.happyfishing.activity.SeachActivity;
 import com.example.happyfishing.adapter.ACTVAdapter;
 import com.example.happyfishing.adapter.FishshopAdapter;
-import com.example.happyfishing.entity.FishpitSumaryEntity;
 import com.example.happyfishing.entity.FishshopEntity;
 import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
@@ -30,21 +27,16 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TextView.OnEditorActionListener;
-
 public class FishingShopActivity extends Activity implements OnClickListener {
 	// private Spinner sp_distence;
 	// private Spinner sp_renqi;

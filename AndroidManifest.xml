@@ -311,7 +311,7 @@
         </service>
         <!-- 友盟推送 -->
         <activity
-            android:name="com.example.happyfishing.SeachActivity"
+            android:name="com.example.happyfishing.activity.SeachActivity"
             android:label="@string/title_activity_seach" >
         </activity>
     </application>

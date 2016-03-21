@@ -12,28 +12,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_height="match_parent"
         android:gravity="center" 
         android:orientation="vertical">
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-80dp"
+            android:layout_marginBottom="@dimen/x20"
+            android:src="@drawable/ic_result_success" />
 
         <TextView
             android:id="@+id/tv_orderresult_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:text="支付成功 获得300积分"
-            android:drawableTop="@drawable/ic_result_success"
+            android:textColor="@color/appcolor"
+            android:layout_marginBottom="@dimen/x10"
             android:gravity="center"/>
 
         <TextView 
             android:id="@+id/tv_orderresult_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="详情可在“我的积分”中查看"
+            android:hint="可在“我的订单”中查看"
             />
     </LinearLayout>
-    <View android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"/>
 
 </LinearLayout>

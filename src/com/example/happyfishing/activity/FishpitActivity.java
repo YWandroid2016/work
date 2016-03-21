@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.happyfishing.R;
-import com.example.happyfishing.SeachActivity;
+import com.example.happyfishing.activity.SeachActivity;
 import com.example.happyfishing.adapter.ACTVAdapter;
 import com.example.happyfishing.adapter.FishpitFishpitAdapter;
 import com.example.happyfishing.entity.FishpitSumaryEntity;

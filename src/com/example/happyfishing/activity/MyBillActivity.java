@@ -18,6 +18,7 @@ import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
 import com.example.happyfishing.view.ActionBarView;
+import com.example.happyfishing.view.MBtn;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,8 +40,9 @@ public class MyBillActivity extends Activity implements OnClickListener,IXListVi
 	private int bill_type;
 	private XListView xliv_bill;
 	private MyBillAdapter adapter;
-	private Button btn_shouru;
-	private Button btn_zhichu;
+	private MBtn btn_shouru;
+	private MBtn btn_zhichu;
+	private MBtn btn_current;
 	private int shouru_start=0;
 	private int zhichu_start=0;
 	private ActionBarView actionBar_mybill;
@@ -89,10 +91,15 @@ public class MyBillActivity extends Activity implements OnClickListener,IXListVi
 		xliv_bill = (XListView) findViewById(R.id.xliv_mybill_bill);
 		xliv_bill.setXListViewListener(this);
 		xliv_bill.setPullLoadEnable(true);
-		btn_shouru = (Button) findViewById(R.id.btn_mybill_shouru);
+		btn_shouru = (MBtn) findViewById(R.id.btn_mybill_shouru);
+		btn_zhichu = (MBtn) findViewById(R.id.btn_mybill_zhichu);
+		btn_shouru.setTv("收入");
+		btn_zhichu.setTv("支出");
+		btn_shouru.dispalyLine(true);
+		btn_zhichu.dispalyLine(false);
 		btn_shouru.setOnClickListener(this);
-		btn_zhichu = (Button) findViewById(R.id.btn_mybill_zhichu);
 		btn_zhichu.setOnClickListener(this);
+		btn_current = btn_shouru;
 		actionBar_mybill = (ActionBarView) findViewById(R.id.actionBar_mybill);
 		actionBar_mybill.setActionBar(R.string.back, -1, R.string.title_actionbar_mybill, this);
 	
@@ -339,6 +346,9 @@ public class MyBillActivity extends Activity implements OnClickListener,IXListVi
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_mybill_shouru:
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
 			bill_type = 0;
 //			getData(bill_type);
 			Message message = new Message();
@@ -347,6 +357,9 @@ public class MyBillActivity extends Activity implements OnClickListener,IXListVi
 			mainHandler.sendMessage(message);
 			break;
 		case R.id.btn_mybill_zhichu:
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
 			bill_type = 1;
 //			getData(bill_type);
 			Message message2 = new Message();

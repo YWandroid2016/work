@@ -22,13 +22,13 @@ public class ImageRequestView extends ImageView {
 	public ImageRequestView(Context context) {
 		super(context);
 		loadDrawable = context.getResources().getDrawable(R.drawable.load_loading);
-		failDrawable = context.getResources().getDrawable(R.drawable.load_failure);
+		failDrawable = context.getResources().getDrawable(R.drawable.ic_launcher);
 	}
 
 	public ImageRequestView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		loadDrawable = context.getResources().getDrawable(R.drawable.load_loading);
-		failDrawable = context.getResources().getDrawable(R.drawable.load_failure);
+		failDrawable = context.getResources().getDrawable(R.drawable.ic_launcher);
 	}
 
 	public void setImageUrl(String url) {

@@ -83,7 +83,7 @@ public class MyConfigActivity extends Activity implements OnClickListener {
 				break;
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(MyConfigActivity.this);
-			builder.setTitle("是否退出登录？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			builder.setMessage("是否退出登录？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
 		           @Override
 		           public void onClick(DialogInterface dialog, int which) {
 		        	   SharedPreferences sp1 =getSharedPreferences("user", Context.MODE_PRIVATE);

@@ -2,7 +2,7 @@ package com.example.happyfishing.tool;
 
 public class HttpAddress {
 
-	public static String ADDRESS = "192.168.1.104:8092/";
+	public static String ADDRESS = "192.168.1.105:8092/";
 	
 	public static String PROJECT = "appConsole/";
 	

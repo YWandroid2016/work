@@ -61,7 +61,7 @@ public class MyBillAdapter extends BaseAdapter {
 		}
 		BillEntity billEntity = arrayList.get(position);
 		holder.tv_billshow_billdetail.setText(billEntity.name);
-		holder.tv_billshow_billdate.setText(billEntity.date);
+		holder.tv_billshow_billdate.setHint(billEntity.date);
 		
 		if (billEntity.jifenType == TYPE_ADD) {
 			holder.tv_billshow_billnumber.setTextColor(Color.BLUE);

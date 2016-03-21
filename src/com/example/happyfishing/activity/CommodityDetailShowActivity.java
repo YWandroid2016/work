@@ -33,6 +33,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +50,7 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 	private ArrayList<String> imageUrlList;
 	private ArrayList<String> linkUrlArray;
 	private TextView tv_commodity_detail_detail;
-	private TextView tv_commoditydetail_totalCount;
+//	private TextView tv_commoditydetail_totalCount;		库存总量
 	private TextView tv_commoditydetail_sallCount;
 	
 	private double target_lat;
@@ -56,6 +59,7 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 //	private double my_lon;
 //	private String cityString;
 	private String nameString;
+	private LinearLayout lin_add;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,8 +78,9 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 					String name = bundle.getString("name");
 					tv_actionbar_title.setText(name);
 					tv_commodity_detail_detail.setText(detail);
-					tv_commoditydetail_totalCount.setText(totalCount);
-					tv_commoditydetail_sallCount.setText(saleCount);
+//					tv_commoditydetail_totalCount.setText(totalCount);
+//					tv_commoditydetail_sallCount.setText(saleCount+"人购买");
+					tv_commoditydetail_sallCount.setHint(saleCount+"人购买");
 					String[] imageUrls = imageUrl.split(",");
 					for (int i = 0; i < imageUrls.length; i++) {
 						imageUrlList.add(imageUrls[i]);
@@ -123,16 +128,33 @@ public class CommodityDetailShowActivity extends Activity implements OnClickList
 
 	private void initView() {
 		
+		
+		
+		lin_add = (LinearLayout) findViewById(R.id.lin_add_commodity);
 		actionbar_commoditydetail = (ActionBarView) findViewById(R.id.actionbar_commoditydetail);
 		actionbar_commoditydetail.setActionBar(R.string.back, -1, R.string.action_settings, this);
 		findViewById(R.id.tv_commodity_detail_daodiangoumai).setOnClickListener(this);
 		tv_actionbar_title = (TextView) findViewById(R.id.tv_actionbar_title);
 		tv_commodity_detail_detail = (TextView) findViewById(R.id.tv_commodity_detail_detail);
-		tv_commoditydetail_totalCount = (TextView) findViewById(R.id.tv_commodity_detail_totalcount);
+//		tv_commoditydetail_totalCount = (TextView) findViewById(R.id.tv_commodity_detail_totalcount);  库存
 		tv_commoditydetail_sallCount = (TextView) findViewById(R.id.tv_commodity_detail_sales);
 		
 		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
+		
+		addImg();
+	}
+	
+	public void addImg(){
+		int[] imgsid = {R.drawable.i01,R.drawable.i02,R.drawable.i03,R.drawable.i04,R.drawable.i05,R.drawable.i06};
+		ImageView img = null;
+		for (int i = 0; i < imgsid.length; i++) {
+			img = new ImageView(this);
+			img.setImageResource(imgsid[i]);
+			img.setScaleType(ScaleType.CENTER_CROP);
+			lin_add.addView(img);
+		}
+		
 	}
 
 	private void loadData() {

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_bg"
     android:orientation="vertical"
     tools:context=".BecomeVipOrderActivity" >
 
@@ -10,165 +11,195 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x45" />
 
-    <com.example.happyfishing.view.RushBuyCountDownTimerView
-        android:id="@+id/timeup_vipordershow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </com.example.happyfishing.view.RushBuyCountDownTimerView>
-    
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/x25"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:background="#ffffff" >
+        android:layout_height="wrap_content"
+        android:background="@color/gray_bg"
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical"
-            android:hint="\t升级VIP" />
-
-        <TextView
-            android:id="@+id/tv_becomevip_order_money"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:hint="￥500" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="#eeeeee" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:background="#ffffff" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical"
-            android:hint="\t有效期" />
-
-        <TextView
-            android:id="@+id/tv_becomevip_order_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical"
-            android:hint="￥500" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/x25"
-        android:gravity="center_vertical"
-        android:layout_weight="1"
-        android:background="#ffffff" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:hint="\t手机号码" />
-
-        <TextView
-            android:id="@+id/tv_becomevip_orer_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_alignParentRight="true"
-            android:hint="13260356241" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="#eeeeee" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-		android:gravity="center_vertical"
-        android:background="#ffffff" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical"
-            android:hint="\t实付金额" />
-
-        <TextView
-            android:id="@+id/tv_becomevip_order_paymoney"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical"
-            android:hint="￥500" />
-    </RelativeLayout>
-    
-    <TextView
+        <com.example.happyfishing.view.RushBuyCountDownTimerView
+            android:id="@+id/timeup_vipordershow"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/x5"
-            android:layout_weight="0.5"
-            android:gravity="center_vertical"
-            android:background="#fff"
-            android:paddingLeft="@dimen/x10"
-            android:paddingRight="@dimen/x15"
-            android:text="选择支付方式" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x10" >
+        </com.example.happyfishing.view.RushBuyCountDownTimerView>
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/x2"
-            android:id="@+id/ll_payment_wechart"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.75"
-            android:paddingLeft="@dimen/x5"
-            android:paddingRight="@dimen/x30"
-            android:background="@color/white"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x45"
+                android:background="#fff"
                 android:gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="微信支付" />
+                android:orientation="horizontal"
+                android:padding="@dimen/x10" >
 
-            <RadioButton
-                android:id="@+id/rb_paymentmethod_wechart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_radio_orderinfo"
-                android:button="@drawable/selector_radio" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="升级VIP"
+                    android:textSize="@dimen/tip_size" />
+
+                <TextView
+                    android:id="@+id/tv_becomevip_order_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="￥500" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:background="@color/gray_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x45"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/x10" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="有效期"
+                    android:textSize="@dimen/tip_size" />
+
+                <TextView
+                    android:id="@+id/tv_becomevip_order_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="￥500" />
+            </LinearLayout>
         </LinearLayout>
-        
-        <Button android:id="@+id/btn_becomevip"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/actionbar_background"
-            android:textColor="@color/white"
-            android:text="立即支付"
-            android:textSize="@dimen/font_btn_becomeVIP"
-            android:layout_weight="1"/>
-        
-        <View android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5.5"/>
-    
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@color/gray_bg"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x45"
+                    android:background="#fff"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/x10" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="手机号码"
+                        android:textSize="@dimen/tip_size" />
+
+                    <TextView
+                        android:id="@+id/tv_becomevip_orer_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/tip_size" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x1"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginRight="@dimen/x10"
+                    android:background="@color/gray_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x45"
+                    android:background="#fff"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/x10" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="实付金额"
+                        android:textSize="@dimen/tip_size" />
+
+                    <TextView
+                        android:id="@+id/tv_becomevip_order_paymoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/tip_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_marginTop="@dimen/x10"
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x15"
+        android:text="选择支付方式" />
+
+    <LinearLayout
+        android:id="@+id/ll_payment_wechart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/x10" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_payment_wechart" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/x10"
+            android:text="微信支付" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/rb_paymentmethod_wechart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_radio_orderinfo"
+            android:button="@null" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_becomevip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:layout_margin="@dimen/x10"
+        android:background="@drawable/circle_app"
+        android:text="立即支付"
+        android:textColor="@color/white" />
 
 </LinearLayout>

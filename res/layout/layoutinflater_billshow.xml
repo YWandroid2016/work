@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingLeft="@dimen/x10"
-    android:paddingRight="@dimen/x10"
-    
-    >
+    android:padding="@dimen/x10" >
 
     <TextView
         android:id="@+id/tv_billshow_billdetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x5"
         android:layout_alignParentLeft="true"
-        android:text="TextView" />
+        android:textSize="18sp"
+        android:text="name" />
 
     <TextView
         android:id="@+id/tv_billshow_billdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:textSize="14sp"
         android:layout_below="@+id/tv_billshow_billdetail"
-        android:text="TextView" />
+        android:hint="date" />
 
     <TextView
         android:id="@+id/tv_billshow_billnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="TextView" />
+        android:layout_centerVertical="true"
+        android:textSize="14sp"
+        android:text="jifen" />
 
 </RelativeLayout>

@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_bg" >
+
+    <com.example.happyfishing.view.ActionBarView
+        android:id="@+id/actionBar_payPassAlter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        android:background="#fff"
+        android:orientation="vertical" >
+	
+        <EditText
+            android:id="@+id/edt_payPassAlter_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:paddingLeft="@dimen/x10"
+            android:hint="请输入手机号"
+            android:background="#fff" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@color/gray_bg" />
+        
+        <EditText
+            android:id="@+id/edt_payPassAlter_pass"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:paddingLeft="@dimen/x10"
+            android:hint="当前支付密码"
+            android:background="#fff" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@color/gray_bg" />
+        
+        <EditText
+            android:id="@+id/edt_payPassAlter_new"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:paddingLeft="@dimen/x10"
+            android:hint="新6位数字密码"
+            android:background="#fff" />
+        
+	</LinearLayout>
+    
+    <Button
+        android:id="@+id/btn_payPassAlter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x20"
+        android:text="提交"
+        android:textSize="@dimen/big_font"
+        android:background="@drawable/circle_app"
+        android:textColor="#fff" />
+    
+    <TextView
+        android:id="@+id/tv_pay_alter_forget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x10"
+        android:gravity="right"
+        android:textColor="@color/anhuang"
+        android:text="忘记支付密码？" />
+
+</LinearLayout>

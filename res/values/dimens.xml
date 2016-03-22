@@ -84,6 +84,9 @@
 	<dimen name="gong_size">42px</dimen>
 	<dimen name="default_size">39px</dimen>
 	<dimen name="tip_size">36px</dimen>
+	<dimen name="big_font">24sp</dimen>
+	<dimen name="default_font">18sp</dimen>
+	<dimen name="small_font">14sp</dimen>
 	
 	
 </resources>

@@ -51,6 +51,7 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 	private TextView tv_userinfo_nickname;
 	private TextView tv_userinfo_phonenumber;
 	private ActionBarView actionBar_userinfo;
+	private SharedPreferences sp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +62,6 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 
 		initView();
 
-		loadData();
-
 	}
 
 	private void initView() {
@@ -71,7 +70,7 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		
 		findViewById(R.id.userinfo_usernickname).setOnClickListener(this);
 		findViewById(R.id.userinfo_userphone).setOnClickListener(this);
-		SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+		sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 		
 		String nickName = sp.getString("nickname", "获取失败，请重试");
 		String phoneNumber = sp.getString("phoneNumber", "获取失败，请重试");
@@ -84,16 +83,16 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		tv_userinfo_phonenumber.setText(phoneNumber);
 	}
 
-	private void loadData() {
-
-	}
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.user_info, menu);
-		return true;
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		String nickName = sp.getString("nickname", "获取失败，请重试");
+		String phoneNumber = sp.getString("phoneNumber", "获取失败，请重试");
+		tv_userinfo_nickname.setText(nickName);
+		tv_userinfo_phonenumber.setText(phoneNumber);
 	}
+	
 
 	@Override
 	public void onClick(View v) {

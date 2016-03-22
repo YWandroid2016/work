@@ -198,6 +198,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 						editor.putString("isMember", jsonObject1.getString("isMember"));
 						editor.putString("category", jsonObject1.getString("category"));
 						editor.putString("userRank", jsonObject1.getString("userRank"));
+						editor.putString("hasPayPass", jsonObject1.getString("hasPayPass"));
 						editor.commit();
 						
 						Message message = new Message();

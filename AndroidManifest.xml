@@ -241,8 +241,7 @@
             android:name="com.example.happyfishing.FinishOrderShowActivity"
             android:label="@string/title_activity_finish_order_show" >
         </activity>
-        <activity
-            android:name="com.example.happyfishing.activity.UserInfoAlter_NickName_Activity" >
+        <activity android:name="com.example.happyfishing.activity.UserInfoAlter_NickName_Activity" >
         </activity>
 
         <!-- 友盟推送 -->
@@ -313,6 +312,26 @@
         <activity
             android:name="com.example.happyfishing.activity.SeachActivity"
             android:label="@string/title_activity_seach" >
+        </activity>
+        <activity
+            android:name="com.example.happyfishing.VIPInfoActivity"
+            android:label="@string/title_activity_vipinfo" >
+        </activity>
+        <activity
+            android:name="com.example.happyfishing.MessageDesActivity"
+            android:label="@string/title_activity_message_des" >
+        </activity>
+        <activity
+            android:name="com.example.happyfishing.NewPassWardActivity"
+            android:label="@string/title_activity_new_pass_ward" >
+        </activity>
+        <activity
+            android:name="com.example.happyfishing.PayPassAlterActivity"
+            android:label="@string/title_activity_pay_pass_alter" >
+        </activity>
+        <activity
+            android:name="com.example.happyfishing.PayForgetActivity"
+            android:label="@string/title_activity_pay_forget" >
         </activity>
     </application>
 

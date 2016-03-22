@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MessageActivity"
+    android:background="@color/gray_bg"
     android:orientation="vertical" >
 
     <com.example.happyfishing.view.ActionBarView
@@ -11,9 +12,11 @@
         android:layout_height="@dimen/x45"
         />
     <ListView 
-        android:id="@+id/liv_message"
+        android:id="@+id/lv_message"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="11"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x10"
+        android:background="#fff"
         />
 </LinearLayout>

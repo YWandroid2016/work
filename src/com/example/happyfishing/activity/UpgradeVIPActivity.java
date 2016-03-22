@@ -8,6 +8,7 @@ import com.example.happyfishing.R;
 import com.example.happyfishing.R.id;
 import com.example.happyfishing.R.layout;
 import com.example.happyfishing.R.menu;
+import com.example.happyfishing.VIPInfoActivity;
 import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
@@ -41,12 +42,12 @@ public class UpgradeVIPActivity extends Activity implements OnClickListener{
 
 	private void initView() {
 		actionBar_becomeVIP = (ActionBarView) findViewById(R.id.actionBar_becomeVIP);
-		actionBar_becomeVIP.setActionBar(R.string.back, R.string.title_actionbar_memberdetail, R.string.title_actionbar_becomeVIP, this);
+		actionBar_becomeVIP.setActionBar(R.string.back, R.string.title_actionbar_memberdetail, R.string.title_actionbar_becomeVIP, 1, this);
 		findViewById(R.id.tv_updateVIP_type_month_become).setOnClickListener(this);
 		findViewById(R.id.tv_updateVIP_type_quater_become).setOnClickListener(this);
 		findViewById(R.id.tv_updateVIP_type_year_become).setOnClickListener(this);
-		tv_actionbar_right = (TextView) findViewById(R.id.tv_actionbar_right);
-		tv_actionbar_right.setText("会员特权");
+		tv_actionbar_right = (TextView) actionBar_becomeVIP.findViewById(R.id.tv_actionbar_right);
+		tv_actionbar_right.setText("特权说明");
 		tv_actionbar_right.setCompoundDrawables(null, null, null, null);
 		tv_actionbar_right.setOnClickListener(this);
 		sp = getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -179,6 +180,10 @@ public class UpgradeVIPActivity extends Activity implements OnClickListener{
 			
 			break;
 		case R.id.tv_actionbar_right:
+			
+			Intent in = new Intent(UpgradeVIPActivity.this, VIPInfoActivity.class);
+			startActivity(in);
+			
 			break;
 		
 //		case :

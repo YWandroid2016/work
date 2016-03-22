@@ -10,6 +10,8 @@ public class HttpAddress {
 	
 	public static String CLASS_APPUSER ="appUser/";
 	
+	public static String CLASS_USERSAFE ="userSafe/";
+	
 	public static String CLASS_APPORDER = "appOrder/";
 	
 	public static String CLASS_ORDERPAY = "orderPay/";
@@ -25,6 +27,12 @@ public class HttpAddress {
 	public static String CLASS_FISHPRODUCT = "fishProduct/";
 	
 	public static String CLASS_USERMEMBER = "userMember/";
+	
+	public static String METHOD_SETPASS ="setPayPwd?";
+	
+	public static String METHOD_CHANGEPAYBYOLD ="changePayPwdByOld?";
+	
+	public static String METHOD_CHANGEPAYBYPHONE ="changePayPwdByPhone?";
 
 	public static String METHOD_FISHPITLIST = "fishpitList?";
 	

@@ -80,11 +80,11 @@ public class OrderSumaryFinishAdapter extends BaseAdapter{
 				break;
 			case 0:
 				holder2 = new ViewHolder_Order2();
-				convertView = layoutInflater.inflate(R.layout.inflater_ordersumary_adapter2, null);
-				holder2.img_memberOrder = (ImageView) convertView.findViewById(R.id.img_ordersumary_adapter2);
-				holder2.tv_order_merchantname = (TextView) convertView.findViewById(R.id.tv_ordersumary_name2);
-				holder2.tv_member_validTime = (TextView) convertView.findViewById(R.id.tv_ordersumary_merchantname2);
-				holder2.tv_order_price = (TextView) convertView.findViewById(R.id.tv_ordersumary_price2);
+				convertView = layoutInflater.inflate(R.layout.inflater_ordersumary_adapter, null);
+				holder2.img_memberOrder = (ImageView) convertView.findViewById(R.id.img_ordersumary_adapter);
+				holder2.tv_order_merchantname = (TextView) convertView.findViewById(R.id.tv_ordersumary_type);
+				holder2.tv_member_validTime = (TextView) convertView.findViewById(R.id.tv_ordersumary_name);
+				holder2.tv_order_price = (TextView) convertView.findViewById(R.id.tv_ordersumary_moeny);
 				convertView.setTag(holder2);
 				break;
 			default:

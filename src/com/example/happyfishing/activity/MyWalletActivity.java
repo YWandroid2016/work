@@ -123,6 +123,7 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 			tv_mywallet_confirm.setText("可用积分");
 		} else {
 			findViewById(R.id.tv_mywallet_bill).setVisibility(View.INVISIBLE);
+			findViewById(R.id.img_right).setVisibility(View.INVISIBLE);
 			tv_mywallet_confirm.setVisibility(View.GONE);
 			tv_mywallet_usablejifen.setText("您还未登录，请先登录");
 			btn_bocomeVIP.setText("登录");

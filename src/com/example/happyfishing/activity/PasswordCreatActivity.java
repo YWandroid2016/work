@@ -1,6 +1,8 @@
 package com.example.happyfishing.activity;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,12 +15,17 @@ import com.example.happyfishing.view.ActionBarView;
 import com.example.happyfishing.view.TimeButton;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
@@ -36,12 +43,48 @@ public class PasswordCreatActivity extends Activity implements OnClickListener{
 	private TimeButton btn_register_verification;
 	private Button forget_login;
 	private ActionBarView actionBar;
+	private Handler handler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 		setContentView(R.layout.activity_password_creat);
 		initView();
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				switch (msg.what) {
+				case 1:
+					switch (msg.arg1) {
+					case 2000:
+						Toast.makeText(PasswordCreatActivity.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
+						break;
+
+					default:
+						String str = msg.obj.toString();
+						Toast.makeText(PasswordCreatActivity.this, str, Toast.LENGTH_SHORT).show();
+						break;
+					}
+					break;
+				case 2:
+					switch (msg.arg1) {
+					case 2000:
+						popupwindow();
+						break;
+
+					default:
+						String str = msg.obj.toString();
+						Toast.makeText(PasswordCreatActivity.this, str, Toast.LENGTH_SHORT).show();
+						break;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		};
 	}
 	
 	private void initView(){
@@ -55,6 +98,20 @@ public class PasswordCreatActivity extends Activity implements OnClickListener{
 		
 		actionBar.setActionBar(R.string.back, -1, R.string.title_actionbar_zhaohui, this);
 		
+		edt_password.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(!hasFocus){
+					int length = edt_password.getText().toString().length();
+					if(length < 6){
+						Toast.makeText(PasswordCreatActivity.this, "密码的长度为6~18位", Toast.LENGTH_SHORT).show();
+					}
+					
+				}
+			}
+		});
+		
 		btn_register_verification.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -67,13 +124,11 @@ public class PasswordCreatActivity extends Activity implements OnClickListener{
 				HashMap<String , String> params = new HashMap<String, String>();
 				params.put("phoneNumber", phoneNumber);
 				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-						HttpAddress.CLASS_APPUSER+HttpAddress.METHOD_SENDVALIDATECONDE, 
+						HttpAddress.CLASS_USERINFO+HttpAddress.METHOD_SENDVALIDATECONDE, 
 						params, new HttpCallbackListener() {
 					@Override
 					public void onFinish(Object response) {
 						Log.d("response", response.toString());
-						Message message = new Message();
-						message.what = 1;
 						JSONObject jsonObject1 = (JSONObject) response;
 						int code = 0 ;
 						String statisString = null; 
@@ -83,15 +138,14 @@ public class PasswordCreatActivity extends Activity implements OnClickListener{
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}
-						if (code == 2000) {
-							Toast.makeText(PasswordCreatActivity.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
-						}else {
-							Toast.makeText(PasswordCreatActivity.this, "验证码发送失败", Toast.LENGTH_SHORT).show();
-						}
+						Message msg = handler.obtainMessage();
+						msg.what = 1;
+						msg.arg1 = code;
+						msg.obj = statisString;
+						handler.sendMessage(msg);
 					}
 					@Override
 					public void onError(Exception e) {
-						Toast.makeText(PasswordCreatActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
@@ -147,11 +201,11 @@ public class PasswordCreatActivity extends Activity implements OnClickListener{
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}
-						if (code == 2000) {
-							popupwindow();
-						} else {
-							Toast.makeText(PasswordCreatActivity.this, statisString, Toast.LENGTH_SHORT).show();
-						}
+						Message msg = handler.obtainMessage();
+						msg.what = 2;
+						msg.arg1 = code;
+						msg.obj = statisString;
+						handler.sendMessage(msg);
 					}
 
 					@Override
@@ -162,6 +216,13 @@ public class PasswordCreatActivity extends Activity implements OnClickListener{
 			}
 		});
 	}
+	
+	/*public static boolean isEmail(String strEmail) {   
+	    String strPattern = "^$";  
+	    Pattern p = Pattern.compile(strPattern);  
+	    Matcher m = p.matcher(strEmail);  
+	    return m.matches();  
+	} */
 	
 	private TextView tv_pop;
 	private TextView btn_pop;

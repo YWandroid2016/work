@@ -30,6 +30,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x15"
+            android:textSize="@dimen/font_default"
             android:text="头像" />
             
             <ImageView
@@ -67,13 +68,15 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x15"
+            android:textSize="@dimen/font_default"
             android:text="昵称" />
             
             <TextView
                 android:id="@+id/tv_userinfo_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="十三。。。" />
+                android:textSize="@dimen/font_default"
+                android:hint="十三。。。" />
             
             <ImageView
                 android:layout_width="wrap_content"
@@ -104,13 +107,15 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x15"
+            android:textSize="@dimen/font_default"
             android:text="手机号" />
             
             <TextView
                 android:id="@+id/tv_userinfo_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13240912869" />
+                android:textSize="@dimen/font_middle"
+                android:hint="13240912869" />
             
             <ImageView
                 android:layout_width="wrap_content"

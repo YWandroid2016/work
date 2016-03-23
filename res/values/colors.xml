@@ -169,5 +169,11 @@
     <color name="textcolor_default">#888888</color>
     <color name="textcolor_lvse">#229f1b</color>
     <color name="linecolor">#dddddd</color>
+    <color name="redText">#F26665</color>
+    
+    
+    <color name="hui">#888888</color>
+    <color name="hei">#000000</color>
+    <color name="bai">#ffffff</color>
 
 </resources>

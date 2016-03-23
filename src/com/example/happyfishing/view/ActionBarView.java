@@ -48,7 +48,7 @@ public class ActionBarView extends FrameLayout {
 		}
 		if (leftResId != -1) {
 			
-			tv_actionbar_left.setText(leftResId);
+//			tv_actionbar_left.setText(leftResId);
 			tv_actionbar_left.setOnClickListener(clickListener);
 		}
 		if (rightResId != -1) {
@@ -74,7 +74,7 @@ public class ActionBarView extends FrameLayout {
 		}
 		if (leftResId != -1) {
 			
-			tv_actionbar_left.setText(leftResId);
+//			tv_actionbar_left.setText(leftResId);
 			tv_actionbar_left.setOnClickListener(clickListener);
 		}
 		if (rightResId != -1 && rz != -1) {

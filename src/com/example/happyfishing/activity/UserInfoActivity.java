@@ -76,11 +76,11 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		String phoneNumber = sp.getString("phoneNumber", "获取失败，请重试");
 		
 		tv_userinfo_nickname = (TextView) findViewById(R.id.tv_userinfo_nickname);
-		tv_userinfo_nickname.setText(nickName);
+		tv_userinfo_nickname.setHint(nickName);
 		
 		tv_userinfo_phonenumber = (TextView) findViewById(R.id.tv_userinfo_phone);
 		
-		tv_userinfo_phonenumber.setText(phoneNumber);
+		tv_userinfo_phonenumber.setHint(phoneNumber);
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		super.onResume();
 		String nickName = sp.getString("nickname", "获取失败，请重试");
 		String phoneNumber = sp.getString("phoneNumber", "获取失败，请重试");
-		tv_userinfo_nickname.setText(nickName);
-		tv_userinfo_phonenumber.setText(phoneNumber);
+		tv_userinfo_nickname.setHint(nickName);
+		tv_userinfo_phonenumber.setHint(phoneNumber);
 	}
 	
 

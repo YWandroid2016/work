@@ -38,11 +38,11 @@
 
     <TextView
         android:gravity="center_vertical"
-        android:textSize="@dimen/font_commoditydetail_jingbaojia"
         android:id="@+id/tv_commodity_detail_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/x10"
+        android:textSize="@dimen/font_default"
         android:text="这里好像是另一个个产品简介这里好像是另一个个产品简介这里好像是另一个个产品简介这里好像是另一个个产品简介" />
 
     <View
@@ -67,13 +67,13 @@
             android:layout_height="wrap_content"
             android:text="￥50"
             android:textColor="@color/appcolor"
-            android:textSize="@dimen/tip_size" />
+            android:textSize="@dimen/font_default" />
         
         <TextView
             android:id="@+id/tv_commodity_detail_sales"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="@dimen/tip_size"
+            android:textSize="@dimen/font_small"
             android:hint="2016人购买" />
     </LinearLayout>
         
@@ -85,6 +85,7 @@
         android:padding="@dimen/x10"
         android:layout_marginTop="@dimen/x10"
         android:background="#fff"
+        android:textSize="@dimen/font_default"
         android:text="商品详情" />
     
     
@@ -105,6 +106,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:background="@drawable/circle_app"
+        android:textSize="@dimen/font_big"
         android:text="到店购买" />
     
          

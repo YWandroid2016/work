@@ -39,14 +39,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#F26665"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:text="全年264天" />
         
         <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:text="随心钓" />
         
 	</LinearLayout>
@@ -82,7 +82,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:text="钓鱼只需" />
         
         <TextView
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#F26665"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:text="30元/次" />
         
 	</LinearLayout>
@@ -125,14 +125,14 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:text="鱼获回收" />
         
         <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:textColor="#F26665"
         android:text="5元/次" />
         
@@ -144,7 +144,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/x10"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_default"
         android:text="随时随地预约钓位，和排队抽号说再见！" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
+	        android:textSize="@dimen/font_default"
 	        android:text="首页"/>
 	    <TextView 
 	        android:id="@+id/tv_homeactivity_heikeng"
@@ -18,6 +19,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
+	        android:textSize="@dimen/font_default"
 	        android:text="黑坑"/>
 	    <TextView 
 	        android:id="@+id/tv_homeactivity_fishingshop"
@@ -25,6 +27,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
+	        android:textSize="@dimen/font_default"
 	        android:text="渔具店"/>
 	    <TextView 
 	        android:gravity="center"
@@ -32,6 +35,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
+	        android:textSize="@dimen/font_default"
 	        android:text="我的"/>
 
 </LinearLayout>

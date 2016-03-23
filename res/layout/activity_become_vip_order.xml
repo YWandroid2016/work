@@ -43,13 +43,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="升级VIP"
-                    android:textSize="@dimen/tip_size" />
+                    android:textSize="@dimen/font_default" />
 
                 <TextView
                     android:id="@+id/tv_becomevip_order_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:textSize="@dimen/font_default"
                     android:hint="￥500" />
             </LinearLayout>
 
@@ -73,13 +74,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="有效期"
-                    android:textSize="@dimen/tip_size" />
+                    android:textSize="@dimen/font_default" />
 
                 <TextView
                     android:id="@+id/tv_becomevip_order_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:textSize="@dimen/font_default"
                     android:hint="￥500" />
             </LinearLayout>
         </LinearLayout>
@@ -110,13 +112,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="手机号码"
-                        android:textSize="@dimen/tip_size" />
+                        android:textSize="@dimen/font_default" />
 
                     <TextView
                         android:id="@+id/tv_becomevip_orer_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/tip_size" />
+                        android:textSize="@dimen/font_default" />
                 </LinearLayout>
 
                 <View
@@ -139,13 +141,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="实付金额"
-                        android:textSize="@dimen/tip_size" />
+                        android:textSize="@dimen/font_default" />
 
                     <TextView
                         android:id="@+id/tv_becomevip_order_paymoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/tip_size" />
+                        android:textSize="@dimen/font_default" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -158,6 +160,7 @@
         android:layout_marginTop="@dimen/x10"
         android:paddingLeft="@dimen/x10"
         android:paddingRight="@dimen/x15"
+        android:textSize="@dimen/font_small"
         android:text="选择支付方式" />
 
     <LinearLayout
@@ -178,6 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/x10"
+            android:textSize="@dimen/font_small"
             android:text="微信支付" />
 
         <TextView
@@ -196,10 +200,11 @@
     <Button
         android:id="@+id/btn_becomevip"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x40"
+        android:layout_height="@dimen/x50"
         android:layout_margin="@dimen/x10"
         android:background="@drawable/circle_app"
         android:text="立即支付"
+        android:textSize="@dimen/font_big"
         android:textColor="@color/white" />
 
 </LinearLayout>

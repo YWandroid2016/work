@@ -46,9 +46,10 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	public static int TYPE_PAY_FISHPIT = 4;
 	private ActionBarView actionBar_orderinformation;
 	private RadioButton rdb_wechar;
-//	private RadioButton rdb_daokeng;
+	private RadioButton rdb_daokeng;
 	private RadioButton rdb_jifen;
 	
+	private String moneyString;
 	private String nameString;
 	private String dateString;
 	private String phoneNumber;
@@ -61,6 +62,8 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	
 	private TextView tv_orderdetail_content1;
 	private TextView tv_orderdetail_content2;
+	private TextView tv_orderdetail_location;
+	private TextView tv_orderinformation_money;
 	private TextView tv_orderdetail_phone;
 	private RushBuyCountDownTimerView tv_timeUp;
 	private String dateCreate;
@@ -102,6 +105,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		Log.d("point", userPoint+" 积分");
 		dateCreate = bundle.getString("dateCreate");
 		nameString = bundle.getString("name");
+		moneyString = bundle.getString("totalFee");
 		dateString = bundle.getString("date");
 		Log.d("date", dateString);
 		
@@ -126,21 +130,24 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		}
 		location = bundle.getInt("location");
 		phoneNumber = bundle.getString("phone");
-//		if (hide) {
-//			LinearLayout ll_payment_daokeng = (LinearLayout) findViewById(R.id.ll_payment_daokeng);
-//			ll_payment_daokeng.setVisibility(View.GONE);
-//		}
-//		rdb_daokeng = (RadioButton) findViewById(R.id.rb_paymentmethod_daokeng);
-//		rdb_daokeng.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//			
-//			@Override
-//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//				if (isChecked) {
-//					rdb_wechar.setChecked(false);
-//					rdb_jifen.setChecked(false);
-//				}
-//			}
-//		});
+		if (hide) {
+			LinearLayout ll_payment_daokeng = (LinearLayout) findViewById(R.id.ll_payment_daokeng);
+			ll_payment_daokeng.setVisibility(View.GONE);
+		}
+		
+		
+		
+		rdb_daokeng = (RadioButton) findViewById(R.id.rb_paymentmethod_daokeng);
+		rdb_daokeng.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					rdb_wechar.setChecked(false);
+					rdb_jifen.setChecked(false);
+				}
+			}
+		});
 		rdb_wechar = (RadioButton) findViewById(R.id.rb_paymentmethod_wechart);
 		rdb_wechar.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -148,7 +155,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					
-//					rdb_daokeng.setChecked(false);
+					rdb_daokeng.setChecked(false);
 					rdb_jifen.setChecked(false);
 				}
 			}
@@ -159,11 +166,13 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
-//					rdb_daokeng.setChecked(false);
+					rdb_daokeng.setChecked(false);
 					rdb_wechar.setChecked(false);
 				}
 			}
 		});
+		
+		rdb_wechar.setChecked(true);	//默认支付方式
 		
 		TextView textView = (TextView) findViewById(R.id.tv_orderinformation_jifenzhifu);
 		if (userPoint < 30) {
@@ -180,10 +189,14 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		actionBar_orderinformation.setActionBar(R.string.cancl, -1, R.string.title_actionbar_order_detail, this);
 		findViewById(R.id.btn_orderinformation_pay).setOnClickListener(this);
 		
+		tv_orderinformation_money = (TextView) findViewById(R.id.tv_orderinformation_money);
+		tv_orderinformation_money.setText(moneyString);
+		tv_orderdetail_location = (TextView) findViewById(R.id.tv_orderdetail_location);
+		tv_orderdetail_location.setText(nameString);
 		tv_orderdetail_content1 = (TextView) findViewById(R.id.tv_orderdetail_content1);
 		tv_orderdetail_content1.setText(dateString);
 		tv_orderdetail_content2 = (TextView) findViewById(R.id.tv_orderdetail_content2);
-		tv_orderdetail_content2.setText(nameString+"  "+location+" 号位");
+		tv_orderdetail_content2.setText(location+"号位");
 		tv_orderdetail_phone = (TextView) findViewById(R.id.tv_orderinformation_phone);
 		tv_orderdetail_phone.setHint(phoneNumber);
 	}
@@ -200,54 +213,53 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	}
 	
 	public void payMethod() {
-//		if (rdb_daokeng.isChecked()) {
-//			HashMap<String, String> params = new HashMap<String, String>();
-//			params.put("token", token);
-//			params.put("merchantId", merchantId);
-//			params.put("orderId", orderId);
-//			HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-//					HttpAddress.CLASS_ORDERPAY+HttpAddress.METHOD_CASHPAY, 
-//					params, 
-//					new HttpCallbackListener() {
-//						@Override
-//						public void onFinish(Object response) {
-//							int code = 0 ;
-//							String money = null;
-//							JSONObject jsonObject = (JSONObject) response;
-//							JSONObject jsonObject2;
-//							try {
-//								jsonObject2 = jsonObject.getJSONObject("order");
-//								money = jsonObject2.getString("totalFee");
-//							} catch (JSONException e1) {
-//								// TODO Auto-generated catch block
-//								e1.printStackTrace();
-//							}
-//							try {
-//								code = jsonObject.getInt("status");
-//							} catch (JSONException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-//							if (code == 2000) {
-//								Intent intent1 = new Intent(OrderInformationActivity.this, OrderResultActivity.class);
-//								intent1.putExtra("type", TYPE_PAY_FISHPIT);
-//								Bundle bundle = new Bundle();
-//								bundle.putString("money", money);
-//								bundle.putString("from", "order");
-//								intent1.putExtras(bundle );
-//								startActivity(intent1);
-//							}
-//							
-//						}
-//						
-//						@Override
-//						public void onError(Exception e) {
-//							Log.d("error", e.toString());
-//						}
-//					});
-//			
-//		}else 
-		if (rdb_wechar.isChecked()) {
+		if (rdb_daokeng.isChecked()) {
+			HashMap<String, String> params = new HashMap<String, String>();
+			params.put("token", token);
+			params.put("merchantId", merchantId);
+			params.put("orderId", orderId);
+			HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
+					HttpAddress.CLASS_ORDERPAY+HttpAddress.METHOD_CASHPAY, 
+					params, 
+					new HttpCallbackListener() {
+						@Override
+						public void onFinish(Object response) {
+							int code = 0 ;
+							String money = null;
+							JSONObject jsonObject = (JSONObject) response;
+							JSONObject jsonObject2;
+							try {
+								jsonObject2 = jsonObject.getJSONObject("order");
+								money = jsonObject2.getString("totalFee");
+							} catch (JSONException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								code = jsonObject.getInt("status");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							if (code == 2000) {
+								Intent intent1 = new Intent(OrderInformationActivity.this, OrderResultActivity.class);
+								intent1.putExtra("type", TYPE_PAY_FISHPIT);
+								Bundle bundle = new Bundle();
+								bundle.putString("money", money);
+								bundle.putString("from", "order");
+								intent1.putExtras(bundle );
+								startActivity(intent1);
+							}
+							
+						}
+						
+						@Override
+						public void onError(Exception e) {
+							Log.d("error", e.toString());
+						}
+					});
+			
+		}else if (rdb_wechar.isChecked()) {
 			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 			String token = sp.getString("token", "");
 			HashMap<String, String> params = new HashMap<String, String>();
@@ -369,8 +381,16 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_orderinformation_pay:	
+			String str = null;
+			if(rdb_daokeng.isChecked()){
+				str = "预约钓位\n30元";
+			} else if(rdb_wechar.isChecked()){
+				str = "预约钓位\n30元";
+			} else if(rdb_jifen.isChecked()){
+				str = "预约钓位\n30积分";
+			}
 			
-			popupwindow("预约钓位\n30积分");
+			popupwindow(str);
 			
 			break;
 		case R.id.tv_actionbar_left:

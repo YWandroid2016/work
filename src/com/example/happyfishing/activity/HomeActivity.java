@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,12 +54,14 @@ public class HomeActivity extends Activity implements OnClickListener {
 	private TextView tv_home_bottom_right;
 	private static boolean isExit = false;
 	private Handler handler;
+	private SharedPreferences sp;
+	private ImageView img_home_bootom_usericon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-
+		sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 		handler = new Handler(HomeActivity.this.getMainLooper()) {
 			@Override
 			public void handleMessage(Message msg) {
@@ -68,8 +71,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 					Bundle bundle = msg.getData();
 					tv_home_bottom_left.setCompoundDrawables(null, null, null, null);
 					tv_home_bottom_left.setTextColor(HomeActivity.this.getResources().getColor(R.color.textcolor_default));
-					tv_home_bottom_left.setText(bundle.getString("nickname"));
-					tv_home_bottom_right.setText(bundle.getString("userLevel"));
+					tv_home_bottom_left.setText(bundle.getString("nickname")+":");
+					tv_home_bottom_right.setText(bundle.getString("userPoint"));
 					tv_home_bottom_right.setTextColor(HomeActivity.this.getResources().getColor(R.color.appcolor));
 					findViewById(R.id.ll_home_bottom).setClickable(false);
 					break;
@@ -121,15 +124,22 @@ public class HomeActivity extends Activity implements OnClickListener {
 			drawable = getResources().getDrawable(R.drawable.ic_message_nonew);
 			drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 		}
-		tv_actionbar_right.setCompoundDrawables(drawable, null, null, null);
+		tv_actionbar_right.setCompoundDrawables(null, null, drawable, null);
 		initLogin();
+		
+		//是否登陆
+		String token = sp.getString("token", "");
+		if (token.equals("")) {
+			img_home_bootom_usericon.setVisibility(View.VISIBLE);
+		} else {
+			img_home_bootom_usericon.setVisibility(View.GONE);
+		}
+		
 		super.onStart();
 	}
 
 	private void initLogin() {
 		// 发送请求 验证登陆
-
-		SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 		String token = sp.getString("token", "");
 		if (token.equals("")) {
 			handler.sendEmptyMessage(2);
@@ -205,7 +215,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 						message.what = 1;
 						Bundle bundle = new Bundle();
 						bundle.putString("nickname", jsonObject1.getString("nickname"));
-						bundle.putString("userLevel", jsonObject1.getString("userRank"));
+						bundle.putString("userPoint", jsonObject1.getString("userPoint"));
 						message.setData(bundle);
 						handler.sendMessage(message);
 					} catch (JSONException e) {
@@ -227,6 +237,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 	}
 
 	private void initView() {
+		img_home_bootom_usericon = (ImageView) findViewById(R.id.img_home_bootom_usericon);
 		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		actionBar_home = (ActionBarView) findViewById(R.id.actionBar_home);
@@ -285,12 +296,13 @@ public class HomeActivity extends Activity implements OnClickListener {
 		case R.id.tv_actionbar_right:
 			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 			String token = sp.getString("token", "");
+			Intent intent2 = new Intent();
 			if (token.equals("")) {
-				Toast.makeText(HomeActivity.this, "尚未登录，请登录", Toast.LENGTH_SHORT).show();
+				intent2.setClass(HomeActivity.this, LoginActivity.class);
 			}else {
-				Intent intent2 = new Intent(HomeActivity.this, MessageActivity.class);
-				startActivity(intent2);
+				intent2.setClass(HomeActivity.this, MessageActivity.class);
 			}
+			startActivity(intent2);
 			break;
 		case R.id.ll_home_bottom:
 			Intent intent5 = new Intent(HomeActivity.this, LoginActivity.class);

@@ -101,7 +101,7 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 		btn_finish.setTv("已完成");
 		btn_waitpay.setTv("待支付");
 		btn_after.setTv("已过期");
-		btn_waitpay.setTv("全部");
+		btn_all.setTv("全部");
 		btn_waitpay.dispalyLine(false);
 		btn_after.dispalyLine(false);
 		btn_all.dispalyLine(false);

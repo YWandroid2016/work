@@ -8,43 +8,40 @@
 
     <com.example.happyfishing.image.ImageRequestView
         android:id="@+id/img_fishshop_itemshow"
-        android:layout_width="@dimen/x65"
-        android:layout_height="@dimen/x65"
+        android:layout_width="@dimen/x70"
+        android:layout_height="@dimen/x70"
+        android:layout_marginRight="@dimen/x10"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher" />
     
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_margin="@dimen/x5"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
     <TextView
         android:id="@+id/tv_fishshop_itemshow_title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="@dimen/x25"
         android:gravity="center_vertical"
-        android:text="我是渔具店名"
-        android:textSize="@dimen/tv_fishpit_itmeshow_title" />
+        android:textSize="@dimen/font_big"
+        android:text="我是渔具店名" />
 
     <TextView
         android:id="@+id/tv_fishshop_itemshow_detail"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:singleLine="true"
-        android:ems="10"
-        android:text="我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介" >
+        android:textSize="@dimen/font_small"
+        android:hint="我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介我是渔具店简介" >
     </TextView>
 
     </LinearLayout>
     
     <ImageView
         android:id="@+id/img_fishshop_itemshow_arrow"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x20"
         android:layout_height="match_parent"
         android:src="@drawable/ic_arrows_right"
         android:paddingRight="@dimen/x10" />

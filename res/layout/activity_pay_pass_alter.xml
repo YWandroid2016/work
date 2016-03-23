@@ -23,6 +23,7 @@
             android:layout_height="@dimen/x50"
             android:paddingLeft="@dimen/x10"
             android:hint="请输入手机号"
+            android:inputType="phone"
             android:background="#fff" />
         
         <View
@@ -38,6 +39,7 @@
             android:layout_height="@dimen/x50"
             android:paddingLeft="@dimen/x10"
             android:hint="当前支付密码"
+            android:inputType="numberPassword"
             android:background="#fff" />
         
         <View
@@ -53,6 +55,7 @@
             android:layout_height="@dimen/x50"
             android:paddingLeft="@dimen/x10"
             android:hint="新6位数字密码"
+            android:inputType="numberPassword"
             android:background="#fff" />
         
 	</LinearLayout>

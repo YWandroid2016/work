@@ -143,64 +143,75 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		Intent intent = new Intent();
+		String token = sp.getString("token", "");
 		switch (v.getId()) {
 		// 底部button的点击事件
 		case R.id.tv_homeactivity_heikeng:
-			Intent intent2 = new Intent(MyWalletActivity.this, FishpitActivity.class);
-			startActivity(intent2);
+			intent.setClass(MyWalletActivity.this, FishpitActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.tv_homeactivity_fishingshop:
-			Intent intent3 = new Intent(MyWalletActivity.this, FishingShopActivity.class);
-			startActivity(intent3);
+			intent.setClass(MyWalletActivity.this, FishingShopActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.tv_homeactivity_jump2home:
-			Intent intent4 = new Intent(MyWalletActivity.this, HomeActivity.class);
-			startActivity(intent4);
+			intent.setClass(MyWalletActivity.this, HomeActivity.class);
+			startActivity(intent);
 			MyWalletActivity.this.finish();
 			break;
 		// 钱包界面的点击事件
 		case R.id.tv_mywallet_bill:
-			Intent intent6 = new Intent(MyWalletActivity.this, MyBillActivity.class);
-			startActivity(intent6);
+			intent.setClass(MyWalletActivity.this, MyBillActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.tv_mywallet_userinfo:
-			Intent intent5 = new Intent(MyWalletActivity.this, UserInfoActivity.class);
-			startActivity(intent5);
+			if (token.equals("")) {
+				intent.setClass(MyWalletActivity.this, LoginActivity.class);
+			} else {
+				intent.setClass(MyWalletActivity.this, UserInfoActivity.class);
+			}
+			startActivity(intent);
 			break;
 		case R.id.tv_mywallet_mycollection:
-			Intent intent9 = new Intent(MyWalletActivity.this, MyCollectionActivity.class);
-			startActivity(intent9);
+			if (token.equals("")) {
+				intent.setClass(MyWalletActivity.this, LoginActivity.class);
+			} else {
+				intent.setClass(MyWalletActivity.this, MyCollectionActivity.class);
+			}
+			startActivity(intent);
 			break;
 		case R.id.tv_mywallet_myorder:
-			Intent intent8 = new Intent(MyWalletActivity.this, MyOrderActivity.class);
-			startActivity(intent8);
+			if (token.equals("")) {
+				intent.setClass(MyWalletActivity.this, LoginActivity.class);
+			} else {
+				intent.setClass(MyWalletActivity.this, MyOrderActivity.class);
+			}
+			startActivity(intent);
 			break;
 		case R.id.tv_mywallet_setting:
 			Intent intent7 = new Intent(MyWalletActivity.this, MyConfigActivity.class);
 			startActivity(intent7);
 			break;
 		case R.id.btn_bocomeVIP:
-			String token = sp.getString("token", null);
-			if (token != null) {
-				Intent intent1 = new Intent(MyWalletActivity.this, UpgradeVIPActivity.class);
-				startActivity(intent1);
+			if (token.equals("")) {
+				intent.setClass(MyWalletActivity.this, LoginActivity.class);
 			}else {
-				Intent intent10 = new Intent(MyWalletActivity.this, LoginActivity.class);
-				startActivity(intent10);
+				intent.setClass(MyWalletActivity.this, UpgradeVIPActivity.class);
 			}
+			startActivity(intent);
 			break;
 		case R.id.tv_actionbar_left:
 			MyWalletActivity.this.finish();
 			break;
 		case R.id.tv_actionbar_right:
-			SharedPreferences sp = getSharedPreferences("token", Context.MODE_PRIVATE);
-			String token2 = sp.getString("token", "");
-			if (token2.equals("")) {
-				Toast.makeText(MyWalletActivity.this, "尚未登录，请登录", Toast.LENGTH_SHORT).show();
+			
+			if (token.equals("")) {
+				intent.setClass(MyWalletActivity.this, LoginActivity.class);
 			}else {
-				Intent intent11 = new Intent(MyWalletActivity.this, MessageActivity.class);
-				startActivity(intent11);
+				intent.setClass(MyWalletActivity.this, MessageActivity.class);
 			}
+			startActivity(intent);
 			break;
 		default:
 			break;

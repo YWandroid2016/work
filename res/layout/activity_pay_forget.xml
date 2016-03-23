@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/x50"
             android:background="#fff"
+            android:inputType="phone"
             android:hint="请输入手机号"
             android:paddingLeft="@dimen/x10" />
 
@@ -44,6 +45,7 @@
                 android:layout_weight="1"
                 android:background="#fff"
                 android:hint="请输入验证码"
+                android:inputType="number"
                 android:paddingLeft="@dimen/x10" />
 
             <com.example.happyfishing.view.TimeButton
@@ -69,6 +71,7 @@
             android:layout_height="@dimen/x50"
             android:background="#fff"
             android:hint="请输入6位数字密码"
+            android:inputType="numberPassword"
             android:paddingLeft="@dimen/x10" />
     </LinearLayout>
 
@@ -82,6 +85,6 @@
         android:background="@drawable/circle_app"
         android:text="提交"
         android:textColor="#fff"
-        android:textSize="@dimen/big_font" />
+        android:textSize="@dimen/font_big" />
 
 </LinearLayout>

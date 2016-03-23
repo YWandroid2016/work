@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/x50"
             android:layout_marginLeft="@dimen/x15"
+            android:textSize="@dimen/font_default"
             android:gravity="center_vertical" />
 
         <View
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#fff"
+                android:textSize="@dimen/font_default"
                 android:hint="请输入验证码" />
 
             <com.example.happyfishing.view.TimeButton
@@ -55,6 +57,7 @@
                 android:layout_marginRight="@dimen/x15"
                 android:background="@drawable/tbtn_background"
                 android:text="获取验证码"
+                android:textSize="@dimen/font_small"
                 android:textColor="@color/appcolor" />
         </LinearLayout>
     </LinearLayout>
@@ -67,7 +70,7 @@
         android:layout_marginRight="@dimen/x15"
         android:layout_marginTop="@dimen/x20"
         android:text="下一步"
-        android:textSize="@dimen/big_font"
+        android:textSize="@dimen/font_big"
         android:background="@drawable/circle_app"
         android:textColor="#fff" />
 

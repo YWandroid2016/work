@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/actionbar_background" 
-    android:paddingLeft="@dimen/x16"
-    android:paddingRight="@dimen/x16">
+    android:paddingLeft="@dimen/x8"
+    android:paddingRight="@dimen/x8">
 
     <TextView
         android:id="@+id/tv_actionbar_left"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x40"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:drawableLeft="@drawable/btn_back"
         android:gravity="center"
-        android:text="左边"
+        android:textSize="@dimen/font_default"
         android:textColor="@color/white" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_centerVertical="true"
         android:text="我是标题"
         android:textColor="@color/white"
-        android:textSize="@dimen/fishpit_title" />
+        android:textSize="@dimen/font_big" />
 
     <TextView
         android:id="@+id/tv_actionbar_right"
@@ -35,7 +35,8 @@
         android:layout_alignParentRight="true"
         android:gravity="center"
         android:layout_centerVertical="true"
-        android:drawableLeft="@drawable/ic_yzm"
-        android:textColor="@color/actionbar_background" />
+        android:drawableRight="@drawable/ic_yzm"
+        android:textSize="@dimen/font_default"
+        android:textColor="@color/bai" />
 
 </RelativeLayout>

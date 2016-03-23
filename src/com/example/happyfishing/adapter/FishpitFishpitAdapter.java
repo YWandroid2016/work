@@ -80,7 +80,7 @@ public class FishpitFishpitAdapter extends BaseAdapter{
 			holder.img_fishpit_itemshow.setImageUrl(entity.headImageURL);
 		}
 		holder.tv_fishpit_itemshow_title.setText(entity.name);
-		holder.tv_fishpit_itemshow_detail.setText(entity.fishpitSumary);
+		holder.tv_fishpit_itemshow_detail.setHint(entity.fishpitSumary);
 		
 		return convertView;
 	}

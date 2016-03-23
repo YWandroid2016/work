@@ -24,7 +24,7 @@
             android:src="@drawable/btn_search"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x20" />
+            android:layout_marginRight="@dimen/x8" />
         
 	</RelativeLayout>
 

@@ -212,7 +212,7 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 						public void run() {
 							// tv_envirScore.setText("环境："+envirScore);
 							tv_address.setText(location);
-							tv_fishpitDetail.setText(fishpitDetail);
+							tv_fishpitDetail.setText("\t\t"+fishpitDetail);
 							if (collected.equals("1")) {
 								img_collected.setImageResource(R.drawable.ic_collection_collected);
 								FishpitDetailActivity.this.isCollected = true;
@@ -264,28 +264,20 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 		case R.id.tv_fishpitdetail_order:
 			SharedPreferences sp2 = getSharedPreferences("user", Context.MODE_PRIVATE);
 			String token2 = sp2.getString("token", "");
+			Intent intent1 = new Intent();
 			if (token2.equals("")) {
-				Toast.makeText(FishpitDetailActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+				intent1.setClass(FishpitDetailActivity.this, LoginActivity.class);
 			}else {
-				Intent intent1 = new Intent(FishpitDetailActivity.this, FishpitConfirmOrderActivity.class);
+				intent1.setClass(FishpitDetailActivity.this, FishpitConfirmOrderActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putString("id", idString);
 				bundle.putString("name", nameString);
 				bundle.putInt("fishPositionTotal", fishPositionTotal);
 				intent1.putExtras(bundle);
-				startActivity(intent1);
 			}
+			startActivity(intent1);
 			break;
 		case R.id.ll_fishpitlocation:
-//			Intent intent2 = new Intent(FishpitDetailActivity.this, LocationShowActivity.class);
-//			Bundle bundle2 = new Bundle();
-//			bundle2.putDouble("target_lat", latitude2);
-//			bundle2.putDouble("target_lon", longitude2);
-//			bundle2.putDouble("my_lat", locating.latitude);
-//			bundle2.putDouble("my_lon", locating.longitude);
-//			bundle2.putString("city", locating.cityName);
-//			intent2.putExtras(bundle2);
-//			startActivity(intent2);
 			View view = LayoutInflater.from(FishpitDetailActivity.this).inflate( R.layout.inflater_popwindow_map, null);
 			tv_gao = (TextView) view.findViewById(R.id.tv_gao);
 			tv_bai = (TextView) view.findViewById(R.id.tv_bai);
@@ -363,70 +355,10 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 			tv_bai.setOnClickListener(onclick);
 			tv_cancle.setOnClickListener(onclick);
 			
-			
-			
-			
-			
-//			liv_map.setOnItemClickListener(new OnItemClickListener() {
-//
-//				@Override
-//				public void onItemClick(AdapterView<?> arg0, View arg1,
-//						int arg2, long arg3) {
-//					if (arg2 == 0) {
-//						if (isInstalled("com.autonavi.minimap")) {
-//							try {
-//								PackageInfo packageInfo =  pm.getPackageInfo("com.autonavi.minimap", 0);
-//								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
-//							} catch (NameNotFoundException e1) {
-//								// TODO Auto-generated catch block
-//								e1.printStackTrace();
-//							}
-//							try  
-//					        {  
-//					            Intent intent = Intent.getIntent("androidamap://viewMap?sourceApplication=自渔自乐&poiname="+nameString+"&lat="+latitude2+""+"&lon="+longitude2+""+"&dev=0");  
-//					            startActivity(intent);   
-//					        } catch (URISyntaxException e)  
-//					        {  
-//					            e.printStackTrace();  
-//					        }  
-//						}else 
-//						{
-//							String url = "http://shouji.baidu.com/soft/item?docid=8992640&from=web_alad_6";
-//							Uri uri = Uri.parse(url);
-//							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
-//							startActivity(intent_down1);
-//						}
-//					}else if (arg2 == 1) {
-//						if (isInstalled("com.baidu.BaiduMap")) {
-//							try {
-//								PackageInfo packageInfo =  pm.getPackageInfo("com.baidu.BaiduMap", 0);
-//								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
-//							} catch (NameNotFoundException e1) {
-//								// TODO Auto-generated catch block
-//								e1.printStackTrace();
-//							}
-//							try {
-//								Intent intent = Intent.getIntent("intent://map/marker?location="+latitude2+""+","+longitude2+""+"&title="+nameString+"&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
-//								startActivity(intent);
-//							} catch (URISyntaxException e1) {
-//								e1.printStackTrace();
-//							}
-//						}else {
-//							String url = "http://wap.amap.com/?type=bdpz01";
-//							Uri uri = Uri.parse(url);
-//							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
-//							startActivity(intent_down1);
-//						}
-//					}
-//					
-//				}
-//			});
-//		
-//			
-			
 			break;
 		case R.id.tv_actionbar_left:
 			FishpitDetailActivity.this.finish();
+			break;
 		case R.id.img_actionbar_collection:
 			if (isCollected) {
 				SharedPreferences sp3 = getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -474,8 +406,9 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 				params.put("merchantId", idString);
 				
 				if (token.equals("")) {
-					Toast.makeText(FishpitDetailActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
-					
+					Intent in = new Intent();
+					in.setClass(FishpitDetailActivity.this, LoginActivity.class);
+					startActivity(in);
 				} else {
 					HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERCOLLECT + HttpAddress.METHOD_ADDCOLLET, params, new HttpCallbackListener() {
 						

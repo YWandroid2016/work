@@ -3,7 +3,7 @@
 
     <!-- 系统默认 -->
     <string name="app_name">HappyFishing</string>
-    <string name="action_settings">1</string>
+    <string name="action_settings"></string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_fishpit">FishpitActivity</string>
     <string name="title_activity_fishing_shop">FishingShopActivity</string>
@@ -24,7 +24,7 @@
     <string name="title_actionbar_register_success">注册成功</string>
     <string name="title_actionbar_login">登录</string>
     <string name="title_actionbar_zhaohui">找回密码</string>
-    <string name="title_actionbar_update_passward">找回密码</string>
+    <string name="title_actionbar_update_passward">修改密码</string>
     <string name="title_actionbar_zhaohui_success">找回成功</string>
     <string name="title_actionbar_fishpit_detail">钓位详情</string>
     <string name="title_actionbar_order_detail">订单详情</string>

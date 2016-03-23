@@ -35,13 +35,11 @@ import android.widget.Toast;
 public class PasswordAlterActivity extends Activity implements OnClickListener, OnTouchListener {
 
 	private ActionBarView actionBar_passwordalter;
-//	private TextView tv_passwordalter_old;
 	private EditText edt_passwordalter_old;
-//	private TextView tv_passwordalter_new;
 	private EditText edt_passwordalter_new;
-//	private TextView tv_passwordalter_newconfirm;
 	private EditText edt_passwordalter_newconfirm;
 	private InputMethodManager inputManager;
+	private SharedPreferences sp;
 
 	public static int ALTER_PASSWORDBYOLD = 6;
 
@@ -50,11 +48,9 @@ public class PasswordAlterActivity extends Activity implements OnClickListener, 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_password_alter);
 
+		sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 		Intent intent = getIntent();
 		boolean create = intent.getBooleanExtra("password_create", false);
-//		if (create) {
-//			findViewById(R.id.ll_passwordalter_3).setVisibility(View.GONE);
-//		}
 		findViewById(R.id.btn_passwordalter).setOnClickListener(this);
 
 		initView();
@@ -73,151 +69,15 @@ public class PasswordAlterActivity extends Activity implements OnClickListener, 
 		findViewById(R.id.ll_passwordalter_parent).setOnTouchListener(this);
 		initActionbar();
 
-//		tv_passwordalter_old = (TextView) findViewById(R.id.tv_passwordalter_old);
-/*		tv_passwordalter_old.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				tv_passwordalter_old.setVisibility(View.INVISIBLE);
-				edt_passwordalter_old.setVisibility(View.VISIBLE);
-				edt_passwordalter_old.requestFocus();
-				inputManager = (InputMethodManager) edt_passwordalter_old.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-				inputManager.showSoftInput(edt_passwordalter_old, 0);
-
-				tv_passwordalter_new.setVisibility(View.VISIBLE);
-				tv_passwordalter_newconfirm.setVisibility(View.VISIBLE);
-				edt_passwordalter_new.setVisibility(View.INVISIBLE);
-				edt_passwordalter_newconfirm.setVisibility(View.INVISIBLE);
-				
-				edt_passwordalter_old.setOnEditorActionListener(new OnEditorActionListener() {
-
-					@Override
-					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-						if (actionId == EditorInfo.IME_ACTION_DONE) {
-							// 点击按钮隐藏键盘
-							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-							edt_passwordalter_old.setVisibility(View.INVISIBLE);
-							tv_passwordalter_old.setVisibility(View.VISIBLE);
-							return true;
-						}
-						return false;
-					}
-				});
-			}
-		});*/
-
 		edt_passwordalter_old = (EditText) findViewById(R.id.edt_passwordalter_old);
 		
-//		tv_passwordalter_new = (TextView) findViewById(R.id.tv_passwordalter_new);
-//		tv_passwordalter_new.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_passwordalter_new.setVisibility(View.INVISIBLE);
-//				edt_passwordalter_new.setVisibility(View.VISIBLE);
-//				edt_passwordalter_new.requestFocus();
-//				inputManager = (InputMethodManager) edt_passwordalter_new.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//				inputManager.showSoftInput(edt_passwordalter_new, 0);
-//
-//				edt_passwordalter_old.setVisibility(View.INVISIBLE);
-//				edt_passwordalter_newconfirm.setVisibility(View.INVISIBLE);
-//				tv_passwordalter_newconfirm.setVisibility(View.VISIBLE);
-//				tv_passwordalter_old.setVisibility(View.VISIBLE);
-//				
-//				edt_passwordalter_new.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							// 点击按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_passwordalter_new.setVisibility(View.INVISIBLE);
-//							tv_passwordalter_new.setVisibility(View.VISIBLE);
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
 		edt_passwordalter_new = (EditText) findViewById(R.id.edt_passwordalter_new);
-//		edt_passwordalter_new.addTextChangedListener(new TextWatcher() {
-//
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//			}
-//
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//			}
-//
-//			@Override
-//			public void afterTextChanged(Editable s) {
-//				tv_passwordalter_new.setText(edt_passwordalter_new.getText().toString());
-//			}
-//		});
 
-//		tv_passwordalter_newconfirm = (TextView) findViewById(R.id.tv_passwordalter_newconfirm);
-//		tv_passwordalter_newconfirm.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_passwordalter_newconfirm.setVisibility(View.INVISIBLE);
-//				edt_passwordalter_newconfirm.setVisibility(View.VISIBLE);
-//				edt_passwordalter_newconfirm.requestFocus();
-//				inputManager = (InputMethodManager) edt_passwordalter_newconfirm.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//				inputManager.showSoftInput(edt_passwordalter_newconfirm, 0);
-//				edt_passwordalter_new.setVisibility(View.INVISIBLE);
-//				edt_passwordalter_old.setVisibility(View.INVISIBLE);
-//				tv_passwordalter_old.setVisibility(View.VISIBLE);
-//				tv_passwordalter_new.setVisibility(View.VISIBLE);
-//				edt_passwordalter_newconfirm.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							// 点击按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_passwordalter_newconfirm.setVisibility(View.INVISIBLE);
-//							tv_passwordalter_newconfirm.setVisibility(View.VISIBLE);
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
 		edt_passwordalter_newconfirm = (EditText) findViewById(R.id.edt_passwordalter_newconfirm);
-//		edt_passwordalter_newconfirm.addTextChangedListener(new TextWatcher() {
-//
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//			}
-//
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//			}
-//
-//			@Override
-//			public void afterTextChanged(Editable s) {
-//				tv_passwordalter_newconfirm.setText(edt_passwordalter_newconfirm.getText().toString());
-//			}
-//		});
-//
 	}
 
 	private void loadData() {
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.password_alter, menu);
-		return true;
 	}
 
 	@Override
@@ -228,17 +88,35 @@ public class PasswordAlterActivity extends Activity implements OnClickListener, 
 			break;
 		case R.id.btn_passwordalter:
 			
+			String phoneNumber = sp.getString("phoneNumber", "");
+			
+			if (null == phoneNumber || "".equals(phoneNumber)) {
+				Toast.makeText(PasswordAlterActivity.this, "手机号为空", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			String password_old = edt_passwordalter_old.getText().toString();
+			
+			if (null == password_old || "".equals(password_old)) {
+				Toast.makeText(PasswordAlterActivity.this, "请输入当前密码", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
 			String newPassword1 = edt_passwordalter_new.getText().toString();
+			
+			if (null == newPassword1 || "".equals(newPassword1)) {
+				Toast.makeText(PasswordAlterActivity.this, "请输入新密码", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
 			String newPassword2 = edt_passwordalter_newconfirm.getText().toString();
 			
 			if (!newPassword1.equals(newPassword2)) {
 				Toast.makeText(PasswordAlterActivity.this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
-				break;
+				return;
 			}else {
 				String oldPassword = edt_passwordalter_old.getText().toString();
 				HashMap<String, String> params = new HashMap<String, String>();
-				SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-				String phoneNumber = sp.getString("phoneNumber", "");
 				params.put("phoneNumber", phoneNumber);
 				params.put("oldPassword", oldPassword);
 				params.put("newPassword", newPassword1);

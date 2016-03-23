@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -48,17 +49,12 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 
 	private ActionBarView actionBar_login;
 	public static int LOGIN_FORGET = 2;
-	private TextView tv_login_phone;
 	private EditText edt_login_phone;
-	private TextView tv_login_password;
 	private EditText edt_login_password;
 	private InputMethodManager inputManager;
 	private CheckBox cb_rember;
 	private Handler mHandler;
-	private SharedPreferences sharedPreferences;
 
-	//111
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,8 +63,6 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 		initHandler();
 
 		initView();
-
-		loadData();
 	}
 
 	private void initHandler() {
@@ -105,171 +99,35 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 	}
 
 	private void initView() {
-//		findViewById(R.id.btn_login_login).setBackgroundColor(getResources().getColor(R.color.button_background));
 		findViewById(R.id.btn_login_login).setOnClickListener(this);
 		findViewById(R.id.ll_loginparent).setOnTouchListener(this);
 		actionBar_login = (ActionBarView) findViewById(R.id.actionBar_login);
-//		actionBar_login.setActionBar(R.string.back, R.string.title_actionbar_register, R.string.title_actionbar_login, this);
 		actionBar_login.setActionBar(R.string.back, R.string.title_actionbar_register, R.string.title_actionbar_login, 1, this);
-		actionBar_login.setBackgroundColor(Color.parseColor("#ff8d07"));
 		findViewById(R.id.tv_login_forget).setOnClickListener(this);
 
-//		tv_login_phone = (TextView) findViewById(R.id.tv_login_phone);
-//
-//		// 对电话号码输入框进行监听
-//		tv_login_phone.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_login_phone.setVisibility(View.INVISIBLE);
-//				edt_login_phone.setVisibility(View.VISIBLE);
-//				edt_login_phone.requestFocus();
-//				inputManager = (InputMethodManager) edt_login_phone.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//				// 点击号码框时，默认验证码输入操作已完成
-//				edt_login_password.setVisibility(View.INVISIBLE);
-//				tv_login_password.setVisibility(View.VISIBLE);
-//
-//				inputManager.showSoftInput(edt_login_phone, 0);
-//				edt_login_phone.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							// 点击按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_login_phone.setVisibility(View.INVISIBLE);
-//							tv_login_phone.setVisibility(View.VISIBLE);
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//
-//			}
-//		});
 		edt_login_phone = (EditText) findViewById(R.id.edt_login_phone);
 		edt_login_phone.setInputType(InputType.TYPE_CLASS_PHONE);
 		
-		edt_login_phone.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				inputManager = (InputMethodManager) edt_login_phone.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-				inputManager.showSoftInput(edt_login_phone, 0);
-				edt_login_phone.setOnEditorActionListener(new OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-						if (actionId == EditorInfo.IME_ACTION_DONE) {
-							// 点击按钮隐藏键盘
-							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-							edt_login_phone.setVisibility(View.INVISIBLE);
-							tv_login_phone.setVisibility(View.VISIBLE);
-							return true;
-						}
-						return false;
-					}
-				});
-			}
-		});
-//		
-//		edt_login_phone.addTextChangedListener(new TextWatcher() {
-//
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//			}
-//
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//			}
-//
-//			@Override
-//			public void afterTextChanged(Editable s) {
-//				tv_login_phone.setText(edt_login_phone.getText().toString());
-//			}
-//		});
 
-		// 对验证码输入框进行监听
-//		tv_login_password = (TextView) findViewById(R.id.tv_login_verification);
-//		tv_login_password.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_login_password.setVisibility(View.INVISIBLE);
-//				edt_login_password.setVisibility(View.VISIBLE);
-//				edt_login_password.requestFocus();
-//				inputManager = (InputMethodManager) edt_login_password.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//				inputManager.showSoftInput(edt_login_password, 0);
-//				// 点击验证码输入框时 认定好吗框输入操作已完成
-//				edt_login_phone.setVisibility(View.INVISIBLE);
-//				tv_login_phone.setVisibility(View.VISIBLE);
-//
-//				edt_login_password.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							// 点击按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_login_password.setVisibility(View.INVISIBLE);
-//							tv_login_password.setVisibility(View.VISIBLE);
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
 		edt_login_password = (EditText) findViewById(R.id.edt_login_verification);
-		edt_login_password.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				inputManager = (InputMethodManager) edt_login_password.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-				inputManager.showSoftInput(edt_login_password, 0);
-				// 点击验证码输入框时 认定好吗框输入操作已完成
-				edt_login_password.setOnEditorActionListener(new OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-						if (actionId == EditorInfo.IME_ACTION_DONE) {
-							// 点击按钮隐藏键盘
-							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-							edt_login_password.setVisibility(View.INVISIBLE);
-							tv_login_password.setVisibility(View.VISIBLE);
-							return true;
-						}
-						return false;
-					}
-				});
-			}
-		});
 
 		cb_rember = (CheckBox) findViewById(R.id.cb_login_rember);
 		cb_rember.setChecked(true);
 		//暂时默认记住密码登录
 		cb_rember.setEnabled(false);
-		cb_rember.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
+		
+		edt_login_password.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				edt_login_phone.setVisibility(View.INVISIBLE);
-				tv_login_phone.setVisibility(View.VISIBLE);
-				edt_login_password.setVisibility(View.INVISIBLE);
-				tv_login_password.setVisibility(View.VISIBLE);
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(!hasFocus){
+					int length = edt_login_password.getText().toString().length();
+					if(length < 6){
+						Toast.makeText(LoginActivity.this, "密码的长度为6~18位", Toast.LENGTH_SHORT).show();
+					}
+				}
 			}
 		});
-	}
-
-	private void loadData() {
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
 	}
 
 	@Override
@@ -320,8 +178,7 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 						e.printStackTrace();
 					}
 					if (code == 2000) {
-						Intent intent3 = new Intent(LoginActivity.this, HomeActivity.class);
-						startActivity(intent3);
+						LoginActivity.this.finish();
 					}else {
 						try {
 							statisString = jsonObject1.getString("text");
@@ -350,10 +207,6 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 		v.setFocusable(true);
 		v.setFocusableInTouchMode(true);
 		v.requestFocus();
-//		edt_login_phone.setVisibility(View.INVISIBLE);
-//		tv_login_phone.setVisibility(View.VISIBLE);
-//		edt_login_password.setVisibility(View.INVISIBLE);
-//		tv_login_password.setVisibility(View.VISIBLE);
 		return false;
 	}
 

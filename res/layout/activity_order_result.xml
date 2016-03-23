@@ -30,12 +30,14 @@
             android:text="支付成功 获得300积分"
             android:textColor="@color/appcolor"
             android:layout_marginBottom="@dimen/x10"
+            android:textSize="@dimen/font_default"
             android:gravity="center"/>
 
         <TextView 
             android:id="@+id/tv_orderresult_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/font_middle"
             android:hint="可在“我的订单”中查看"
             />
     </LinearLayout>

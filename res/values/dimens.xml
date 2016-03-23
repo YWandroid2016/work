@@ -89,4 +89,11 @@
 	<dimen name="small_font">14sp</dimen>
 	
 	
+	<dimen name="font_big_more">30sp</dimen>
+	<dimen name="font_big">24sp</dimen>
+	<dimen name="font_default">20sp</dimen>
+	<dimen name="font_middle">18sp</dimen>
+	<dimen name="font_small">16sp</dimen>
+	
+	
 </resources>

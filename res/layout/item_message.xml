@@ -24,7 +24,7 @@
             android:id="@+id/name_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/default_font"
+            android:textSize="@dimen/font_default"
             android:text="积分变更" />
 
         <TextView
@@ -33,6 +33,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="bottom"
+            android:textSize="@dimen/font_middle"
             android:hint="150积分已入账" />
 
 	</LinearLayout>
@@ -41,6 +42,7 @@
             android:id="@+id/date_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/font_small"
             android:hint="2016.3.22" />
 
 </LinearLayout>

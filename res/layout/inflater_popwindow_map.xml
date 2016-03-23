@@ -18,14 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/x12"
+            android:padding="@dimen/x13"
             android:text="使用高德地图导航"
             android:textColor="@color/appcolor"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/font_big" />
 
         <View
             android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
             android:layout_height="@dimen/x1"
             android:background="@color/gray_bg" />
 
@@ -34,11 +35,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/x12"
+            android:padding="@dimen/x13"
             android:text="使用百度地图导航"
             android:textColor="@color/appcolor"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/font_big" />
     </LinearLayout>
 
     <TextView
@@ -48,8 +48,8 @@
         android:layout_marginTop="@dimen/x10"
         android:background="@drawable/circle_white"
         android:gravity="center"
-        android:padding="@dimen/x12"
+        android:padding="@dimen/x13"
         android:text="取消"
-        android:textSize="18sp" />
+        android:textSize="@dimen/font_big" />
 
 </LinearLayout>

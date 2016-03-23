@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#fff"
+            android:textSize="@dimen/font_default"
             android:hint="旧昵称" />
 
         <ImageView
@@ -42,6 +43,7 @@
         android:layout_marginLeft="@dimen/x15"
         android:layout_marginTop="@dimen/x10"
         android:text="4-20个字符，可由中英文、数字组成"
+        android:textSize="@dimen/font_small"
         android:textColor="@color/textcolor_default" />
 
 </LinearLayout>

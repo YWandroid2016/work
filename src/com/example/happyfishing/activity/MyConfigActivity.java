@@ -73,7 +73,12 @@ public class MyConfigActivity extends Activity implements OnClickListener {
 			MyConfigActivity.this.finish();
 			break;
 		case R.id.ll_myconfig_loginpassword:
-			intent.setClass(MyConfigActivity.this, PasswordAlterActivity.class);
+			String token = sp.getString("token", "");
+			if (token.equals("")) {
+				intent.setClass(MyConfigActivity.this, LoginActivity.class);
+			} else {
+				intent.setClass(MyConfigActivity.this, PasswordAlterActivity.class);
+			}
 			startActivity(intent);
 			break;
 			

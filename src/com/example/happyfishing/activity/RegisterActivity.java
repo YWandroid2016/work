@@ -53,15 +53,11 @@ import android.widget.TextView.OnEditorActionListener;
 public class RegisterActivity extends Activity implements OnClickListener, OnTouchListener {
 
 	private InputMethodManager inputManager;
-	private TextView tv_register_phone;
 	private EditText edt_register_phone;
 	private ActionBarView actionBar_register;
-	private TextView tv_register_verification;
 	private EditText edt_register_verification;
 	private TextView tv_register_password;
 	private EditText edt_register_password;
-	private TextView tv_register_confirm;
-	private EditText edt_register_confirm;
 	public static int TYPE_REGISTER = 1;
 	private CheckBox cb_register;
 	private Button btn_register_registe;
@@ -97,53 +93,16 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 	}
 	
 
+	//TODO 初始化布局
 	private void initView() {
 		findViewById(R.id.ll_registerparent).setOnTouchListener(this);
 
 		actionBar_register = (ActionBarView) findViewById(R.id.actionBar_register);
 		actionBar_register.setActionBar(R.string.back, -1, R.string.title_actionbar_register, this);
-//		findViewById(R.id.rl_actionbar).setBackgroundColor(getResources().getColor(R.color.actionbar_background));
 		actionBar_register.setBackgroundColor(getResources().getColor(R.color.actionbar_background));
 		btn_register_registe = (Button)findViewById(R.id.btn_register_regist);
 		btn_register_registe.setOnClickListener(this);
-//		btn_register_registe.setBackgroundColor(getResources().getColor(R.color.actionbar_background));
 		findViewById(R.id.btn_register_verification).setOnClickListener(this);
-		// 电话号码
-//		tv_register_phone = (TextView) findViewById(R.id.tv_register_phone);
-//		tv_register_phone.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				tv_register_phone.setVisibility(View.INVISIBLE);
-//				edt_register_phone.setVisibility(View.VISIBLE);
-//				edt_register_phone.requestFocus();
-//				inputManager = (InputMethodManager) edt_register_phone.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//				inputManager.showSoftInput(edt_register_phone, 0);
-//				edt_register_verification.setVisibility(View.INVISIBLE);
-//				tv_register_verification.setVisibility(View.VISIBLE);
-//				edt_register_password.setVisibility(View.INVISIBLE);
-//				tv_register_password.setVisibility(View.VISIBLE);
-//				edt_register_confirm.setVisibility(View.INVISIBLE);
-//				tv_register_confirm.setVisibility(View.VISIBLE);
-//				edt_register_phone.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_NEXT) {
-//							// 点击搜索按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							// edt_register_phone.setVisibility(View.INVISIBLE);
-//							// tv_register_phone.setVisibility(View.VISIBLE);
-//							edt_register_phone.setVisibility(View.INVISIBLE);
-//							tv_register_phone.setVisibility(View.VISIBLE);
-//
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
 		edt_register_phone = (EditText) findViewById(R.id.edt_register_phone);
 		edt_register_phone.setOnClickListener(new OnClickListener() {
 			
@@ -166,42 +125,6 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 				});
 			}
 		});
-//		// 验证码
-//		tv_register_verification = (TextView) findViewById(R.id.tv_register_verification);
-//		tv_register_verification.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_register_verification.setVisibility(View.INVISIBLE);
-//				edt_register_verification.setVisibility(View.VISIBLE);
-//				edt_register_verification.requestFocus();
-//				inputManager = (InputMethodManager) edt_register_verification.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//				inputManager.showSoftInput(edt_register_verification, 0);
-//				edt_register_phone.setVisibility(View.INVISIBLE);
-//				tv_register_phone.setVisibility(View.VISIBLE);
-//				// edt_register_verification.setVisibility(View.INVISIBLE);
-//				// tv_register_verification.setVisibility(View.VISIBLE);
-//				edt_register_password.setVisibility(View.INVISIBLE);
-//				tv_register_password.setVisibility(View.VISIBLE);
-//				edt_register_confirm.setVisibility(View.INVISIBLE);
-//				tv_register_confirm.setVisibility(View.VISIBLE);
-//				edt_register_verification.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_NEXT) {
-//							// 点击搜索按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_register_verification.setVisibility(View.INVISIBLE);
-//							tv_register_verification.setVisibility(View.VISIBLE);
-//
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
 		edt_register_verification = (EditText) findViewById(R.id.edt_register_verification);
 		edt_register_verification.setOnClickListener(new OnClickListener() {
 			
@@ -224,42 +147,6 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 				});
 			}
 		});
-//		// 第一次输入密码
-//		tv_register_password = (TextView) findViewById(R.id.tv_register_password);
-//		tv_register_password.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				tv_register_password.setVisibility(View.INVISIBLE);
-//				edt_register_password.setVisibility(View.VISIBLE);
-//				edt_register_password.requestFocus();
-//				inputManager = (InputMethodManager) edt_register_password.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//				inputManager.showSoftInput(edt_register_password, 0);
-//				edt_register_phone.setVisibility(View.INVISIBLE);
-//				tv_register_phone.setVisibility(View.VISIBLE);
-//				edt_register_verification.setVisibility(View.INVISIBLE);
-//				tv_register_verification.setVisibility(View.VISIBLE);
-//				// edt_register_password.setVisibility(View.INVISIBLE);
-//				// tv_register_password.setVisibility(View.VISIBLE);
-//				edt_register_confirm.setVisibility(View.INVISIBLE);
-//				tv_register_confirm.setVisibility(View.VISIBLE);
-//				edt_register_password.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_NEXT) {
-//							// 点击搜索按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_register_password.setVisibility(View.INVISIBLE);
-//							tv_register_password.setVisibility(View.VISIBLE);
-//
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
-//		
 		
 		
 		edt_register_password = (EditText) findViewById(R.id.edt_register_password);
@@ -302,59 +189,6 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 				}
 			}
 		});
-//		// 再次输入验证密码
-//		tv_register_confirm = (TextView) findViewById(R.id.tv_register_confirm);
-//		tv_register_confirm.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_register_confirm.setVisibility(View.INVISIBLE);
-//				edt_register_confirm.setVisibility(View.VISIBLE);
-//				edt_register_confirm.requestFocus();
-//				inputManager = (InputMethodManager) edt_register_confirm.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//				inputManager.showSoftInput(edt_register_confirm, 0);
-//				edt_register_phone.setVisibility(View.INVISIBLE);
-//				tv_register_phone.setVisibility(View.VISIBLE);
-//				edt_register_verification.setVisibility(View.INVISIBLE);
-//				tv_register_verification.setVisibility(View.VISIBLE);
-//				edt_register_password.setVisibility(View.INVISIBLE);
-//				tv_register_password.setVisibility(View.VISIBLE);
-//				// edt_register_confirm.setVisibility(View.INVISIBLE);
-//				// tv_register_confirm.setVisibility(View.VISIBLE);
-//
-//				edt_register_confirm.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_DONE) {
-//							// 点击搜索按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							edt_register_confirm.setVisibility(View.INVISIBLE);
-//							tv_register_confirm.setVisibility(View.VISIBLE);
-//
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
-//		edt_register_confirm = (EditText) findViewById(R.id.edt_register_confirm);
-//		edt_register_confirm.addTextChangedListener(new TextWatcher() {
-//
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//			}
-//
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//			}
-//
-//			@Override
-//			public void afterTextChanged(Editable s) {
-//				tv_register_confirm.setText(edt_register_confirm.getText().toString());
-//			}
-//		});
 		
 		cb_register = (CheckBox) findViewById(R.id.cb_register);
 		cb_register.setChecked(true);
@@ -364,29 +198,12 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.register, menu);
-		return true;
-	}
-	
-	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == event.KEYCODE_BACK){
 			if(popupWindow.isShowing()){
 				popupWindow.dismiss();
 			}
 		}
-//		if (edt_register_password.isFocusable()) {
-//			edt_register_phone.setVisibility(View.INVISIBLE);
-//			tv_register_phone.setVisibility(View.VISIBLE);
-//			edt_register_verification.setVisibility(View.INVISIBLE);
-//			tv_register_verification.setVisibility(View.VISIBLE);
-//			edt_register_password.setVisibility(View.INVISIBLE);
-//			tv_register_password.setVisibility(View.VISIBLE);
-//			edt_register_confirm.setVisibility(View.INVISIBLE);
-//			tv_register_confirm.setVisibility(View.VISIBLE);
-//		}
 		return super.onKeyDown(keyCode, event);
 	}
 
@@ -401,7 +218,7 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 				}
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("phoneNumber", edt_register_phone.getText().toString());
-				params.put("nickname", "user_"+edt_register_phone.getText().toString());
+				params.put("nickname", edt_register_phone.getText().toString());
 				params.put("validateCode", edt_register_verification.getText().toString());
 				params.put("password", edt_register_password.getText().toString());
 				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+HttpAddress.CLASS_APPUSER+HttpAddress.METHOD_REGISTER, params, new HttpCallbackListener() {

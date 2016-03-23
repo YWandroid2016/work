@@ -166,149 +166,16 @@ public class FishpitActivity extends Activity implements OnClickListener,OnTouch
 		tv_homeactivity_mywallet = (TextView) findViewById(R.id.tv_homeactivity_mywallet);
 		tv_homeactivity_mywallet.setOnClickListener(this);
 		tv_homeactivity_mywallet.setCompoundDrawables(null, drawable4, null, null);
-		// sp_distence=(Spinner) findViewById(R.id.sp_fishpit_distance);
-		// sp_distence.setPrompt("距离");
-		// sp_renqi=(Spinner) findViewById(R.id.sp_fishpit_renqi);
 		
 		actionBarView_fishpit=(ActionBarView) findViewById(R.id.actionbar_fishpit);
 		actionBarView_fishpit.setActionBar(-1, -1, R.string.fishipit, this);
 		
-//		atv_fishpit_search = (AutoCompleteTextView) findViewById(R.id.atv_fishpit_search);
-//		atv_fishpit_search.setFocusable(false);
-//		atv_fishpit_search.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-////				atv_fishpit_search.setBackgroundDrawable(getResources().getDrawable(R.drawable.tbtn_background));
-//				atv_fishpit_search.setBackgroundResource(R.drawable.tbtn_background);
-//				liv_fishpit.setAlpha((float) 0.1);
-////				atv_fishpit_search.setFocusable(true);
-////				atv_fishpit_search.requestFocus();
-//				inputManager = (InputMethodManager) atv_fishpit_search.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//				inputManager.showSoftInput(atv_fishpit_search, 0);
-//				atv_fishpit_search.setOnEditorActionListener(new OnEditorActionListener() {
-//					
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//						// TODO Auto-generated method stub
-//						if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//							// 点击按钮隐藏键盘
-//							inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//							liv_fishpit.setAlpha(1);
-//							return true;
-//						}
-//						return false;
-//					}
-//				});
-//			}
-//		});
-//		atv_fishpit_search.setOnItemClickListener(new OnItemClickListener() {
-
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				
-////				192.168.1.135:8092/appConsole/merchant/fishpitList?
-//				liv_fishpit.setAlpha(1);
-//				HashMap<String, String> params = new HashMap<String, String>();
-//				params.put("fishpit", adapter.getItem(position));
-//				Log.d("paras", adapter.getItem(position));
-//				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-//						HttpAddress.CLASS_MERCHANT+HttpAddress.METHOD_FISHPITLIST, 
-//						params, new HttpCallbackListener() {
-//							
-//							@Override
-//							public void onFinish(Object response) {
-//								Log.d("select_result", response.toString());
-//								JSONObject jsonObject = (JSONObject) response;
-//								ArrayList<FishpitSumaryEntity> arrayList = new ArrayList<FishpitSumaryEntity>();
-//								try {
-//									int total ;
-//									String totalString= jsonObject.getString("total");
-//									total = Integer.parseInt(totalString);
-//									JSONArray jsonArray = jsonObject.getJSONArray("data");
-//									for (int i = 0; i < jsonArray.length(); i++) {
-//										JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-//										Log.d("aaa", jsonObject2.toString());
-//										String name = (String) jsonObject2.get("name");
-//										String headImageURL = (String) jsonObject2.get("headImage");
-//										String detail = (String) jsonObject2.get("introduction");
-//										int id =  jsonObject2.getInt("id");
-//										arrayList.add(new FishpitSumaryEntity(name,  headImageURL, detail,id+""));
-//									}
-//									Message message = new Message();
-//									message.what=2;
-//									message.obj = arrayList;
-//									mainHandler.sendMessage(message);
-////									fishpitAdapter.addToAdapter(arrayList, true);
-//									Log.d("total", total+" "+jsonArray);
-//									
-//								} catch (JSONException e) {
-//									mainHandler.sendEmptyMessage(5);
-//									e.printStackTrace();
-//								}
-//								
-//							}
-//							
-//							@Override
-//							public void onError(Exception e) {
-//								mainHandler.sendEmptyMessage(5);
-//							}
-//						});
-//				liv_fishpit.setVisibility(View.VISIBLE);
-//			}
-//		});
-		
-		
-		
-//		edt_fishpit = (EditText) findViewById(R.id.edt_fishpit);
-//		edt_fishpit.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//			@Override
-//			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//					Toast.makeText(FishpitActivity.this, "执行搜索功能", Toast.LENGTH_SHORT).show();
-//					liv_fishpit.setVisibility(View.VISIBLE);
-////					点击搜索按钮隐藏键盘
-//					inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//					edt_fishpit.setVisibility(View.INVISIBLE);
-//					tv_edt_fishpit.setVisibility(View.VISIBLE);
-//					return true;
-//				}
-//				return false;
-//			}
-//		});
-//
-//		tv_edt_fishpit = (TextView) findViewById(R.id.tv_edt_fishpit);
-//		tv_edt_fishpit.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_edt_fishpit.setVisibility(View.INVISIBLE);
-//				edt_fishpit.setVisibility(View.VISIBLE);
-//				edt_fishpit.requestFocus();
-//				inputManager = (InputMethodManager) edt_fishpit.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//				inputManager.showSoftInput(edt_fishpit, 0);
-//
-//				liv_fishpit.setVisibility(View.INVISIBLE);
-//			}
-//		});
-
-		// adapter_distance = new ArrayAdapter<String>(FishpitActivity.this,
-		// R.layout.fishpit_spinner_distance, distance);
-		//
-		// adapter_renqi = new ArrayAdapter<String>(FishpitActivity.this,
-		// R.layout.fishpit_spinner_distance, renqi);
-
 		fishpitAdapter = new FishpitFishpitAdapter(FishpitActivity.this);
 
 		liv_fishpit = (ListView) findViewById(R.id.liv_heikeng);
 	}
 
 	private void initData() {
-		// sp_distence.setAdapter(adapter_distance);
-		// sp_renqi.setAdapter(adapter_renqi);
-
 		fishpitEntities = new ArrayList<FishpitSumaryEntity>();
 	}
 
@@ -336,11 +203,6 @@ public class FishpitActivity extends Activity implements OnClickListener,OnTouch
 								jsonObject.get("headImage").toString(), 
 								jsonObject.get("introduction").toString(), 
 								jsonObject.get("id").toString()));
-						
-//						add(new FishpitSumary(jsonObject.get("name").toString(), 
-//								jsonObject.get("headImage").toString(), 
-//								jsonObject.get("introduction").toString(),),
-//								jsonObject.get("id").toString());
 					}
 					
 					Message message = new Message();

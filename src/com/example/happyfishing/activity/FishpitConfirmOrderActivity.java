@@ -289,6 +289,13 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 		return true;
 	}
 
+	private String totalFee;
+	private int userPoint;
+	String tokenString = null;
+	String orderIdString = null;
+	String merchantIdString = null;
+	String reserveTime = null;
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -311,19 +318,9 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 
 				@Override
 				public void onFinish(Object response) {
+					Log.d("my", response.toString());
 					JSONObject jsonObject = (JSONObject) response;
-					try {
-						JSONObject jsonObject2 = jsonObject.getJSONObject("order");
-						long userPoint = jsonObject.getLong("userPoint");
-						Log.d("point", userPoint+"  ");
-						String orderName = jsonObject2.getString("name");
-						SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-//						String phoneNumber = orderName.substring(5, 16);
-						FishpitConfirmOrderActivity.this.phoneNumber = sp.getString("phoneNumber", "");
-					} catch (JSONException e1) {
-						mainHandler.sendEmptyMessage(5);
-						e1.printStackTrace();
-					}
+					
 					int code = 0;
 					String statusText = null;
 					try {
@@ -335,29 +332,29 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 					}
 					switch (code) {
 					case 2000:
-						String tokenString = null;
-						String orderIdString = null;
-						String merchantIdString = null;
-						long userPoint = 0;
+						String dateCreate = null;
 						try {
-							JSONObject jsonObject3 = jsonObject.getJSONObject("order");
-							tokenString = jsonObject3.getString("token");
-							orderIdString = jsonObject3.getString("orderId");
-							merchantIdString = jsonObject3.getString("merchantId");
-							userPoint = jsonObject.getLong("userPoint");
-							SharedPreferences sp2 = getSharedPreferences("user", Context.MODE_PRIVATE);
-							Editor editor = sp2.edit();
-							editor.putString("userPoint", userPoint+"");
-							editor.commit();
+							JSONObject jsonObject2 = jsonObject.getJSONObject("order");
+							userPoint = jsonObject.getInt("userPoint");
+							totalFee = jsonObject2.getString("totalFee");
+							SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+							phoneNumber = sp.getString("phoneNumber", "");
+							tokenString = jsonObject2.getString("token");
+							orderIdString = jsonObject2.getString("orderId");
+							merchantIdString = jsonObject2.getString("merchantId");
+							reserveTime = jsonObject2.getString("reserveTime");
 							
-						} catch (JSONException e) {
+							
+							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+							long currentTime = System.currentTimeMillis();
+							Date date = new Date(currentTime);
+							dateCreate = dateFormat.format(date);
+							
+						} catch (JSONException e1) {
 							mainHandler.sendEmptyMessage(5);
-							e.printStackTrace();
-						} 
-						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-						long currentTime = System.currentTimeMillis();
-						Date date = new Date(currentTime);
-						String dateCreate = dateFormat.format(date);
+							e1.printStackTrace();
+						}
+						
 						Intent intent1 = new Intent(FishpitConfirmOrderActivity.this, OrderInformationActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putString("dateCreate", dateCreate);
@@ -368,6 +365,7 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 						bundle.putInt("location", currentOrder);
 						bundle.putString("name", nameString);
 						bundle.putString("phone", phoneNumber);
+						bundle.putString("totalFee", totalFee);
 						bundle.putLong("userPoint", userPoint);
 						intent1.putExtras(bundle);
 						startActivity(intent1);

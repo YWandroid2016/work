@@ -203,7 +203,7 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 								public void run() {
 //									tv_environScore_fishshop.setText("环境："+envirScore);
 									tv_address_fishshop.setText(location);
-									tv_detail_fishshop.setText(fishpitDetail);
+									tv_detail_fishshop.setText("\t\t"+fishpitDetail);
 									if (collected.equals("1")) {
 										img_collected.setImageResource(R.drawable.ic_collection_collected);
 										FishshopDetailActivity.this.isCollected = true;
@@ -398,7 +398,9 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 				
 				if (token.equals("")) {
 					Toast.makeText(FishshopDetailActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
-					
+					Intent in = new Intent();
+					in.setClass(FishshopDetailActivity.this, LoginActivity.class);
+					startActivity(in);
 				} else {
 					HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERCOLLECT + HttpAddress.METHOD_ADDCOLLET, params, new HttpCallbackListener() {
 						

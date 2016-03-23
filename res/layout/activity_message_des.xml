@@ -17,6 +17,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="@dimen/x10"
+        android:background="#fff"
         android:orientation="vertical" >
 
 	
@@ -25,36 +26,36 @@
         android:id="@+id/title_message_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/big_font"
-        android:layout_marginTop="@dimen/x5"
+        android:textSize="@dimen/font_big"
+        android:layout_marginTop="@dimen/x2"
         android:text="VIP会员即将到期" />
     <TextView
         android:id="@+id/date_message_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x5"
-        android:textSize="@dimen/small_font"
+        android:layout_marginTop="@dimen/x2"
+        android:textSize="@dimen/font_small"
         android:hint="2016.3.22" />
     <TextView
         android:id="@+id/des_message_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x15"
-        android:textSize="@dimen/default_font"
+        android:layout_marginTop="@dimen/x10"
+        android:textSize="@dimen/font_middle"
         android:text="月度VIP会员身份即将离你远去。" />
     <TextView
         android:id="@+id/after_message_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x15"
-        android:textSize="@dimen/default_font"
+        android:layout_marginTop="@dimen/x10"
+        android:textSize="@dimen/font_middle"
         android:text="到期时间：2016.3.26" />
     <TextView
         android:id="@+id/content_message_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x15"
-        android:textSize="@dimen/default_font"
+        android:layout_marginTop="@dimen/x10"
+        android:textSize="@dimen/font_middle"
         android:text="你即将失去30元享黑坑门票费、预约钓位等VIP特权" />
     
     </LinearLayout>

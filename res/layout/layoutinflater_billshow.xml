@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/x5"
         android:layout_alignParentLeft="true"
-        android:textSize="18sp"
+        android:textSize="@dimen/font_default"
         android:text="name" />
 
     <TextView
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_small"
         android:layout_below="@+id/tv_billshow_billdetail"
         android:hint="date" />
 
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_middle"
         android:text="jifen" />
 
 </RelativeLayout>

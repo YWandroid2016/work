@@ -62,6 +62,7 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 			drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 		}
 		tv_actionbar_right.setCompoundDrawables(drawable, null, null, null);
+		
 		super.onStart();
 	}
 

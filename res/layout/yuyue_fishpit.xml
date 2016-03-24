@@ -1,19 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FishpitConfirmOrderActivity" >
-
-    <com.example.happyfishing.view.ActionBarView
-        android:id="@+id/actionBar_fishipit_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x45" />
+    android:background="@color/gray_bg"
+    android:orientation="vertical" >
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
         android:background="#fff" >
 
         <LinearLayout
@@ -24,7 +18,7 @@
             android:orientation="horizontal" >
         </LinearLayout>
     </HorizontalScrollView>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +40,7 @@
                 android:text="选钓位" />
 
             <TextView
-                android:id="@+id/tv_fishipit_confirm_fishPositionTotal"
+                android:id="@+id/tv_yuyue_fishfit_fitnum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -58,24 +52,15 @@
             android:layout_height="@dimen/x1"
             android:background="@color/gray_bg" />
         
-        <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x45"
-        android:scrollbars="none" >
-
         <LinearLayout
+            android:id="@+id/lin_yuyue_fishpit_limit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x45"
+            android:background="#fff"
             android:orientation="horizontal" >
-
-            <GridView
-                android:id="@+id/grv_fishipitorder_position_group"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x45"
-                android:gravity="center" >
-            </GridView>
+            
+            
         </LinearLayout>
-    	</HorizontalScrollView>
         
         <View
             android:layout_width="match_parent"
@@ -83,31 +68,25 @@
             android:background="@color/gray_bg" />
         
         <GridView
-            android:id="@+id/grv_fishpitorder_position"
+            android:id="@+id/gv_yuyue_fishfit_fitlocation"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#fff"
             android:numColumns="7" >
 
 		</GridView>
         
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/gray_bg"
-        android:layout_weight="1" />
-    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
+        android:layout_marginTop="@dimen/x10"
         android:padding="@dimen/x10" >
 
         <Button
-            android:id="@+id/tv_fishpitconfirmorder_confirm"
+            android:id="@+id/btn_yuyue_fishpit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/circle_app"
@@ -116,7 +95,5 @@
             android:textColor="#fff"
             android:textSize="@dimen/font_big" />
     </LinearLayout>
-
-   
 
 </LinearLayout>

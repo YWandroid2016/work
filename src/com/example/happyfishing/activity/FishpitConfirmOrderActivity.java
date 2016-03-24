@@ -34,6 +34,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,9 +45,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("ResourceAsColor")
 public class FishpitConfirmOrderActivity extends Activity implements OnClickListener {
 
-	private GridView grv_fishipitoder_date;
+//	private GridView grv_fishipitoder_date;
+	private LinearLayout lin_date;
 	private FishpitOrderDateAdapter adapter;
 	private GridView grv_fishipitoder_position_group;
 	private FishPositionGroupNumAdapter adapter2;
@@ -123,7 +126,7 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 					}
 					runOnUiThread(new Runnable() {
 						public void run() {
-							adapter3 = new FishPositionShowAdapter(FishpitConfirmOrderActivity.this, 50, 0, orderedLocations);
+							adapter3 = new FishPositionShowAdapter(FishpitConfirmOrderActivity.this, 28, 0, orderedLocations);
 							adapter3.setCurrentOrder(-1);
 							grv_fishpitorder_position.setAdapter(adapter3);
 							adapter3.notifyDataSetChanged();
@@ -146,15 +149,16 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 		findViewById(R.id.tv_fishpitconfirmorder_confirm).setEnabled(false);
 		findViewById(R.id.tv_fishpitconfirmorder_confirm).setBackgroundColor(Color.parseColor("#bbbbbb"));
 		
-		if ((fishPositionTotal % 50) == 0) {
-			groupNum = fishPositionTotal / 50;
+		if ((fishPositionTotal % 28) == 0) {
+			groupNum = fishPositionTotal / 28;
 		} else {
-			groupNum = fishPositionTotal / 50 + 1;
+			groupNum = fishPositionTotal / 28 + 1;
 		}
 
-		adapter2 = new FishPositionGroupNumAdapter(FishpitConfirmOrderActivity.this, groupNum);
+		adapter2 = new FishPositionGroupNumAdapter(FishpitConfirmOrderActivity.this, groupNum, fishPositionTotal);
 
-		grv_fishipitoder_date = (GridView) findViewById(R.id.grv_fishipitorder_date);
+//		grv_fishipitoder_date = (GridView) findViewById(R.id.grv_fishipitorder_date);
+		lin_date = (LinearLayout) findViewById(R.id.lin_yuyue_fishpit_date);
 		adapter = new FishpitOrderDateAdapter(FishpitConfirmOrderActivity.this);
 		arrayList = new ArrayList<OrderDateEntity>();
 
@@ -206,12 +210,12 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		float density = dm.density;
 		// 设置positionGroupGridView在界面显示时的属性
-		int allWidth2 = (int) (70 * groupNum * density);
-		int itemSize2 = (int) (60 * density);
+		int allWidth2 = (int) (80 * groupNum * density);
+		int itemSize2 = (int) (80 * density);
 		LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(allWidth2, LinearLayout.LayoutParams.MATCH_PARENT);
 		grv_fishipitoder_position_group.setLayoutParams(params2);
 		grv_fishipitoder_position_group.setColumnWidth(itemSize2);
-		grv_fishipitoder_position_group.setHorizontalSpacing(10);
+//		grv_fishipitoder_position_group.setHorizontalSpacing(10);
 		grv_fishipitoder_position_group.setStretchMode(GridView.NO_STRETCH);
 		grv_fishipitoder_position_group.setNumColumns(groupNum);
 		grv_fishipitoder_position_group.setAdapter(adapter2);
@@ -223,14 +227,14 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 				for (int i = 0; i < groupNum; i++) {
 					parent.getChildAt(i).setBackground(null);
 				}
-				parent.getChildAt(position).setBackgroundColor(Color.YELLOW);
-				if ((fishPositionTotal - 50 * position) >= 50) {
-					adapter3 = new FishPositionShowAdapter(FishpitConfirmOrderActivity.this, 50, position, orderedLocations);
+				parent.getChildAt(position).setBackgroundResource(R.color.appcolor);
+				if ((fishPositionTotal - 28 * position) >= 28) {
+					adapter3 = new FishPositionShowAdapter(FishpitConfirmOrderActivity.this, 28, position, orderedLocations);
 					adapter3.setCurrentOrder(currentOrder);
 					grv_fishpitorder_position.setAdapter(adapter3);
 					adapter3.notifyDataSetChanged();
 				} else {
-					adapter3 = new FishPositionShowAdapter(FishpitConfirmOrderActivity.this, (fishPositionTotal - 50 * position), position, orderedLocations);
+					adapter3 = new FishPositionShowAdapter(FishpitConfirmOrderActivity.this, (fishPositionTotal - 28 * position), position, orderedLocations);
 					adapter3.setCurrentOrder(currentOrder);
 					grv_fishpitorder_position.setAdapter(adapter3);
 					adapter3.notifyDataSetChanged();
@@ -238,49 +242,66 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 			}
 		});
 
-		// 设置dateGridView在界面显示时的属性
-		int allWidth1 = (int) (110 * 5 * density);
-		int itemSize1 = (int) (100 * density);
-		LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(allWidth1, LinearLayout.LayoutParams.MATCH_PARENT);
-		grv_fishipitoder_date.setLayoutParams(params1);
-		grv_fishipitoder_date.setColumnWidth(itemSize1);
-		grv_fishipitoder_date.setHorizontalSpacing(10);
-		grv_fishipitoder_date.setStretchMode(GridView.NO_STRETCH);
-		grv_fishipitoder_date.setNumColumns(5);
-
+		initDates();
+	}
+	
+	private String dateString;	//当前选中鱼坑
+	
+	private View currentV;
+	
+	private void initDates(){
 		long currentTime = System.currentTimeMillis();
 		SimpleDateFormat format_week = new SimpleDateFormat("EEEE");
 		SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd");
-		Date date;
+		SimpleDateFormat format_date2 = new SimpleDateFormat("MM-dd");
+		Date date = new Date(currentTime);
 		String weekString;
-		String dateString;
+		String dateString2 = null;
+		
+		weekString = format_week.format(date);
+		dateString = format_date.format(date);
+		dateString2 = format_date2.format(date);
+		
+		loadData(dateString);
+		
+		View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_yuyue_fishpit_date, null);
+		
+		
+		
+		tv_date = (TextView) v.findViewById(R.id.tv_item_yuyue_fishfit_date);
+		tv_date.setTextColor(getResources().getColor(R.color.bai));
+		tv_date.setText(dateString2+"\n"+"今天");
+		
+		v.setId(100);
+		v.setTag(dateString);
+		v.setOnClickListener(this);
+		
+		lin_date.addView(v);
+		
+		currentV = v;
+		
+		currentV.setBackgroundResource(R.color.hong);
+		
 		// 获取当前时间并向后获得4个将来时间
-		for (int i = 0; i < 5; i++) {
+		for (int i = 1; i < 5; i++) {
 			date = new Date(currentTime + 86400000 * i);
 			weekString = format_week.format(date);
 			dateString = format_date.format(date);
-			if (i == 0) {
-				loadData(dateString);
-			}
-			arrayList.add(new OrderDateEntity(dateString, weekString));
+			dateString2 = format_date2.format(date);
+			
+			View v2 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_yuyue_fishpit_date, null);
+			TextView tv_date2 = (TextView) v2.findViewById(R.id.tv_item_yuyue_fishfit_date);
+			
+			tv_date2.setText(dateString2+"\n("+weekString+")");
+			
+			v2.setId(i+101);
+			v2.setTag(dateString);
+			v2.setOnClickListener(this);
+			
+			lin_date.addView(v2);
 		}
-		adapter.add2Adapter(arrayList);
-
-		grv_fishipitoder_date.setAdapter(adapter);
-		grv_fishipitoder_date.setOnItemClickListener(new OnItemClickListener() {
-			@SuppressLint("NewApi")
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				for (int i = 0; i < arrayList.size(); i++) {
-					parent.getChildAt(i).setBackground(null);
-				}
-				tv_date = (TextView) view.findViewById(R.id.tv_inflater_orderdate_date);
-				loadData(tv_date.getText().toString());
-				parent.getChildAt(position).setBackgroundColor(Color.YELLOW);
-			}
-		});
-
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -395,9 +416,37 @@ public class FishpitConfirmOrderActivity extends Activity implements OnClickList
 			break;
 		case R.id.tv_actionbar_left:
 			FishpitConfirmOrderActivity.this.finish();
+			break;
+			
+		case 100:
+			iniView(v);
+			break;
+		case 101:
+			iniView(v);
+			break;
+		case 102:
+			iniView(v);
+			break;
+		case 103:
+			iniView(v);
+			break;
+		case 104:
+			iniView(v);
+			break;
+			
 		default:
 			break;
 		}
 	}
 
+	public void iniView(View v){
+		tv_date.setTextColor(getResources().getColor(R.color.hei));
+		currentV.setBackgroundResource(R.color.bai);
+		currentV = v;
+		currentV.setBackgroundResource(R.color.hong);
+		tv_date = (TextView) currentV.findViewById(R.id.tv_item_yuyue_fishfit_date);
+		tv_date.setTextColor(getResources().getColor(R.color.bai));
+		loadData(v.getTag().toString());
+	}
+	
 }

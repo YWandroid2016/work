@@ -68,12 +68,12 @@ public class FishPositionShowAdapter extends BaseAdapter{
 			view = layoutInflater.inflate(R.layout.layoutinflater_fishposition_show, null);
 			view.setTag(true);
 			TextView tv_fishposition_show = (TextView) view.findViewById(R.id.tv_layoutinflater_fishposition_show);
-			tv_fishposition_show.setText((50*fishPositionNum+(position+1))+"");
-			if ((50*fishPositionNum+(position+1)) == currentOrdered) {
+			tv_fishposition_show.setText((28*fishPositionNum+(position+1))+"");
+			if ((28*fishPositionNum+(position+1)) == currentOrdered) {
 				tv_fishposition_show.setBackgroundResource(R.drawable.bgd_diaowei_selected);
 			}
 			for (int i = 0; i < orderedLocation.size(); i++) {
-				if ((50*fishPositionNum+position+1) == orderedLocation.get(i)) {
+				if ((28*fishPositionNum+position+1) == orderedLocation.get(i)) {
 					tv_fishposition_show.setBackgroundResource(R.drawable.bgd_diaowei_noselected);
 					view.setClickable(false);
 					view.setTag(false);

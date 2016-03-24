@@ -143,6 +143,11 @@
             android:launchMode="singleTask" >
         </activity>
         <activity
+            android:name="com.example.happyfishing.activity.FishpitConfirmOrderActivity2"
+            android:label="@string/title_activity_fishpit_confirm_order"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
             android:name="com.example.happyfishing.activity.FishpitOrderShowActivity"
             android:label="@string/title_activity_fishpit_order_show"
             android:launchMode="singleTask" >

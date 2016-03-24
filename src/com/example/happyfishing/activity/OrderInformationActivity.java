@@ -53,7 +53,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	private String nameString;
 	private String dateString;
 	private String phoneNumber;
-	private int location;
+	private String location;
 	private String merchantId;
 	private String token;
 	private String orderId;
@@ -128,7 +128,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		location = bundle.getInt("location");
+		location = bundle.getString("location");
 		phoneNumber = bundle.getString("phone");
 		if (hide) {
 			LinearLayout ll_payment_daokeng = (LinearLayout) findViewById(R.id.ll_payment_daokeng);

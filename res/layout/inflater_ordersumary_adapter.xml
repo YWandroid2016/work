@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fff"
+    android:background="@color/gray_bg"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/x45"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/x10"
+        android:background="#fff"
+        android:gravity="center_vertical"
         android:padding="@dimen/x10" >
 
         <TextView
@@ -25,6 +28,16 @@
             android:layout_height="wrap_content"
             android:hint="钓位预约"
             android:textSize="@dimen/font_middle" />
+        <TextView
+            android:id="@+id/tv_ordersumary_status"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:hint="钓位预约"
+            android:visibility="invisible"
+            android:textSize="@dimen/font_middle" />
+        
+        
     </LinearLayout>
 
     <View
@@ -34,9 +47,10 @@
         android:layout_marginRight="@dimen/x10"
         android:background="@color/gray_bg" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/x85"
+        android:background="#fff"
         android:padding="@dimen/x10" >
 
         <com.example.happyfishing.image.ImageRequestView
@@ -50,6 +64,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x5"
             android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/img_ordersumary_adapter"
             android:orientation="vertical" >
 
             <TextView
@@ -79,22 +94,22 @@
                 android:textColor="@color/appcolor"
                 android:textSize="@dimen/font_default"
                 android:text="￥430" />
-
-            <!-- <LinearLayout -->
-            <!-- android:layout_width="match_parent" -->
-            <!-- android:layout_height="match_parent" -->
-            <!-- android:orientation="horizontal" > -->
-
-
-            <!-- </LinearLayout> -->
-
-
-            <!-- <TextView -->
-            <!-- android:id="@+id/tv_ordersumary_price" -->
-            <!-- android:layout_width="match_parent" -->
-            <!-- android:layout_height="wrap_content" -->
-            <!-- android:text="111" /> -->
+            
         </LinearLayout>
-    </LinearLayout>
+        
+            <TextView
+                android:id="@+id/tv_ordersumary_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="#fff"
+                android:textSize="@dimen/font_default"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/circle_app"
+                android:padding="@dimen/x5"
+                android:visibility="gone"
+                android:text="去支付" />
+    </RelativeLayout>
 
 </LinearLayout>

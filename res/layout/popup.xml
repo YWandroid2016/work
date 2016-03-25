@@ -13,29 +13,26 @@
         android:orientation="vertical" >
 
         <TextView
-        android:id="@+id/tv_pop"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
-        android:gravity="center"
-        android:text="注册成功！"
-        android:textSize="@dimen/topbar_size" />
+            android:id="@+id/tv_pop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:gravity="center"
+            android:text="注册成功！"
+            android:textSize="@dimen/font_default" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
+            android:layout_height="1px"
             android:background="@color/linecolor" />
-        
-    <TextView
-        android:id="@+id/btn_pop"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x40"
-        android:gravity="center"
-        android:text="确定"
-        android:textSize="@dimen/topbar_size"
-        android:textColor="@color/appcolor" />
-        
-	</LinearLayout>
-    
-    
+
+        <TextView
+            android:id="@+id/btn_pop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/appcolor"
+            android:textSize="@dimen/font_default" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -138,6 +138,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 		super.onStart();
 	}
 
+	//TODO 登陆
 	private void initLogin() {
 		// 发送请求 验证登陆
 		String token = sp.getString("token", "");

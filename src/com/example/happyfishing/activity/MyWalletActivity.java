@@ -64,6 +64,21 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 		tv_actionbar_right.setCompoundDrawables(drawable, null, null, null);
 		
 		super.onStart();
+		
+		String token = sp.getString("token", null);
+		if (token != null) {
+			
+			String jifen = sp.getString("userPoint", "0");
+			tv_mywallet_usablejifen.setText(jifen);
+			tv_mywallet_confirm.setText("可用积分");
+			btn_bocomeVIP.setText("升级VIP，享特权");
+		} else {
+			findViewById(R.id.tv_mywallet_bill).setVisibility(View.INVISIBLE);
+			findViewById(R.id.img_right).setVisibility(View.INVISIBLE);
+			tv_mywallet_confirm.setVisibility(View.GONE);
+			tv_mywallet_usablejifen.setText("您还未登录，请先登录");
+			btn_bocomeVIP.setText("登录");
+		}
 	}
 
 	private void initView() {
@@ -121,6 +136,7 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 			
 			String jifen = sp.getString("userPoint", "0");
 			tv_mywallet_usablejifen.setText(jifen);
+			tv_mywallet_confirm.setVisibility(View.VISIBLE);
 			tv_mywallet_confirm.setText("可用积分");
 		} else {
 			findViewById(R.id.tv_mywallet_bill).setVisibility(View.INVISIBLE);

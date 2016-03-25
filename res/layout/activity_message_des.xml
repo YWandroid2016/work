@@ -24,35 +24,36 @@
     
     <TextView
         android:id="@+id/title_message_des"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_big"
         android:layout_marginTop="@dimen/x2"
         android:text="VIP会员即将到期" />
     <TextView
         android:id="@+id/date_message_des"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x2"
         android:textSize="@dimen/font_small"
-        android:hint="2016.3.22" />
+        android:textColor="@color/hui"
+        android:text="2016.3.22" />
     <TextView
         android:id="@+id/des_message_des"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x10"
         android:textSize="@dimen/font_middle"
         android:text="月度VIP会员身份即将离你远去。" />
     <TextView
         android:id="@+id/after_message_des"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x10"
         android:textSize="@dimen/font_middle"
         android:text="到期时间：2016.3.26" />
     <TextView
         android:id="@+id/content_message_des"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x10"
         android:textSize="@dimen/font_middle"
@@ -63,7 +64,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/x1"
-        android:background="@color/gray_bg" />
+        android:background="@color/linecolor" />
     
     <Button
         android:id="@+id/btn_messageDes"

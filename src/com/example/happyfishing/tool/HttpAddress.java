@@ -2,7 +2,7 @@ package com.example.happyfishing.tool;
 
 public class HttpAddress {
 
-	public static String ADDRESS = "192.168.1.105:8092/";
+	public static String ADDRESS = "haowai.58vshop.com/";
 	
 	public static String PROJECT = "appConsole/";
 	
@@ -85,5 +85,10 @@ public class HttpAddress {
 	public static String METHOD_OUTLIST = "outList?";
 
 	public static String METHOD_GETLIST = "getList?";
+	
+	public static String METHOD_GETLIST_FINISH = "finishedOrders?";
+	public static String METHOD_GETLIST_WAIT = "waitPayOrders?";
+	public static String METHOD_GETLIST_AFTER = "expiredOrders?";
+	public static String METHOD_GETLIST_ALL = "allOrders?";
 
 }

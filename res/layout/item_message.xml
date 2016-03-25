@@ -2,47 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/x10"
-    android:paddingBottom="@dimen/x10"
     android:background="#fff"
-    android:orientation="horizontal" >
-    
-    <ImageView
-        android:id="@+id/img_message"
-        android:layout_width="@dimen/x50"
-        android:layout_height="@dimen/x50"
-        android:layout_marginRight="@dimen/x10"
-        android:src="@drawable/ic_launcher" />
-    
+    android:orientation="vertical" >
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/x10"
+    	android:paddingTop="@dimen/x10"
+        android:background="#fff"
+        android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/name_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_default"
-            android:text="积分变更" />
+        <ImageView
+            android:id="@+id/img_message"
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/x45"
+            android:layout_marginRight="@dimen/x10"
+            android:src="@drawable/ic_launcher" />
 
-        <TextView
-            android:id="@+id/des_message"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="bottom"
-            android:textSize="@dimen/font_middle"
-            android:hint="150积分已入账" />
+            android:orientation="vertical" >
 
-	</LinearLayout>
-	
-    <TextView
+            <TextView
+                android:id="@+id/name_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="积分变更"
+                android:textSize="@dimen/font_default" />
+
+            <TextView
+                android:id="@+id/des_message"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="150积分已入账"
+                android:textColor="@color/hui"
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/date_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_small"
-            android:hint="2016.3.22" />
+            android:text="2016.3.22"
+            android:textColor="@color/hui"
+            android:textSize="@dimen/font_small" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="@color/linecolor" />
 
 </LinearLayout>

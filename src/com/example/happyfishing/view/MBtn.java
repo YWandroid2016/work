@@ -62,8 +62,8 @@ public class MBtn extends RelativeLayout {
 		tv.measure(tv.getWidth(), tv.getHeight());
 
 		LayoutParams para = (LayoutParams) line.getLayoutParams();// 获取按钮的布局
-		para.width = tv.getMeasuredWidth() + 20;// 修改宽度
-		if(para.width>40){
+		para.width = tv.getMeasuredWidth() + 5;// 修改宽度
+		if(para.width>10){
 			line.setLayoutParams(para); // 设置修改后的布局。
 		} else {
 			para.width = 0;

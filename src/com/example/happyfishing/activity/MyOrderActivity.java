@@ -2,6 +2,7 @@ package com.example.happyfishing.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,12 +15,15 @@ import com.example.happyfishing.R.menu;
 import com.example.happyfishing.adapter.OrderSumaryFinishAdapter;
 import com.example.happyfishing.customlistview.XListView;
 import com.example.happyfishing.customlistview.XListView.IXListViewListener;
+import com.example.happyfishing.entity.DingEntity;
+import com.example.happyfishing.entity.FishEntity;
 import com.example.happyfishing.entity.OrderEntity;
 import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
 import com.example.happyfishing.view.ActionBarView;
 import com.example.happyfishing.view.MBtn;
+import com.google.gson.Gson;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,39 +41,55 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-public class MyOrderActivity extends Activity implements OnClickListener,IXListViewListener{
+public class MyOrderActivity extends Activity implements OnClickListener{
 
 	private ActionBarView actionBar_myorder;
 	private Handler mainHandler;
 	private int orderType;
-	private XListView xliv_myorder;
+	private ListView xliv_myorder;
 	private OrderSumaryFinishAdapter finishAdapter;
-	private ArrayList<OrderEntity> arrayList_finish;
-	private ArrayList<OrderEntity> arrayList_waitpay;
-	private MBtn btn_finish;
-	private MBtn btn_waitpay;
-	private MBtn btn_after;
-	private MBtn btn_all;
+	private List<DingEntity> arrayList_finish;
+	private List<DingEntity> arrayList_kong;
+	private MBtn btn_finish;	//可使用
+	private MBtn btn_waitpay;	//待支付
+	private MBtn btn_after;		//已过期
+	private MBtn btn_all;		//全部
 	private MBtn btn_current;
+	private Gson gson;
+	
+	private static final int FISH = 1;
+	private static final int WAIT = 2;
+	private static final int AFTER = 3;
+	private static final int ALL = 4;
+	private static final int ERROR = 5;
+	
+	private FishEntity fishentity;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_order);
+		gson = new Gson();
+		arrayList_kong = new ArrayList<DingEntity>();
+		arrayList_finish = new ArrayList<DingEntity>();
 		mainHandler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
-				case 1:
-					String errorText = (String) msg.obj;
-					Toast.makeText(MyOrderActivity.this, errorText, Toast.LENGTH_SHORT).show();
-					break;
-				case 3:
-					finishAdapter.add2Adapter(arrayList_finish);
-					xliv_myorder.setAdapter(finishAdapter);
-					break;
-				case 5:
+				case ERROR:
 					Toast.makeText(MyOrderActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
+					break;
+				case FISH:
+					M_sw(FISH);
+					break;
+				case WAIT:
+					M_sw(WAIT);
+					break;
+				case AFTER:
+					M_sw(AFTER);
+					break;
+				case ALL:
+					M_sw(ALL);
 					break;
 
 				default:
@@ -81,24 +101,45 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 		
 		initView();
 		
-		loadData();
+		loadData(FISH,HttpAddress.METHOD_GETLIST_FINISH);
 		
 	}
 
+	//判断数据状态
+	public void M_sw(int i){
+		int status = fishentity.getStatus();
+		if(2000 == status){
+			//加载数据
+			arrayList_finish =  fishentity.getOrders();
+			finishAdapter.add2Adapter(arrayList_finish, i);
+			xliv_myorder.setAdapter(finishAdapter);
+			finishAdapter.notifyDataSetChanged();
+			
+		} else {
+			//清空数据
+			String str = fishentity.getText();
+			
+			Toast.makeText(MyOrderActivity.this, str, Toast.LENGTH_SHORT).show();
+			//加载空集合
+			finishAdapter.add2Adapter(arrayList_kong, i);
+			xliv_myorder.setAdapter(finishAdapter);
+			finishAdapter.notifyDataSetChanged();
+			
+		}
+		
+		
+	}
+	
 	private void initView() {
 		actionBar_myorder = (ActionBarView) findViewById(R.id.actionBar_myorder);
 		actionBar_myorder.setActionBar(R.string.back, -1, R.string.title_actionbar_myorder, this);
-		xliv_myorder = (XListView) findViewById(R.id.liv_myorder_sumary);
-		xliv_myorder.setXListViewListener(this);
-		xliv_myorder.setPullLoadEnable(true);
-		arrayList_finish = new ArrayList<OrderEntity>();
-		arrayList_waitpay = new ArrayList<OrderEntity>();
+		xliv_myorder = (ListView) findViewById(R.id.liv_myorder_sumary);
 		finishAdapter = new OrderSumaryFinishAdapter(MyOrderActivity.this);
 		btn_finish = (MBtn) findViewById(R.id.btn_myorder_finish);
 		btn_waitpay = (MBtn) findViewById(R.id.btn_myorder_waitpay);
 		btn_after = (MBtn) findViewById(R.id.btn_myorder_after);
 		btn_all = (MBtn) findViewById(R.id.btn_myorder_all);
-		btn_finish.setTv("已完成");
+		btn_finish.setTv("可使用");
 		btn_waitpay.setTv("待支付");
 		btn_after.setTv("已过期");
 		btn_all.setTv("全部");
@@ -114,107 +155,33 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 		btn_current.dispalyLine(true);
 	}
 
-	private void loadData() {
+	private void loadData(final int i,String str) {
 		SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
 		String token = sp.getString("token", "");
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("token", token);
+		params.put("start", "0");
+		params.put("length", "100");
 		HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-				HttpAddress.CLASS_APPORDER+HttpAddress.METHOD_ORDERLIST, 
+				HttpAddress.CLASS_APPORDER+str, 
 				params, 
 				new HttpCallbackListener() {
 					@Override
 					public void onFinish(Object response) {
 						Log.d("response", response.toString());
-						JSONObject jsonObject = (JSONObject) response;
-						int code = 0;
-						String errorText = "";
-						try {
-							code = jsonObject.getInt("status");
-							switch (code) {
-							case 2000:
-								JSONArray jsonArray_finish = jsonObject.getJSONArray("finishOrders");
-								JSONObject jsonObject2;
-								String id;
-								String merchantId;
-								String reserveTime;
-								String location;
-								String orderId;
-								String name;
-								String dateCreated;
-								String totalFee;
-								String picUrl;
-								String merchantName;
-								String orderType;
-								String category;
-								for (int i = 0; i < jsonArray_finish.length(); i++) {
-									jsonObject2 = jsonArray_finish.getJSONObject(i);
-									id= jsonObject2.getString("id");
-									orderType = jsonObject2.getString("type");
-									category = jsonObject2.getString("category");
-									merchantId = jsonObject2.getString("merchantId");
-									reserveTime = jsonObject2.getString("reserveTime");
-									location = jsonObject2.getString("location");
-									orderId = jsonObject2.getString("orderId");
-									name = jsonObject2.getString("name");
-									dateCreated = jsonObject2.getString("dateCreated");
-									totalFee = jsonObject2.getString("totalFee");
-									picUrl = jsonObject2.getString("picUrl");
-									merchantName = jsonObject2.getString("merchantName");
-									arrayList_finish.add(new OrderEntity(id, orderType, category, merchantId, reserveTime, location, orderId, name, dateCreated, totalFee, picUrl, merchantName));
-								}
-								Message message = new Message();
-								message.what = 3;
-								message.obj = arrayList_finish;
-								mainHandler.sendMessage(message);
-								
-								JSONArray jsonArray_waitpay = jsonObject.getJSONArray("waitPayOrders");
-								for (int i = 0; i < jsonArray_waitpay.length(); i++) {
-									jsonObject2 = jsonArray_waitpay.getJSONObject(i);
-									id= jsonObject2.getString("id");
-									orderType = jsonObject2.getString("type");
-									category = jsonObject2.getString("category");
-									merchantId = jsonObject2.getString("merchantId");
-									reserveTime = jsonObject2.getString("reserveTime");
-									location = jsonObject2.getString("location");
-									orderId = jsonObject2.getString("orderId");
-									name = jsonObject2.getString("name");
-									dateCreated = jsonObject2.getString("dateCreated");
-									totalFee = jsonObject2.getString("totalFee");
-									picUrl = jsonObject2.getString("picUrl");
-									merchantName = jsonObject2.getString("merchantName");
-									arrayList_waitpay.add(new OrderEntity(id, orderType, category, merchantId, reserveTime, location, orderId, name, dateCreated, totalFee, picUrl, merchantName));
-									Log.d("reserveTime", reserveTime);
-									Log.d("dateCreated", dateCreated);
-								}
-								break;
-							default:
-								errorText = jsonObject.getString("text");
-								Message message1 = new Message();
-								message1.what=1;
-								message1.obj = errorText;
-								mainHandler.sendMessage(message1);
-								break;
-							}
-							
-						} catch (JSONException e) {
-							mainHandler.sendEmptyMessage(5);
-							e.printStackTrace();
-						}
+						String json = response.toString();
+						fishentity = gson.fromJson(json, FishEntity.class);
+						Message msg = mainHandler.obtainMessage();
+						msg.what = i;
+						msg.obj = fishentity;
+						mainHandler.sendMessage(msg);
 					}
 					
 					@Override
 					public void onError(Exception e) {
-						mainHandler.sendEmptyMessage(5);
+						mainHandler.sendEmptyMessage(ERROR);
 					}
 				});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my_order, menu);
-		return true;
 	}
 
 	@Override
@@ -224,122 +191,37 @@ public class MyOrderActivity extends Activity implements OnClickListener,IXListV
 			MyOrderActivity.this.finish();
 			break;
 		case R.id.btn_myorder_finish:
+			//TODO 获取可使用订单并加载
 			btn_current.dispalyLine(false);
 			btn_current = (MBtn) v;
 			btn_current.dispalyLine(true);
-			orderType = 0;
-			finishAdapter.add2Adapter(arrayList_finish);
-			xliv_myorder.setAdapter(finishAdapter);
-			finishAdapter.notifyDataSetChanged();
-			xliv_myorder.setOnItemClickListener(null);
+			loadData(FISH,HttpAddress.METHOD_GETLIST_FINISH);
 			break;
 			
 		case R.id.btn_myorder_after:
 			//TODO 获取已过期订单并加载
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
+			loadData(AFTER,HttpAddress.METHOD_GETLIST_AFTER);
 			break;
 			
 		case R.id.btn_myorder_all:
-			
 			//TODO 获取全部订单并加载
-			
+			btn_current.dispalyLine(false);
+			btn_current = (MBtn) v;
+			btn_current.dispalyLine(true);
+			loadData(ALL,HttpAddress.METHOD_GETLIST_ALL);
 			break;
 			
 		case R.id.btn_myorder_waitpay:
 			btn_current.dispalyLine(false);
 			btn_current = (MBtn) v;
 			btn_current.dispalyLine(true);
-			orderType = 1;
-			finishAdapter.add2Adapter(arrayList_waitpay);
-			xliv_myorder.setAdapter(finishAdapter);
-			finishAdapter.notifyDataSetChanged();
-			xliv_myorder.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					int type = finishAdapter.getItemViewType((position-1));
-					switch (type) {
-					case 1:
-						SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-						OrderEntity entity = arrayList_waitpay.get((position-1));
-						String token = sp.getString("token", "");
-						String orderId = entity.orderId;
-						String merchantId = entity.merchantId;
-						String userjifen = sp.getString("userPoint", "");
-						Long userPoint = Long.parseLong(userjifen);
-						String name = entity.merchantName;
-						String date = entity.reserveTime;
-						String dateCreated = entity.dateCreated;
-						String location = entity.location;
-						int orderPosition = Integer.parseInt(location);
-						String phoneNumber = sp.getString("phoneNumber", "");
-						Intent intent1 = new Intent(MyOrderActivity.this, OrderInformationActivity.class);
-						Bundle bundle = new Bundle();
-						bundle.putString("token", token);
-						bundle.putString("orderId", orderId);
-						bundle.putString("merchantId", merchantId);
-						bundle.putString("date", date);
-						bundle.putInt("location", orderPosition);
-						bundle.putString("name", name);
-						bundle.putString("phone", phoneNumber);
-						bundle.putLong("userPoint", userPoint);
-						bundle.putString("dateCreate", dateCreated);
-						intent1.putExtras(bundle);
-						startActivity(intent1);
-						break;
-					case 0:
-						Log.d("type", "会员开通");
-						Intent intent2 = new Intent(MyOrderActivity.this, BecomeVipOrderActivity.class);
-						OrderEntity entity2 = arrayList_waitpay.get((position-1));
-						String category = entity2.category;
-						String price = entity2.totalFee;	
-						String price2 = price.substring(0, price.length()-2);
-						Bundle bundle2 = new Bundle();
-						bundle2.putString("dateCreate", entity2.dateCreated);
-						int money = Integer.parseInt(price2);
-						int memberType = 0;
-						if (category.equals("month")) {
-							memberType = 1;
-						}else if (category.equals("season")) {
-							memberType = 2;
-						}else if (category.equals("year")) {
-							memberType = 3;
-						}
-						intent2.putExtras(bundle2);
-						intent2.putExtra("money", money);
-						intent2.putExtra("type", memberType);
-						startActivity(intent2);
-						break;
-
-					default:
-						break;
-					}
-					
-					
-				}
-			});
-			break;
-		default:
+			loadData(WAIT,HttpAddress.METHOD_GETLIST_WAIT);
 			break;
 		}
-	}
-
-	@Override
-	public void onRefresh() {
-		
-	}
-
-	@Override
-	public void onLoadMore() {
-		switch (orderType) {
-		case 0:
-			//获取更多的已完成的订单
-			break;
-		case 1:
-			//获取更多的待支付的订单
-			break;
-		default:
-			break;
-		}
+			
 	}
 
 }

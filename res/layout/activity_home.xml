@@ -59,6 +59,11 @@
         </LinearLayout>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/linecolor" />
+    
     <LinearLayout
         android:id="@+id/ll_home_bottom"
         android:layout_width="match_parent"

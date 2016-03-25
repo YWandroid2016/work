@@ -1,5 +1,8 @@
 package com.example.happyfishing.activity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONException;
@@ -13,6 +16,7 @@ import com.example.happyfishing.manager.SharedPreferencesManager;
 import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
+import com.example.happyfishing.tool.UiUtil;
 import com.example.happyfishing.view.ActionBarView;
 
 import android.os.Bundle;
@@ -54,7 +58,8 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 	private InputMethodManager inputManager;
 	private CheckBox cb_rember;
 	private Handler mHandler;
-
+	private JSONObject jsonObject;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -149,24 +154,87 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 			HashMap<String, String> params = new HashMap<String, String>();
 			params.put("phoneNumber", edt_login_phone.getText().toString());
 			params.put("password", edt_login_password.getText().toString());
-			HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_APPUSER + HttpAddress.METHOD_LOGIN, params, new HttpCallbackListener() {
+			String str = HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_APPUSER + HttpAddress.METHOD_LOGIN;
+			Log.d("log", str);
+			HttpUtil.getJSON(str, params, new HttpCallbackListener() {
 
 				@Override
 				public void onFinish(Object response) {
 					Log.d("response", response.toString());
+					
+					jsonObject = (JSONObject) response;
+					JSONObject jsonObject1 = null;
+					try {
+						jsonObject1 = jsonObject.getJSONObject("appUser");
+						Log.d("successs", response.toString());
+					} catch (JSONException e) {
+						mHandler.sendEmptyMessage(5);
+						e.printStackTrace();
+					}
+					try {
+						Log.d("success", "会员到期时间" + jsonObject1.getString("outOfDate"));
+						Log.d("success", "会员开通时间" + jsonObject1.getString("startOfDate"));
+						Log.d("success", "昵称" + jsonObject1.getString("nickname"));
+						Log.d("success", "用户头像地址" + jsonObject1.getString("headImageUrl"));
+						Log.d("success", "用户的唯一标识" + jsonObject1.getString("token"));
+						Log.d("success", "注册用的电话" + jsonObject1.getString("phoneNumber"));
+						Log.d("success", "经验值" + jsonObject1.getString("userExp"));
+						Log.d("success", "用户积分" + jsonObject1.getString("userPoint"));
+						Log.d("success", "是否为会员" + jsonObject1.getString("isMember"));
+						Log.d("success", "会员类别" + jsonObject1.getString("category"));
+						Log.d("success", "用户等级" + jsonObject1.getString("userRank"));
+						SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+						Editor editor = sp.edit();
+						// 比较两次userpoint值 如果变化则修改message图标为带红点
+//						String userPoint_previous = sp.getString("userPoint", "");
+//						String userPoint_now = jsonObject1.getString("userPoint");
+						long current = System.currentTimeMillis();
+						String outOfDate = jsonObject1.getString("outOfDate");
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-hh");
+						try {
+							Date date = dateFormat.parse(outOfDate);
+							long outOfDatejiange = current - date.getTime();
+							Log.d("outOfDatejiange", outOfDatejiange + "");
+							if (outOfDatejiange < 259200000) {
+								Log.d("outOfDatejiange", outOfDatejiange + "");
+								UiUtil.setNewMessage(true);
+							}
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+//						if (userPoint_now.equals(userPoint_previous)) {
+//						} else {
+//							UiUtil.setNewMessage(true);
+//						}
+						
+						editor.putString("outOfDate", jsonObject1.getString("outOfDate"));
+						editor.putString("startOfDate", jsonObject1.getString("startOfDate"));
+						editor.putString("nickname", jsonObject1.getString("nickname"));
+						editor.putString("headImageUrl", jsonObject1.getString("headImageUrl"));
+						editor.putString("token", jsonObject1.getString("token"));
+						editor.putString("phoneNumber", jsonObject1.getString("phoneNumber"));
+						editor.putString("userExp", jsonObject1.getString("userExp"));
+						editor.putString("userPoint", jsonObject1.getString("userPoint"));
+						editor.putString("isMember", jsonObject1.getString("isMember"));
+						editor.putString("category", jsonObject1.getString("category"));
+						editor.putString("userRank", jsonObject1.getString("userRank"));
+						editor.putString("hasPayPass", jsonObject1.getString("hasPayPass"));
+						editor.commit();
+					
 					Message message = new Message();
 					message.what = 1;
-					JSONObject jsonObject1 = (JSONObject) response;
 					int code = 0 ;
 					String statisString = null; 
 					try {
-						code = jsonObject1.getInt("status");
+						code = jsonObject.getInt("status");
 					} catch (JSONException e1) {
 						mHandler.sendEmptyMessage(5);
 						e1.printStackTrace();
 					}
 					try {
-						JSONObject jsonObject2 = jsonObject1.getJSONObject("appUser");
+						JSONObject jsonObject2 = jsonObject.getJSONObject("appUser");
 						String token = jsonObject2.getString("token");
 						String phoneNumber = jsonObject2.getString("phoneNumber");
 						
@@ -189,8 +257,10 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 							e.printStackTrace();
 						}
 					}
+				} catch (JSONException e) {
+					mHandler.sendEmptyMessage(5);
 				}
-
+				}
 				@Override
 				public void onError(Exception e) {
 					mHandler.sendEmptyMessage(2);

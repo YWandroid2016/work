@@ -135,7 +135,6 @@ public class PasswordAlterActivity extends Activity implements OnClickListener, 
 					
 					@Override
 					public void onError(Exception e) {
-						// TODO Auto-generated method stub
 						
 					}
 				});

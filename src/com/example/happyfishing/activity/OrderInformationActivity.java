@@ -57,7 +57,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 	private String merchantId;
 	private String token;
 	private String orderId;
-	private long userPoint;
+	private String userPoint;
 	private Handler mainHandler;   
 	
 	private TextView tv_orderdetail_content1;
@@ -101,7 +101,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		token = bundle.getString("token");
 		orderId = bundle.getString("orderId");
 		merchantId = bundle.getString("merchantId");
-		userPoint = bundle.getLong("userPoint");
+		userPoint = bundle.getString("userPoint");
 		Log.d("point", userPoint+" 积分");
 		dateCreate = bundle.getString("dateCreate");
 		nameString = bundle.getString("name");
@@ -175,7 +175,7 @@ public class OrderInformationActivity extends Activity implements OnClickListene
 		rdb_wechar.setChecked(true);	//默认支付方式
 		
 		TextView textView = (TextView) findViewById(R.id.tv_orderinformation_jifenzhifu);
-		if (userPoint < 30) {
+		if (Float.parseFloat(userPoint) < 30) {
 			rdb_jifen.setEnabled(false);
 			textView.setHint("积分余额："+userPoint);
 			ImageView imageView = (ImageView) findViewById(R.id.img_orderinfomation_pay_jifen);

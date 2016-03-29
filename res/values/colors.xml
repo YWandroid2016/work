@@ -163,6 +163,7 @@
     <color name="daojishi_background">#f0b035</color>
     
     <color name="appcolor">#3086f2</color>
+    <color name="appcolor_pressed">#1D5091</color> 
     <color name="anhong">#f26665</color>
     <color name="anhuang">#f0b035</color>
     <color name="textcolor_zhong">#3a3a3a</color>

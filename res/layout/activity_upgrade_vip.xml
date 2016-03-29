@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/gray_bg"
     tools:context=".UpgradeVIPActivity" >
 
     <com.example.happyfishing.view.ActionBarView
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:layout_marginTop="@dimen/x20"
-                android:text="￥500"
+                android:text="￥600"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_money" />
             
@@ -38,8 +39,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/x20"
                 android:layout_marginLeft="@dimen/x20"
-                android:layout_marginRight="@dimen/x130"
-                android:textSize="@dimen/font_becomeVIP_detail"
+                android:layout_marginRight="@dimen/x135"
+                android:textSize="@dimen/font_small"
                 android:textColor="#c79359"
                 android:gravity="center"
                 android:padding="@dimen/x5"
@@ -100,12 +101,12 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/x20"
                 android:layout_marginLeft="@dimen/x20"
-                android:layout_marginRight="@dimen/x130"
-                android:textSize="@dimen/font_becomeVIP_detail"
+                android:layout_marginRight="@dimen/x135"
+                android:textSize="@dimen/font_small"
                 android:textColor="#c79359"
                 android:gravity="center"
                 android:padding="@dimen/x5"
-                android:text="季度会员，优惠100"/>
+                android:text="季度会员，优惠600"/>
             
             <TextView android:id="@+id/tv_updateVIP_type_quater_become"
                 android:layout_width="wrap_content"
@@ -151,12 +152,12 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/x20"
                 android:layout_marginLeft="@dimen/x20"
-                android:layout_marginRight="@dimen/x130"
-                android:textSize="@dimen/font_becomeVIP_detail"
+                android:layout_marginRight="@dimen/x135"
+                android:textSize="@dimen/font_small"
                 android:textColor="#c79359"
                 android:gravity="center"
                 android:padding="@dimen/x5"
-                android:text="年度会员，优惠200"/>
+                android:text="年度会员，优惠2400"/>
             
             <TextView android:id="@+id/tv_updateVIP_type_year_become"
                 android:layout_width="wrap_content"

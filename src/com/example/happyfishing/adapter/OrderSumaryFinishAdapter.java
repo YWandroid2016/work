@@ -145,6 +145,11 @@ public class OrderSumaryFinishAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					// 鱼坑支付订单	UpgradeVIPActivity
 					
+					String dateCreate = null;
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					long currentTime = System.currentTimeMillis();
+					Date date = new Date(currentTime);
+					dateCreate = dateFormat.format(date);
 					
 					SharedPreferences sp = context.getSharedPreferences("user",
 							Context.MODE_PRIVATE);
@@ -153,11 +158,9 @@ public class OrderSumaryFinishAdapter extends BaseAdapter {
 					String orderId = entity.getCode();
 					String merchantId = ""+entity.getMerchantId();
 					String userjifen = sp.getString("userPoint", "");
-					Long userPoint = Long.parseLong(userjifen);
 					String name = entity.getMerchantName();
-					String date = entity.getReserveTime();
+					String date_str = entity.getReserveTime();
 					String location = ""+entity.getLocation();
-					int orderPosition = Integer.parseInt(location);
 					String phoneNumber = sp.getString("phoneNumber", "");
 					Intent intent1 = new Intent(context,
 							OrderInformationActivity.class);
@@ -165,11 +168,13 @@ public class OrderSumaryFinishAdapter extends BaseAdapter {
 					bundle.putString("token", token);
 					bundle.putString("orderId", orderId);
 					bundle.putString("merchantId", merchantId);
-					bundle.putString("date", date);
-					bundle.putInt("location", orderPosition);
+					bundle.putString("date", date_str);
+					bundle.putString("location", location);
 					bundle.putString("name", name);
 					bundle.putString("phone", phoneNumber);
-					bundle.putLong("userPoint", userPoint);
+					bundle.putString("userPoint", userjifen);
+					bundle.putString("dateCreate", dateCreate);
+					bundle.putInt("type", -1);
 					intent1.putExtras(bundle);
 					context.startActivity(intent1);
 				}

@@ -23,7 +23,8 @@ public class OrderResultActivity extends Activity implements OnClickListener {
 	private TextView tv_result_top;
 	private TextView tv_result_bottom;
 	private TextView tv_actionbar_right;
-
+	private int type = -1;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class OrderResultActivity extends Activity implements OnClickListener {
 
 	private void initActionbar() {
 		Intent intent = getIntent();
-		int type = intent.getIntExtra("type", 0);
+		type = intent.getIntExtra("type", 0);
 		Bundle bundle = intent.getExtras();
 		Log.d("extra", "type" + type + "money");
 		actionBar_result = (ActionBarView) findViewById(R.id.actionbar_result);
@@ -122,7 +123,6 @@ public class OrderResultActivity extends Activity implements OnClickListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.order_result, menu);
 		return true;
 	}
@@ -131,9 +131,16 @@ public class OrderResultActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.tv_actionbar_right:
-			Intent intent1 = new Intent(OrderResultActivity.this, HomeActivity.class);
-			OrderResultActivity.this.finish();
-			startActivity(intent1);
+			if(type == 6){
+				Intent intent1 = new Intent(OrderResultActivity.this, MyWalletActivity.class);
+				startActivity(intent1);
+			} else if(type == 4) {
+				Intent intent1 = new Intent(OrderResultActivity.this, MyWalletActivity.class);
+				startActivity(intent1);
+			} else {
+				Intent intent1 = new Intent(OrderResultActivity.this, HomeActivity.class);
+				startActivity(intent1);
+			}
 			break;
 
 		default:

@@ -16,6 +16,7 @@ import com.example.happyfishing.adapter.ImagePagerAdapter;
 import com.example.happyfishing.bannerview.CircleFlowIndicator;
 import com.example.happyfishing.bannerview.ViewFlow;
 import com.example.happyfishing.mapManager.Locating;
+import com.example.happyfishing.tool.AppInstalled;
 import com.example.happyfishing.tool.HttpAddress;
 import com.example.happyfishing.tool.HttpCallbackListener;
 import com.example.happyfishing.tool.HttpUtil;
@@ -44,7 +45,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FishshopDetailActivity extends Activity implements OnClickListener{
+public class FishshopDetailActivity extends Activity implements OnClickListener {
 	private ActionBarView actionBar_fishshopdetail;
 	private TextView tv_actionbar_title;
 
@@ -65,14 +66,13 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 	private ImageView img_collected;
 	private boolean isCollected;
 	private String collectedId;
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fishshop_detail);
-		
-		mainHandler = new Handler(){
+
+		mainHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
@@ -81,14 +81,18 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 					Bundle bundle = msg.getData();
 					boolean collecting = bundle.getBoolean("isCollected");
 					if (collecting) {
-						img_collected.setImageResource(R.drawable.ic_collection_collected);
-					}else {
-						img_collected.setImageResource(R.drawable.ic_collection_default);
+						img_collected
+								.setImageResource(R.drawable.ic_collection_collected);
+					} else {
+						img_collected
+								.setImageResource(R.drawable.ic_collection_default);
 					}
-					Toast.makeText(FishshopDetailActivity.this, statusString, Toast.LENGTH_SHORT).show();
+					Toast.makeText(FishshopDetailActivity.this, statusString,
+							Toast.LENGTH_SHORT).show();
 					break;
 				case 5:
-					Toast.makeText(FishshopDetailActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
+					Toast.makeText(FishshopDetailActivity.this, "网络连接错误",
+							Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					break;
@@ -108,7 +112,8 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 
 	private void initBanner(ArrayList<String> imageUrlList2) {
 
-		mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray).setInfiniteLoop(true));
+		mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList,
+				linkUrlArray).setInfiniteLoop(true));
 		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
 
 		mViewFlow.setFlowIndicator(mFlowIndicator);
@@ -120,33 +125,43 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 	private void initBannerList() {
 		imageUrlList = new ArrayList<String>();
 		linkUrlArray = new ArrayList<String>();
-		imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-		imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-		imageUrlList.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
-		imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
+		imageUrlList
+				.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+		imageUrlList
+				.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
+		imageUrlList
+				.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+		imageUrlList
+				.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
 
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44301359");
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/43486527");
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44648121");
-		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44619589");
+		linkUrlArray
+				.add("http://blog.csdn.net/finddreams/article/details/44301359");
+		linkUrlArray
+				.add("http://blog.csdn.net/finddreams/article/details/43486527");
+		linkUrlArray
+				.add("http://blog.csdn.net/finddreams/article/details/44648121");
+		linkUrlArray
+				.add("http://blog.csdn.net/finddreams/article/details/44619589");
 	}
 
 	private void initView() {
 		img_collected = (ImageView) findViewById(R.id.img_actionbar_collection);
 		img_collected.setOnClickListener(this);
 		findViewById(R.id.ll_fishshop_address).setOnClickListener(this);
-		
-		
-//		tv_environScore_fishshop = (TextView) findViewById(R.id.tv_environScore_fishshop);
+
+		// tv_environScore_fishshop = (TextView)
+		// findViewById(R.id.tv_environScore_fishshop);
 		tv_address_fishshop = (TextView) findViewById(R.id.tv_address_fishshop);
 		tv_detail_fishshop = (TextView) findViewById(R.id.tv_detail_fishshop);
-		
+
 		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
-		
+
 		actionBar_fishshopdetail = (ActionBarView) findViewById(R.id.actionbar_fishshopdetail);
-		actionBar_fishshopdetail.setActionBar(R.string.back, -1, R.string.action_settings, this);
-		actionBar_fishshopdetail.setBackgroundColor(getResources().getColor(R.color.actionbar_background));
+		actionBar_fishshopdetail.setActionBar(R.string.back, -1,
+				R.string.action_settings, this);
+		actionBar_fishshopdetail.setBackgroundColor(getResources().getColor(
+				R.color.actionbar_background));
 		tv_actionbar_title = (TextView) findViewById(R.id.tv_actionbar_title);
 
 		tv_fishshop_detail_order = (TextView) findViewById(R.id.tv_fishshopdetail_order);
@@ -165,7 +180,8 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 	}
 
 	private void initData(String idString) {
-		SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+		SharedPreferences sp = getSharedPreferences("user",
+				Context.MODE_PRIVATE);
 		String token = sp.getString("token", null);
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("id", idString);
@@ -173,56 +189,67 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 		} else {
 			params.put("token", token);
 		}
-		HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+HttpAddress.CLASS_MERCHANT+HttpAddress.METHOD_DETAIL, 
-				params, 
-				new HttpCallbackListener() {
-					
+		HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT
+				+ HttpAddress.CLASS_MERCHANT + HttpAddress.METHOD_DETAIL,
+				params, new HttpCallbackListener() {
+
 					@Override
 					public void onFinish(Object response) {
 						Log.d("detail", response.toString());
 						JSONObject jsonObject = (JSONObject) response;
 						try {
-							//缺经纬度  imageurls haveWIFI haveParking
-							JSONObject jsonObject2 = jsonObject.getJSONObject("merchant");
-							final String location = jsonObject2.getString("address");//鱼坑位置
-							nameString = jsonObject2.getString("name");//鱼坑名字
-							final String envirScore = jsonObject2.getString("envirScore");//环境指数
-							final String fishpitDetail = jsonObject2.getString("introduction");//鱼坑介绍
-							String ADBannerURLS = jsonObject2.getString("imageUrls");//鱼坑的banner图片
-							String longitude = jsonObject2.getString("longitude");//鱼坑所在的经度
-							final String collected = jsonObject2.getString("collected");
+							// 缺经纬度 imageurls haveWIFI haveParking
+							JSONObject jsonObject2 = jsonObject
+									.getJSONObject("merchant");
+							final String location = jsonObject2
+									.getString("address");// 鱼坑位置
+							nameString = jsonObject2.getString("name");// 鱼坑名字
+							final String envirScore = jsonObject2
+									.getString("envirScore");// 环境指数
+							final String fishpitDetail = jsonObject2
+									.getString("introduction");// 鱼坑介绍
+							String ADBannerURLS = jsonObject2
+									.getString("imageUrls");// 鱼坑的banner图片
+							String longitude = jsonObject2
+									.getString("longitude");// 鱼坑所在的经度
+							final String collected = jsonObject2
+									.getString("collected");
 							longitude2 = Double.parseDouble(longitude);
-							String latitude = jsonObject2.getString("latitude");//鱼坑所在的纬度
+							String latitude = jsonObject2.getString("latitude");// 鱼坑所在的纬度
 							latitude2 = Double.parseDouble(latitude);
-							boolean hasWifi =jsonObject2.getBoolean("hasWifi");//鱼坑是否有wifi
-							boolean hasPark = jsonObject2.getBoolean("hasPark");//鱼坑是否有停车场
+							boolean hasWifi = jsonObject2.getBoolean("hasWifi");// 鱼坑是否有wifi
+							boolean hasPark = jsonObject2.getBoolean("hasPark");// 鱼坑是否有停车场
 							String idString = jsonObject2.getString("id");
 							collectedId = jsonObject2.getString("collectId");
-							
+
 							runOnUiThread(new Runnable() {
 								public void run() {
-//									tv_environScore_fishshop.setText("环境："+envirScore);
+									// tv_environScore_fishshop.setText("环境："+envirScore);
 									tv_address_fishshop.setText(location);
-									tv_detail_fishshop.setText("\t\t"+fishpitDetail);
+									tv_detail_fishshop.setText("\t\t"
+											+ fishpitDetail);
 									if (collected.equals("1")) {
-										img_collected.setImageResource(R.drawable.ic_collection_collected);
+										img_collected
+												.setImageResource(R.drawable.ic_collection_collected);
 										FishshopDetailActivity.this.isCollected = true;
-									}else {
+									} else {
 										FishshopDetailActivity.this.isCollected = false;
 									}
 								}
 							});
-							Log.d("merchant:  ", "location:  "+
-							location+"name:  "+nameString+"envirScore:  "+envirScore+"fishpitDetail:  "+
-									fishpitDetail+"ADBannerURLS:  "+ADBannerURLS
-									+"latitude:  "+latitude2 +"longitude:  "+longitude2
-									+"hasWifi:  "+ hasWifi +"hasPark:  ");
+							Log.d("merchant:  ", "location:  " + location
+									+ "name:  " + nameString + "envirScore:  "
+									+ envirScore + "fishpitDetail:  "
+									+ fishpitDetail + "ADBannerURLS:  "
+									+ ADBannerURLS + "latitude:  " + latitude2
+									+ "longitude:  " + longitude2
+									+ "hasWifi:  " + hasWifi + "hasPark:  ");
 						} catch (JSONException e) {
 							mainHandler.sendEmptyMessage(5);
 						}
-						
+
 					}
-					
+
 					@Override
 					public void onError(Exception e) {
 						mainHandler.sendEmptyMessage(5);
@@ -241,7 +268,7 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 	private TextView tv_gao;
 	private TextView tv_bai;
 	private TextView tv_cancle;
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -249,7 +276,8 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 			FishshopDetailActivity.this.finish();
 			break;
 		case R.id.tv_fishshopdetail_order:
-			Intent intent1 = new Intent(FishshopDetailActivity.this, CommodityDisplayActivity.class);
+			Intent intent1 = new Intent(FishshopDetailActivity.this,
+					CommodityDisplayActivity.class);
 			Bundle bundle1 = new Bundle();
 			bundle1.putDouble("target_lat", latitude2);
 			bundle1.putDouble("target_lon", longitude2);
@@ -262,79 +290,87 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 			startActivity(intent1);
 			break;
 		case R.id.ll_fishshop_address:
-//			Intent intent2 = new Intent(FishshopDetailActivity.this, LocationShowActivity.class);
-//			Bundle bundle = new Bundle();
-//			bundle.putDouble("target_lat", latitude2);
-//			bundle.putDouble("target_lon", longitude2);
-//			bundle.putDouble("my_lat", locating.latitude);
-//			bundle.putDouble("my_lon", locating.longitude);
-//			bundle.putString("city", locating.cityName);
-//			intent2.putExtras(bundle);
-//			startActivity(intent2);
-			
-			View view = LayoutInflater.from(FishshopDetailActivity.this).inflate( R.layout.inflater_popwindow_map, null);
+			// Intent intent2 = new Intent(FishshopDetailActivity.this,
+			// LocationShowActivity.class);
+			// Bundle bundle = new Bundle();
+			// bundle.putDouble("target_lat", latitude2);
+			// bundle.putDouble("target_lon", longitude2);
+			// bundle.putDouble("my_lat", locating.latitude);
+			// bundle.putDouble("my_lon", locating.longitude);
+			// bundle.putString("city", locating.cityName);
+			// intent2.putExtras(bundle);
+			// startActivity(intent2);
+
+			View view = LayoutInflater.from(FishshopDetailActivity.this)
+					.inflate(R.layout.inflater_popwindow_map, null);
 			tv_gao = (TextView) view.findViewById(R.id.tv_gao);
 			tv_bai = (TextView) view.findViewById(R.id.tv_bai);
 			tv_cancle = (TextView) view.findViewById(R.id.tv_cencal);
-			
-			final PackageManager pm = FishshopDetailActivity.this.getPackageManager();
-			popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,true);
+
+			final PackageManager pm = FishshopDetailActivity.this
+					.getPackageManager();
+			popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT, true);
 			popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-			
+
 			OnClickListener onclick = new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View arg0) {
 					switch (arg0.getId()) {
 					case R.id.tv_gao:
-						if (isInstalled("com.autonavi.minimap")) {
+						if (AppInstalled
+								.isAppInstalled(getApplicationContext(),
+										"com.autonavi.minimap")) {
 							try {
-								PackageInfo packageInfo =  pm.getPackageInfo("com.autonavi.minimap", 0);
-								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
-							} catch (NameNotFoundException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								Intent intent = Intent
+										.getIntent("androidamap://viewMap?sourceApplication=自渔自乐&poiname="
+												+ nameString
+												+ "&lat="
+												+ latitude2
+												+ ""
+												+ "&lon="
+												+ longitude2 + "" + "&dev=0");
+								startActivity(intent);
+							} catch (URISyntaxException e) {
+								e.printStackTrace();
 							}
-							try  
-					        {  
-					            Intent intent = Intent.getIntent("androidamap://viewMap?sourceApplication=自渔自乐&poiname="+nameString+"&lat="+latitude2+""+"&lon="+longitude2+""+"&dev=0");  
-					            startActivity(intent);   
-					        } catch (URISyntaxException e)  
-					        {  
-					            e.printStackTrace();  
-					        }  
-						}else 
-						{
-							String url = "http://shouji.baidu.com/soft/item?docid=8992640&from=web_alad_6";
+						} else {
+							String url = "http://www.autonavi.com/download.html";
 							Uri uri = Uri.parse(url);
-							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
+							Intent intent_down1 = new Intent(
+									Intent.ACTION_VIEW, uri);
 							startActivity(intent_down1);
 						}
 						break;
 					case R.id.tv_bai:
-						if (isInstalled("com.baidu.BaiduMap")) {
+						if (AppInstalled.isAppInstalled(
+								getApplicationContext(), "com.baidu.BaiduMap")) {
 							try {
-								PackageInfo packageInfo =  pm.getPackageInfo("com.baidu.BaiduMap", 0);
-								Log.d("packageInfo", packageInfo.packageName+"应用名字："+packageInfo.applicationInfo.loadLabel(pm).toString());
-							} catch (NameNotFoundException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							try {
-								Intent intent = Intent.getIntent("intent://map/marker?location="+latitude2+""+","+longitude2+""+"&title="+nameString+"&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+								Intent intent = Intent
+										.getIntent("intent://map/marker?location="
+												+ latitude2
+												+ ""
+												+ ","
+												+ longitude2
+												+ ""
+												+ "&title="
+												+ nameString
+												+ "&content=百度奎科大厦&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
 								startActivity(intent);
 							} catch (URISyntaxException e1) {
 								e1.printStackTrace();
 							}
-						}else {
-							String url = "http://wap.amap.com/?type=bdpz01";
+						} else {
+							String url = "http://wuxian.baidu.com/map/map_download.html";
 							Uri uri = Uri.parse(url);
-							Intent intent_down1 = new Intent(Intent.ACTION_VIEW, uri);
+							Intent intent_down1 = new Intent(
+									Intent.ACTION_VIEW, uri);
 							startActivity(intent_down1);
 						}
 						break;
 					case R.id.tv_cencal:
-						if(null != popupWindow && popupWindow.isShowing()){
+						if (null != popupWindow && popupWindow.isShowing()) {
 							popupWindow.dismiss();
 						}
 						break;
@@ -344,25 +380,26 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 					}
 				}
 			};
-			
+
 			tv_gao.setOnClickListener(onclick);
 			tv_bai.setOnClickListener(onclick);
 			tv_cancle.setOnClickListener(onclick);
-			
+
 			break;
 		case R.id.img_actionbar_collection:
 			if (isCollected) {
-				SharedPreferences sp3 = getSharedPreferences("user", Context.MODE_PRIVATE);
+				SharedPreferences sp3 = getSharedPreferences("user",
+						Context.MODE_PRIVATE);
 				String token = sp3.getString("token", "");
 				HashMap<String, String> params2 = new HashMap<String, String>();
 				params2.put("token", token);
 				params2.put("collectId", collectedId);
-				
-				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+
-						HttpAddress.CLASS_USERCOLLECT+HttpAddress.METHOD_DELCOLLET, 
-						params2, 
+
+				HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT
+						+ HttpAddress.CLASS_USERCOLLECT
+						+ HttpAddress.METHOD_DELCOLLET, params2,
 						new HttpCallbackListener() {
-							
+
 							@Override
 							public void onFinish(Object response) {
 								Log.d("delCollect", response.toString());
@@ -380,57 +417,66 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 								bundle.putBoolean("isCollected", isCollected);
 								msg.setData(bundle);
 								msg.obj = text;
-								msg.what=1;
+								msg.what = 1;
 								mainHandler.sendMessage(msg);
 							}
-							
+
 							@Override
 							public void onError(Exception e) {
-								
+
 							}
 						});
-			}else {
-				SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+			} else {
+				SharedPreferences sp = getSharedPreferences("user",
+						Context.MODE_PRIVATE);
 				String token = sp.getString("token", "");
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("token", token);
 				params.put("merchantId", idString);
-				
+
 				if (token.equals("")) {
-					Toast.makeText(FishshopDetailActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+					Toast.makeText(FishshopDetailActivity.this, "请先登录",
+							Toast.LENGTH_SHORT).show();
 					Intent in = new Intent();
-					in.setClass(FishshopDetailActivity.this, LoginActivity.class);
+					in.setClass(FishshopDetailActivity.this,
+							LoginActivity.class);
 					startActivity(in);
 				} else {
-					HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERCOLLECT + HttpAddress.METHOD_ADDCOLLET, params, new HttpCallbackListener() {
-						
-						@Override
-						public void onFinish(Object response) {
-							JSONObject jsonObject = (JSONObject) response;
-							Log.d("addCollect", response.toString());
-							String statusString = "收藏失败";
-							try {
-								statusString = jsonObject.getString("text");
-								collectedId = jsonObject.getString("collectId");
-							} catch (JSONException e) {
-								mainHandler.sendEmptyMessage(5);
-								e.printStackTrace();
-							}
-							isCollected = true;
-							Message message = new Message();
-							message.what = 1;
-							message.obj = statusString;
-							Bundle bundle = new Bundle();
-							bundle.putBoolean("isCollected", isCollected);
-							message.setData(bundle);
-							mainHandler.sendMessage(message);
-						}
-						
-						@Override
-						public void onError(Exception e) {
-							mainHandler.sendEmptyMessage(5);
-						}
-					});
+					HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT
+							+ HttpAddress.CLASS_USERCOLLECT
+							+ HttpAddress.METHOD_ADDCOLLET, params,
+							new HttpCallbackListener() {
+
+								@Override
+								public void onFinish(Object response) {
+									JSONObject jsonObject = (JSONObject) response;
+									Log.d("addCollect", response.toString());
+									String statusString = "收藏失败";
+									try {
+										statusString = jsonObject
+												.getString("text");
+										collectedId = jsonObject
+												.getString("collectId");
+									} catch (JSONException e) {
+										mainHandler.sendEmptyMessage(5);
+										e.printStackTrace();
+									}
+									isCollected = true;
+									Message message = new Message();
+									message.what = 1;
+									message.obj = statusString;
+									Bundle bundle = new Bundle();
+									bundle.putBoolean("isCollected",
+											isCollected);
+									message.setData(bundle);
+									mainHandler.sendMessage(message);
+								}
+
+								@Override
+								public void onError(Exception e) {
+									mainHandler.sendEmptyMessage(5);
+								}
+							});
 				}
 			}
 			break;
@@ -439,11 +485,12 @@ public class FishshopDetailActivity extends Activity implements OnClickListener{
 		}
 	}
 
-	private boolean isInstalled(String packageName){
-		Intent manager = getPackageManager().getLaunchIntentForPackage(packageName);
-		Log.d("intent", manager+"");
-		Log.d("exists", new File("/data/data/" + packageName).exists()+"");
+	private boolean isInstalled(String packageName) {
+		Intent manager = getPackageManager().getLaunchIntentForPackage(
+				packageName);
+		Log.d("intent", manager + "");
+		Log.d("exists", new File("/data/data/" + packageName).exists() + "");
 		return new File("/data/data/" + packageName).exists();
 	}
-	
+
 }

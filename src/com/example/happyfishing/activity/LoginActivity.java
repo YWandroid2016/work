@@ -80,10 +80,11 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 					Toast.makeText(LoginActivity.this, text, Toast.LENGTH_SHORT).show();
 					break;
 				case 2:
-					Toast.makeText(LoginActivity.this, "登陆失败,网络连接错误", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "手机号或密码错误，请重新输入", Toast.LENGTH_SHORT).show();
 					break;
 				case 5:
-					Toast.makeText(LoginActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
+					Log.d("result", "数据解析或网络连接错误");
+//					Toast.makeText(LoginActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					break;
@@ -151,9 +152,22 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 			startActivity(intent2);
 			break;
 		case R.id.btn_login_login:
+			
+			String phone = edt_login_phone.getText().toString();
+			String pass = edt_login_password.getText().toString();
+			
+			if(null == phone || "".equals(phone)){
+				Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if(null == pass || "".equals(pass)){
+				Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
 			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("phoneNumber", edt_login_phone.getText().toString());
-			params.put("password", edt_login_password.getText().toString());
+			params.put("phoneNumber", phone);
+			params.put("password", pass);
 			String str = HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_APPUSER + HttpAddress.METHOD_LOGIN;
 			Log.d("log", str);
 			HttpUtil.getJSON(str, params, new HttpCallbackListener() {
@@ -188,21 +202,21 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 						// 比较两次userpoint值 如果变化则修改message图标为带红点
 //						String userPoint_previous = sp.getString("userPoint", "");
 //						String userPoint_now = jsonObject1.getString("userPoint");
-						long current = System.currentTimeMillis();
-						String outOfDate = jsonObject1.getString("outOfDate");
-						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-hh");
-						try {
-							Date date = dateFormat.parse(outOfDate);
-							long outOfDatejiange = current - date.getTime();
-							Log.d("outOfDatejiange", outOfDatejiange + "");
-							if (outOfDatejiange < 259200000) {
-								Log.d("outOfDatejiange", outOfDatejiange + "");
-								UiUtil.setNewMessage(true);
-							}
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+//						long current = System.currentTimeMillis();
+//						String outOfDate = jsonObject1.getString("outOfDate");
+//						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-hh");
+//						try {
+//							Date date = dateFormat.parse(outOfDate);
+//							long outOfDatejiange = current - date.getTime();
+//							Log.d("outOfDatejiange", outOfDatejiange + "");
+//							if (outOfDatejiange < 259200000) {
+//								Log.d("outOfDatejiange", outOfDatejiange + "");
+//								UiUtil.setNewMessage(true);
+//							}
+//						} catch (ParseException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
 						
 //						if (userPoint_now.equals(userPoint_previous)) {
 //						} else {
@@ -216,7 +230,10 @@ public class LoginActivity extends Activity implements OnClickListener, OnTouchL
 						editor.putString("token", jsonObject1.getString("token"));
 						editor.putString("phoneNumber", jsonObject1.getString("phoneNumber"));
 						editor.putString("userExp", jsonObject1.getString("userExp"));
-						editor.putString("userPoint", jsonObject1.getString("userPoint"));
+						//获取的积分需要缩小100倍
+						Long up = Long.parseLong(jsonObject1.getString("userPoint"));
+						up = up/100;
+						editor.putString("userPoint", new java.text.DecimalFormat("#0.00").format(up));
 						editor.putString("isMember", jsonObject1.getString("isMember"));
 						editor.putString("category", jsonObject1.getString("category"));
 						editor.putString("userRank", jsonObject1.getString("userRank"));

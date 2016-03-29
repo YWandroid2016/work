@@ -74,7 +74,6 @@ public class HomeActivity extends Activity implements OnClickListener {
 					tv_home_bottom_left.setText(bundle.getString("nickname")+":");
 					tv_home_bottom_right.setText(bundle.getString("userPoint"));
 					tv_home_bottom_right.setTextColor(HomeActivity.this.getResources().getColor(R.color.appcolor));
-					findViewById(R.id.ll_home_bottom).setClickable(false);
 					break;
 				case 2:
 					tv_home_bottom_left.setText("登录/注册");
@@ -82,7 +81,6 @@ public class HomeActivity extends Activity implements OnClickListener {
 					
 					tv_home_bottom_right.setText("创新 · 坐享生活");
 					tv_home_bottom_right.setTextColor(HomeActivity.this.getResources().getColor(R.color.textcolor_default));
-					findViewById(R.id.ll_home_bottom).setClickable(true);
 					break;
 				case 5:
 					Toast.makeText(HomeActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
@@ -177,21 +175,21 @@ public class HomeActivity extends Activity implements OnClickListener {
 						// 比较两次userpoint值 如果变化则修改message图标为带红点
 //						String userPoint_previous = sp.getString("userPoint", "");
 //						String userPoint_now = jsonObject1.getString("userPoint");
-						long current = System.currentTimeMillis();
-						String outOfDate = jsonObject1.getString("outOfDate");
-						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-hh");
-						try {
-							Date date = dateFormat.parse(outOfDate);
-							long outOfDatejiange = current - date.getTime();
-							Log.d("outOfDatejiange", outOfDatejiange + "");
-							if (outOfDatejiange < 259200000) {
-								Log.d("outOfDatejiange", outOfDatejiange + "");
-								UiUtil.setNewMessage(true);
-							}
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+//						long current = System.currentTimeMillis();
+//						String outOfDate = jsonObject1.getString("outOfDate");
+//						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-hh");
+//						try {
+//							Date date = dateFormat.parse(outOfDate);
+//							long outOfDatejiange = current - date.getTime();
+//							Log.d("outOfDatejiange", outOfDatejiange + "");
+//							if (outOfDatejiange < 259200000) {
+//								Log.d("outOfDatejiange", outOfDatejiange + "");
+//								UiUtil.setNewMessage(true);
+//							}
+//						} catch (ParseException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
 						
 //						if (userPoint_now.equals(userPoint_previous)) {
 //						} else {
@@ -205,7 +203,11 @@ public class HomeActivity extends Activity implements OnClickListener {
 						editor.putString("token", jsonObject1.getString("token"));
 						editor.putString("phoneNumber", jsonObject1.getString("phoneNumber"));
 						editor.putString("userExp", jsonObject1.getString("userExp"));
-						editor.putString("userPoint", jsonObject1.getString("userPoint"));
+						//获取的积分需要缩小100倍
+						Long up = Long.parseLong(jsonObject1.getString("userPoint"));
+						float point = up;
+						Log.d("success", "point" + point);
+						editor.putString("userPoint", new java.text.DecimalFormat("#0.00").format(point/100));
 						editor.putString("isMember", jsonObject1.getString("isMember"));
 						editor.putString("category", jsonObject1.getString("category"));
 						editor.putString("userRank", jsonObject1.getString("userRank"));
@@ -216,7 +218,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 						message.what = 1;
 						Bundle bundle = new Bundle();
 						bundle.putString("nickname", jsonObject1.getString("nickname"));
-						bundle.putString("userPoint", jsonObject1.getString("userPoint"));
+						bundle.putString("userPoint", new java.text.DecimalFormat("#0.00").format(point/100));
 						message.setData(bundle);
 						handler.sendMessage(message);
 					} catch (JSONException e) {
@@ -295,7 +297,6 @@ public class HomeActivity extends Activity implements OnClickListener {
 			startActivity(intent4);
 			break;
 		case R.id.tv_actionbar_right:
-			SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 			String token = sp.getString("token", "");
 			Intent intent2 = new Intent();
 			if (token.equals("")) {
@@ -306,8 +307,13 @@ public class HomeActivity extends Activity implements OnClickListener {
 			startActivity(intent2);
 			break;
 		case R.id.ll_home_bottom:
-			Intent intent5 = new Intent(HomeActivity.this, LoginActivity.class);
-
+			String token2 = sp.getString("token", "");
+			Intent intent5 = new Intent();
+			if (token2.equals("")) {
+				intent5.setClass(HomeActivity.this, LoginActivity.class);
+			}else {
+				intent5.setClass(HomeActivity.this, MyBillActivity.class);
+			}
 			startActivity(intent5);
 			break;
 		default:

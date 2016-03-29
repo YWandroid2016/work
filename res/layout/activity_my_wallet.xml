@@ -58,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/x20"
             android:gravity="center"
-            android:text="升级VIP，享特权"
+            android:text=""
             android:textColor="#bb1133"
             android:padding="@dimen/x8"
             android:background="@drawable/circle_white"
@@ -161,7 +161,7 @@
 
     <include
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="wrap_content"
         layout="@layout/home_button" />
 
 </LinearLayout>

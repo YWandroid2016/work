@@ -32,7 +32,6 @@ public class MyConfigActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_config);
 		sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-//		findViewById(R.id.ll_myconfig_loginpassword).setOnClickListener(this);
 		findViewById(R.id.btn_logout).setOnClickListener(this);
 		
 		

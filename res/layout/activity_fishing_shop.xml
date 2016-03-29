@@ -36,7 +36,7 @@
 
     <include
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="wrap_content"
         layout="@layout/home_button" />
 
 </LinearLayout>

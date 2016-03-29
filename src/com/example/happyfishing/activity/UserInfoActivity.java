@@ -8,6 +8,7 @@ import com.example.happyfishing.tool.FileUtils;
 import com.example.happyfishing.view.ActionBarView;
 
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Context;
@@ -72,8 +73,8 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		findViewById(R.id.userinfo_userphone).setOnClickListener(this);
 		sp = getSharedPreferences("user", Context.MODE_PRIVATE);
 		
-		String nickName = sp.getString("nickname", "获取失败，请重试");
-		String phoneNumber = sp.getString("phoneNumber", "获取失败，请重试");
+		String nickName = sp.getString("nickname", "请先登陆");
+		String phoneNumber = sp.getString("phoneNumber", "请先登陆");
 		
 		tv_userinfo_nickname = (TextView) findViewById(R.id.tv_userinfo_nickname);
 		tv_userinfo_nickname.setHint(nickName);
@@ -99,12 +100,12 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.userinfo_usernickname:
 			Intent intent2 = new Intent(UserInfoActivity.this, UserInfoAlter_NickName_Activity.class);
-			startActivity(intent2);
+			startActivityForResult(intent2, TAKE_NICK);
 			break;
 		case R.id.userinfo_userphone:
 			Intent intent1 = new Intent(UserInfoActivity.this, UserInfoAlterActivity.class);
 			intent1.putExtra("phone", true);
-			startActivity(intent1);
+			startActivityForResult(intent1, TAKE_PHONE);
 			break;
 		case R.id.tv_actionbar_left:
 			UserInfoActivity.this.finish();
@@ -116,37 +117,6 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 
 	private void initChangeUserPhone() {
 		
-	}
-	// 用户更换昵称
-	private void initChangeUserNickName() {
-		
-//		inputManager = (InputMethodManager) edt_userinfo_nickname.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//		edt_userinfo_nickname.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//			@Override
-//			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//				if (actionId == EditorInfo.IME_ACTION_DONE) {
-//					inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//					Toast.makeText(UserInfoActivity.this, "aaa", Toast.LENGTH_SHORT).show();
-//					edt_userinfo_nickname.setVisibility(View.INVISIBLE);
-//					tv_userinfo_nickname.setVisibility(View.VISIBLE);
-//					tv_userinfo_nickname.setText(edt_userinfo_nickname.getText().toString());
-//					return true;
-//				}
-//				return false;
-//			}
-//		});
-//		tv_userinfo_nickname.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				tv_userinfo_nickname.setVisibility(View.INVISIBLE);
-//				edt_userinfo_nickname.setVisibility(View.VISIBLE);
-//				edt_userinfo_nickname.requestFocus();
-//				inputManager = (InputMethodManager) edt_userinfo_nickname.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//				inputManager.showSoftInput(edt_userinfo_nickname, 0);
-//			}
-//		});
 	}
 
 	// 用户更换头像
@@ -204,6 +174,8 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 	}
 
 	private static final int TAKE_PICTURE = 0x000001;
+	private static final int TAKE_NICK = 0x000002;
+	private static final int TAKE_PHONE = 0x000003;
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
@@ -215,6 +187,14 @@ public class UserInfoActivity extends Activity implements OnClickListener {
 				FileUtils.saveBitmap(bm, fileName);
 				img_usericon.setImageBitmap(bm);
 			}
+			break;
+		case TAKE_NICK:
+			String nickName = sp.getString("nickname", "请先登陆");
+			tv_userinfo_nickname.setHint(nickName);
+			break;
+		case TAKE_PHONE:
+			String phoneNumber = sp.getString("phoneNumber", "请先登陆");
+			tv_userinfo_phonenumber.setHint(phoneNumber);
 			break;
 		}
 	}

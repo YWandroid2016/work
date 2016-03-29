@@ -172,6 +172,24 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 			}
 		});
 		
+		edt_register_password.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_DONE) {
+					int len = edt_register_password.getText().length();
+					if (len<6) {
+						edt_register_password.setText("");
+						Toast.makeText(RegisterActivity.this, "请输入6~18个字符组成的密码", Toast.LENGTH_SHORT).show();
+					}else {
+						tv_register_password.setText(edt_register_password.getText().toString());
+					}
+				
+				}
+				return false;
+			}
+		});
+		
 		edt_register_password.setOnFocusChangeListener(new OnFocusChangeListener() {
 			
 			@Override
@@ -182,7 +200,7 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 					int len = edt_register_password.getText().length();
 					if (len<6) {
 						edt_register_password.setText("");
-						Toast.makeText(RegisterActivity.this, "请输入6至16位密码(数字或字母)", Toast.LENGTH_SHORT).show();
+						Toast.makeText(RegisterActivity.this, "请输入6~18个字符组成的密码", Toast.LENGTH_SHORT).show();
 					}else {
 						tv_register_password.setText(edt_register_password.getText().toString());
 					}
@@ -200,7 +218,7 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == event.KEYCODE_BACK){
-			if(popupWindow.isShowing()){
+			if(null != popupWindow && popupWindow.isShowing()){
 				popupWindow.dismiss();
 			}
 		}
@@ -212,15 +230,29 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 		switch (v.getId()) {
 		case R.id.btn_register_regist:
 			if (cb_register.isChecked()) {
-				if (edt_register_password.getText().toString().equals("")) {
-					Toast.makeText(RegisterActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-					break;
+				String phone = edt_register_phone.getText().toString();
+				String pass = edt_register_password.getText().toString();
+				String validatecode = edt_register_verification.getText().toString();
+				
+				if(null == phone || "".equals(phone)){
+					Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				if(null == validatecode || "".equals(validatecode)){
+					Toast.makeText(getApplicationContext(), "请输入验证码", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				if(null == pass || "".equals(pass)){
+					Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				HashMap<String, String> params = new HashMap<String, String>();
-				params.put("phoneNumber", edt_register_phone.getText().toString());
+				params.put("phoneNumber", phone);
 				params.put("nickname", edt_register_phone.getText().toString());
-				params.put("validateCode", edt_register_verification.getText().toString());
-				params.put("password", edt_register_password.getText().toString());
+				params.put("validateCode", validatecode);
+				params.put("password", pass);
 				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+HttpAddress.CLASS_APPUSER+HttpAddress.METHOD_REGISTER, params, new HttpCallbackListener() {
 					
 					@Override

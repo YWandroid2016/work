@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -17,12 +18,14 @@ public class FishPositionGroupNumAdapter extends BaseAdapter {
 	private LayoutInflater layoutInflater;
 	private int groupNum;
 	private int sum;
+	private Context context;
 
 	public FishPositionGroupNumAdapter(Context context, int groupNum, int sum) {
 		layoutInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.groupNum = groupNum;
 		this.sum = sum;
+		this.context = context;
 	}
 
 	@Override
@@ -62,10 +65,13 @@ public class FishPositionGroupNumAdapter extends BaseAdapter {
 			
 			if (position == 0) {
 				convertView.setBackgroundResource(R.color.appcolor);
+				TextView tv_groupNum2 = (TextView) convertView
+						.findViewById(R.id.btn_groupnum);
+				tv_groupNum2.setTextColor(Color.WHITE);
 			}
 
 		}
-
+		
 		return convertView;
 	}
 

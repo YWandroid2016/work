@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     android:background="#fff"
     android:gravity="center_vertical"
+    android:paddingTop="@dimen/x10"
+    android:paddingBottom="@dimen/x10"
     android:orientation="horizontal" >
       <TextView 
 	        android:id="@+id/tv_homeactivity_jump2home"

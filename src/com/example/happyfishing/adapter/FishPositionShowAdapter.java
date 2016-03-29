@@ -42,20 +42,16 @@ public class FishPositionShowAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return positionTotal;
 	}
 
 	@Override
-	public View getItem(int position) {
-		View view = getView(position, null, null);
-		view.findViewById(R.id.tv_layoutinflater_fishposition_show).setBackgroundResource(R.drawable.bgd_diaowei_default);
-		return view;
+	public Object getItem(int position) {
+		return null;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 	
@@ -64,16 +60,13 @@ public class FishPositionShowAdapter extends BaseAdapter{
 	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-			View view ;
-			view = layoutInflater.inflate(R.layout.layoutinflater_fishposition_show, null);
+			View view = layoutInflater.inflate(R.layout.layoutinflater_fishposition_show, null);
 			view.setTag(true);
 			TextView tv_fishposition_show = (TextView) view.findViewById(R.id.tv_layoutinflater_fishposition_show);
 			tv_fishposition_show.setText((28*fishPositionNum+(position+1))+"");
-			if ((28*fishPositionNum+(position+1)) == currentOrdered) {
-				tv_fishposition_show.setBackgroundResource(R.drawable.bgd_diaowei_selected);
-			}
 			for (int i = 0; i < orderedLocation.size(); i++) {
 				if ((28*fishPositionNum+position+1) == orderedLocation.get(i)) {
+					tv_fishposition_show.setTextColor(Color.WHITE);
 					tv_fishposition_show.setBackgroundResource(R.drawable.bgd_diaowei_noselected);
 					view.setClickable(false);
 					view.setTag(false);

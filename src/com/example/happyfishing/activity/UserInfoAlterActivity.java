@@ -102,6 +102,7 @@ public class UserInfoAlterActivity extends Activity implements OnClickListener {
 					switch (msg.arg1) {
 					case 2000:
 						Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
+						sp.edit().putString("phoneNumber", ed_userinfo_newphone.getText().toString()).commit();
 						UserInfoAlterActivity.this.finish();
 						break;
 					case 2001:
@@ -131,7 +132,7 @@ public class UserInfoAlterActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_user_info_alter_phone);
 		
 		actionBar_userinfo = (ActionBarView) findViewById(R.id.actionbar_userinfo_alter);
-		actionBar_userinfo.setActionBar(R.string.back, -1, R.string.title_actionbar_userinfo, this);
+		actionBar_userinfo.setActionBar(R.string.back, -1, R.string.title_actionbar_alterphone, this);
 
 		ed_userinfo_yan = (EditText) findViewById(R.id.ed_userinfo_yan);
 		btn_userinfo_next = (Button) findViewById(R.id.btn_userinfo_next);
@@ -171,10 +172,12 @@ public class UserInfoAlterActivity extends Activity implements OnClickListener {
 			}
 			
 			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("phoneNumber", phone);
+			params.put("oldNumber", phone);
 			params.put("validateCode", yan);
 			params.put("token", token);
-			HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERINFO + HttpAddress.METHOD_CHANGEPHONENUMBER, params, new HttpCallbackListener() {
+			String str = HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_USERINFO + HttpAddress.METHOD_CHANGEPHONENUMBER;
+			HttpUtil.getJSON(str, params, new HttpCallbackListener() {
+				
 				
 				@Override
 				public void onFinish(Object response) {
@@ -233,14 +236,17 @@ public class UserInfoAlterActivity extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.btn_userinfo_verification_new:
+			
+			String newphone2 = ed_userinfo_newphone.getText().toString();
+			
 			// TODO 验证倒计时，获取新验证码
-			if (null == phone || "".equals(phone)) {
+			if (null == newphone2 || "".equals(newphone2)) {
 				Toast.makeText(getApplicationContext(), "手机号不能为空",
 						Toast.LENGTH_SHORT).show();
 				return;
 			}
 			HashMap<String, String> params3 = new HashMap<String, String>();
-			params3.put("phoneNumber", phone);
+			params3.put("phoneNumber", newphone2);
 			HttpUtil.getJSON(HttpAddress.ADDRESS + HttpAddress.PROJECT + HttpAddress.CLASS_APPUSER + HttpAddress.METHOD_SENDVALIDATECONDE, params3, new HttpCallbackListener() {
 				
 				@Override
@@ -340,6 +346,7 @@ public class UserInfoAlterActivity extends Activity implements OnClickListener {
 		btn_userinfo_over = (Button) findViewById(R.id.btn_userinfo_over);
 		ed_userinfo_newphone = (EditText) findViewById(R.id.ed_userinfo_newphone);
 		
+		btn_userinfo_over.setOnClickListener(this);
 		findViewById(R.id.btn_userinfo_verification_new).setOnClickListener(this);
 		
 	}

@@ -68,10 +68,16 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 		String token = sp.getString("token", null);
 		if (token != null) {
 			
-			String jifen = sp.getString("userPoint", "0");
+			String jifen = sp.getString("userPoint", "0")+"";
+			String isMember = sp.getString("isMember", "false");
 			tv_mywallet_usablejifen.setText(jifen);
+			tv_mywallet_confirm.setVisibility(View.VISIBLE);
 			tv_mywallet_confirm.setText("可用积分");
-			btn_bocomeVIP.setText("升级VIP，享特权");
+			if("true".equals(isMember)){
+				btn_bocomeVIP.setText("续费VIP");
+			} else {
+				btn_bocomeVIP.setText("升级VIP，享特权");
+			}
 		} else {
 			findViewById(R.id.tv_mywallet_bill).setVisibility(View.INVISIBLE);
 			findViewById(R.id.img_right).setVisibility(View.INVISIBLE);
@@ -133,8 +139,7 @@ public class MyWalletActivity extends Activity implements OnClickListener {
 		
 		String token = sp.getString("token", null);
 		if (token != null) {
-			
-			String jifen = sp.getString("userPoint", "0");
+			String jifen = sp.getString("userPoint", "0")+"";
 			tv_mywallet_usablejifen.setText(jifen);
 			tv_mywallet_confirm.setVisibility(View.VISIBLE);
 			tv_mywallet_confirm.setText("可用积分");

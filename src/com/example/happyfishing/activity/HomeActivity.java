@@ -42,10 +42,10 @@ import android.widget.Toast;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
-	private ViewFlow mViewFlow;
-	private CircleFlowIndicator mFlowIndicator;
-	private ArrayList<String> imageUrlList = new ArrayList<String>();
-	private ArrayList<String> linkUrlArray = new ArrayList<String>();
+//	private ViewFlow mViewFlow;
+//	private CircleFlowIndicator mFlowIndicator;
+//	private ArrayList<String> imageUrlList = new ArrayList<String>();
+//	private ArrayList<String> linkUrlArray = new ArrayList<String>();
 	// private ArrayList<String> titleList = new ArrayList<String>();
 	private ActionBarView actionBar_home;
 	private TextView tv_actionbar_right;
@@ -56,6 +56,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 	private Handler handler;
 	private SharedPreferences sp;
 	private ImageView img_home_bootom_usericon;
+	private ImageView banner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +98,9 @@ public class HomeActivity extends Activity implements OnClickListener {
 
 		initView();
 
-		initBannerList();
+		/*initBannerList();
 
-		initBanner();
+		initBanner();*/
 
 		checkUpdate();
 	}
@@ -241,8 +242,20 @@ public class HomeActivity extends Activity implements OnClickListener {
 
 	private void initView() {
 		img_home_bootom_usericon = (ImageView) findViewById(R.id.img_home_bootom_usericon);
-		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
-		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
+		banner = (ImageView) findViewById(R.id.banner);
+		banner.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Bundle bundle = new Bundle();
+				bundle.putString("url", "http://www.91chuidiao.com");
+				Intent intent = new Intent(HomeActivity.this, BaseWebActivity.class);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+//		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
+//		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		actionBar_home = (ActionBarView) findViewById(R.id.actionBar_home);
 		actionBar_home.setActionBar(-1, R.string.action_settings, R.string.title_actionbar_home, null);
 		actionBar_home.setBackgroundColor(getResources().getColor(R.color.actionbar_background));
@@ -257,7 +270,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 		tv_home_bottom_right = (TextView) findViewById(R.id.tv_home_bottom_right);
 	}
 
-	private void initBannerList() {
+	/*private void initBannerList() {
 		// 发送请求获取图片地址和点击跳转的网址
 		imageUrlList.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
 		imageUrlList.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
@@ -268,9 +281,9 @@ public class HomeActivity extends Activity implements OnClickListener {
 		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/43486527");
 		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44648121");
 		linkUrlArray.add("http://blog.csdn.net/finddreams/article/details/44619589");
-	}
+	}*/
 
-	private void initBanner() {
+	/*private void initBanner() {
 
 		mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray).setInfiniteLoop(true));
 		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
@@ -279,7 +292,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 		mViewFlow.setTimeSpan(4500);
 		mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
 		mViewFlow.startAutoFlowTimer(); // 启动自动播放
-	} 
+	} */
 
 	@Override
 	public void onClick(View v) {

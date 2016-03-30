@@ -73,8 +73,20 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case 1:
-					String text = (String) msg.obj;
-					Toast.makeText(RegisterActivity.this, text, Toast.LENGTH_SHORT).show();
+					switch (msg.arg1) {
+					case 2000:
+						popupwindow();
+						break;
+					case 2006:
+						Toast.makeText(RegisterActivity.this, "验证码不正确", Toast.LENGTH_SHORT).show();
+						break;
+					case 2010:
+						Toast.makeText(RegisterActivity.this, "手机号已存在请直接登录", Toast.LENGTH_SHORT).show();
+						break;
+
+					default:
+						break;
+					}
 					break;
 				case 5:
 					Toast.makeText(RegisterActivity.this, "发送验证码成功", Toast.LENGTH_SHORT).show();
@@ -250,7 +262,6 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 				}
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("phoneNumber", phone);
-				params.put("nickname", edt_register_phone.getText().toString());
 				params.put("validateCode", validatecode);
 				params.put("password", pass);
 				HttpUtil.getJSON(HttpAddress.ADDRESS+HttpAddress.PROJECT+HttpAddress.CLASS_APPUSER+HttpAddress.METHOD_REGISTER, params, new HttpCallbackListener() {
@@ -265,23 +276,10 @@ public class RegisterActivity extends Activity implements OnClickListener, OnTou
 						String statisString = null; 
 						try {
 							code = jsonObject1.getInt("status");
+							message.arg1 = code;
+							mainHandler.sendMessage(message);
 						} catch (JSONException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
-						}
-						if (code == 2000) {
-							
-							popupwindow();
-							
-						}else {
-							try {
-								statisString = jsonObject1.getString("text");
-								message.obj = statisString;
-								mainHandler.sendMessage(message);
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
 						}
 					}
 					

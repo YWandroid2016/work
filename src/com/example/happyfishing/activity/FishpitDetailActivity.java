@@ -58,10 +58,10 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 
 	private ActionBarView actionBarView_fishipitdetail;
 	private TextView tv_fishpitdetail_title;
-	private ViewFlow mViewFlow;
+	/*private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
 	private ArrayList<String> imageUrlList;
-	private ArrayList<String> linkUrlArray;
+	private ArrayList<String> linkUrlArray;*/
 	// private TextView tv_envirScore;
 	private TextView tv_address;
 	private TextView tv_fishpitDetail;
@@ -120,54 +120,54 @@ public class FishpitDetailActivity extends Activity implements OnClickListener {
 
 		initView();
 
-		initBannerList();
-
-		initBanner(imageUrlList);
+//		initBannerList();
+//
+//		initBanner(imageUrlList);
 
 		loadData();
 
 	}
 
-	private void initBanner(ArrayList<String> imageUrlList2) {
+//	private void initBanner(ArrayList<String> imageUrlList2) {
+//
+//		mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList,
+//				linkUrlArray).setInfiniteLoop(true));
+//		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
+//
+//		mViewFlow.setFlowIndicator(mFlowIndicator);
+//		mViewFlow.setTimeSpan(4500);
+//		mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
+//		mViewFlow.startAutoFlowTimer(); // 启动自动播放
+//	}
 
-		mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList,
-				linkUrlArray).setInfiniteLoop(true));
-		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
-
-		mViewFlow.setFlowIndicator(mFlowIndicator);
-		mViewFlow.setTimeSpan(4500);
-		mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
-		mViewFlow.startAutoFlowTimer(); // 启动自动播放
-	}
-
-	private void initBannerList() {
-		imageUrlList = new ArrayList<String>();
-		linkUrlArray = new ArrayList<String>();
-		imageUrlList
-				.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-		imageUrlList
-				.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-		imageUrlList
-				.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
-		imageUrlList
-				.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
-
-		linkUrlArray
-				.add("http://blog.csdn.net/finddreams/article/details/44301359");
-		linkUrlArray
-				.add("http://blog.csdn.net/finddreams/article/details/43486527");
-		linkUrlArray
-				.add("http://blog.csdn.net/finddreams/article/details/44648121");
-		linkUrlArray
-				.add("http://blog.csdn.net/finddreams/article/details/44619589");
-	}
+//	private void initBannerList() {
+//		imageUrlList = new ArrayList<String>();
+//		linkUrlArray = new ArrayList<String>();
+//		imageUrlList
+//				.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+//		imageUrlList
+//				.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
+//		imageUrlList
+//				.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+//		imageUrlList
+//				.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
+//
+//		linkUrlArray
+//				.add("http://blog.csdn.net/finddreams/article/details/44301359");
+//		linkUrlArray
+//				.add("http://blog.csdn.net/finddreams/article/details/43486527");
+//		linkUrlArray
+//				.add("http://blog.csdn.net/finddreams/article/details/44648121");
+//		linkUrlArray
+//				.add("http://blog.csdn.net/finddreams/article/details/44619589");
+//	}
 
 	private void initView() {
 		img_collected = (ImageView) findViewById(R.id.img_actionbar_collection);
 		img_collected.setOnClickListener(this);
 
-		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
-		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
+//		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
+//		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		findViewById(R.id.tv_fishpitdetail_order).setOnClickListener(this);
 		findViewById(R.id.ll_fishpitlocation).setOnClickListener(this);
 		// 获取意图
